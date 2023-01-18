@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 16:12:25 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/18 17:10:55 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ int	main(void)
 	insert_beg(&pile_a, 1);
 	insert_beg(&pile_a, 2);
 	insert_beg(&pile_a, 3);
+	insert_beg(&pile_a, 4);
+	insert_beg(&pile_a, 5);
+	insert_beg(&pile_a, 6);
+	insert_beg(&pile_a, 7);
 
 	// Mettre 4,5,6 dans pile_b: 6, 5, 4
 	pile_b = NULL;
@@ -84,11 +88,11 @@ int	main(void)
 	// Printpiles
 	printlist2(pile_a, pile_b);
 
-	ft_printf("Push\n");
-	push(&pile_b, &pile_a);
-		push(&pile_b, &pile_a);
-			push(&pile_b, &pile_a);
-				push(&pile_b, &pile_a);
+	ft_printf("rotate\n");
+	rrotate(&pile_a);
+	rrotate(&pile_a);
+	rrotate(&pile_a);
+	rrotate(&pile_b);
 	// Printpiles
 	printlist2(pile_a, pile_b);
 	free_stack(pile_a);

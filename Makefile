@@ -25,6 +25,7 @@ LIB_LNK			= -L $(LIBFT_DIR) -lft
 SRC_DIR			= src
 
 SOURCES			= main.c \
+					operations.c \
 					utils.c \
 					utils2.c \
 					print.c \

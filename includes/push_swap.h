@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 16:04:50 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/18 17:06:12 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_node {
 // TO REMOVE
 extern int	mem_counter;
 # endif
+
 void	my_free(void *p);
 void	*my_malloc(int size);
 
@@ -40,6 +41,10 @@ void	push(t_node **pile_dst, t_node **pile_src);
 void	pop(t_node **head_ref);
 void	free_stack(t_node *head_ref);
 int		is_empty(t_node *head);
+
+/* Operations */
+void	rotate(t_node **head_ref);
+void	rrotate(t_node **head_ref);
 
 /* print */
 void	printnodeaddress(t_node *node, int nbprint);
