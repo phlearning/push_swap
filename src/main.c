@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 15:43:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/18 16:12:25 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,16 @@ int	main(void)
 	insert_beg(&pile_b, 5);
 	insert_beg(&pile_b, 6);
 
-	// Print pile_a
-	ft_printpilea(pile_a);
-
-	// Print pile_b
-	ft_printpileb(pile_b);
+	// Printpiles
+	printlist2(pile_a, pile_b);
 
 	ft_printf("Push\n");
-	push(&pile_a, &pile_b);
-		push(&pile_a, &pile_b);
-			push(&pile_a, &pile_b);
-				push(&pile_a, &pile_b);
-	ft_printpilea(pile_a);
-	ft_printpileb(pile_b);
+	push(&pile_b, &pile_a);
+		push(&pile_b, &pile_a);
+			push(&pile_b, &pile_a);
+				push(&pile_b, &pile_a);
+	// Printpiles
+	printlist2(pile_a, pile_b);
 	free_stack(pile_a);
 	free_stack(pile_b);
 	return (0);

@@ -57,9 +57,9 @@ $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "Compiling..."
 
 $(NAME):	$(OBJS)
-	@make -C $(LIBFT_DIR)
+	@make -s -C $(LIBFT_DIR)
 	@echo "$(GREEN) Libft compiled $(END)"
-	@make -C $(FT_PRINTF_DIR)
+	@make -s -C $(FT_PRINTF_DIR)
 	@echo "$(BLUE) Ft_printf compiled $(END)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(NAME)
 	@echo "$(BLUE) $(NAME) Compiled $(END)"
@@ -72,14 +72,14 @@ clean:
 	@rm -rf $(OBJS_DIR)
 	@rm -rf norminette.txt
 	@rm -rf checkfunction.txt
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(FT_PRINTF_DIR) clean
+	@make -sC $(LIBFT_DIR) clean
+	@make -sC $(FT_PRINTF_DIR) clean
 	@echo "$(NAME) Cleaning Done"
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make -C $(LIBFT_DIR) fclean
-	@make -C $(FT_PRINTF_DIR) fclean
+	@make -sC $(LIBFT_DIR) fclean
+	@make -sC $(FT_PRINTF_DIR) fclean
 	@echo "$(NAME) Fcleaning Done"
 
 re: fclean all

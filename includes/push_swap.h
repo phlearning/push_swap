@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 15:43:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/18 16:04:50 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		is_empty(t_node *head);
 /* print */
 void	printnodeaddress(t_node *node, int nbprint);
 void	printlist(t_node *node);
+void	printlist2(t_node *node, t_node *node2);
 void	ft_printpilea(t_node *pile);
 void	ft_printpileb(t_node *pile);
 #endif
