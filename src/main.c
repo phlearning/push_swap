@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 17:10:55 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:12:37 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,29 @@ void	sort_linked_list(t_node **head_ref)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_node	*pile_a;
 	t_node	*pile_b;
 
-	// Mettre 1, 2, 3 dans la pile_a: 3,2,1
 	pile_a = NULL;
-	insert_beg(&pile_a, 1);
-	insert_beg(&pile_a, 2);
-	insert_beg(&pile_a, 3);
-	insert_beg(&pile_a, 4);
-	insert_beg(&pile_a, 5);
-	insert_beg(&pile_a, 6);
-	insert_beg(&pile_a, 7);
-
-	// Mettre 4,5,6 dans pile_b: 6, 5, 4
 	pile_b = NULL;
-	insert_beg(&pile_b, 4);
-	insert_beg(&pile_b, 5);
-	insert_beg(&pile_b, 6);
-
+	if (ac < 2)
+		return (0);
+	// if (ac == 2)
+	// {
+	// 	if (check_and_split(&pile_a, &pile_b, ac, av) == -1)
+	// 	{
+	// 		free_both_stacks(pile_a, pile_b);
+	// 		return (0);
+	// 	}
+	// }
+	if (ac >= 2)
+	{
+		insert_all(&pile_a, av+1);
+	}
 	// Printpiles
 	printlist2(pile_a, pile_b);
-
-	ft_printf("rotate\n");
-	rrotate(&pile_a);
-	rrotate(&pile_a);
-	rrotate(&pile_a);
-	rrotate(&pile_b);
-	// Printpiles
-	printlist2(pile_a, pile_b);
-	free_stack(pile_a);
-	free_stack(pile_b);
+	free_both_stacks(pile_a, pile_b);
 	return (0);
 }

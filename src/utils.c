@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 17:28:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/26 17:35:00 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,54 +53,8 @@ void	free_stack(t_node *head_ref)
 	}
 }
 
-void	insert_beg(t_node **head_ref, int data)
+void	free_both_stacks(t_node *pile_a, t_node *pile_b)
 {
-	t_node	*new;
-
-	new = my_malloc(sizeof(t_node));
-	if (!new)
-		exit(-1);
-	new->data = data;
-	new->next = (*head_ref);
-	*head_ref = new;
-}
-
-/* Swap the first two elements in pile */
-void	swap(t_node **head_ref)
-{
-	t_node	*current;
-	t_node	*index;
-	int		tmp;
-
-	if (head_ref == NULL)
-		return ;
-	else
-	{
-		current = *head_ref;
-		tmp = current->data;
-		index = current->next;
-		current->data = index->data;
-		index->data = tmp;
-	}
-}
-
-void	pop(t_node **head_ref)
-{
-	t_node	*head;
-
-	if (*head_ref == NULL)
-		exit(EXIT_FAILURE);
-	head = *head_ref;
-	*head_ref = (*head_ref)->next;
-	my_free(head);
-}
-
-/* Take the first element in pile_src and push it to pile_dst */
-void	push(t_node **pile_dst, t_node **pile_src)
-{
-		if (*pile_src == NULL)
-		return ;
-	ft_printf("inserting %d\t", (*pile_src)->data);
-	insert_beg(*(&pile_dst), (*pile_src)->data);
-	pop(*(&pile_src));
+	free_stack(pile_a);
+	free_stack(pile_b);
 }
