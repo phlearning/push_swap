@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/26 17:35:00 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/27 15:21:56 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 # ifndef MEM_COUNTER
 #  define MEM_COUNTER
-// TO REMOVE
+// !TO REMOVE
 int	mem_counter = 0;
 # endif
 
+/**
+ * !Malloc: showing the allocated memory address and size.
+ * 
+ * @param size 
+ * @return void* 
+ */
 void	*my_malloc(int size)
 {
 	void	*ret;
@@ -31,6 +37,11 @@ void	*my_malloc(int size)
 	return (ret);
 } 
 
+/**
+ * !Free: showing freed memory address
+ * 
+ * @param p 
+ */
 void	my_free(void *p)
 {
 	t_node *tmp;
@@ -57,4 +68,14 @@ void	free_both_stacks(t_node *pile_a, t_node *pile_b)
 {
 	free_stack(pile_a);
 	free_stack(pile_b);
+}
+
+void	free_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 }
