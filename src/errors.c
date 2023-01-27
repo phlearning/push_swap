@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:18:13 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/27 19:45:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/27 19:50:01 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,9 @@ int	check_error(char **str)
  * TODO: ...
  * 1. Split into multiple args
  * 2. Check the args
- * 3. 
- * 4.
+ * 3. Check for duplicate numbers
+ * 4. Check for double signs
+ * 
  * @param pile_a 
  * @param pile_b 
  * @param ac 
@@ -143,7 +144,6 @@ int	check_error(char **str)
 int	check_and_split(t_node **pile_a, char **av)
 {
 	char	**tmp;
-
 
 	tmp = ft_split(av[1], ' ');
 	if (check_error(tmp) == -1)
