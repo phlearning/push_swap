@@ -30,7 +30,8 @@ SOURCES			= main.c \
 					utils2.c \
 					print.c \
 					linkedlistfunctions.c \
-					errors.c
+					errors.c \
+					errors2.c
 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
@@ -70,6 +71,11 @@ $(NAME):	$(OBJS)
 
 checkfunction:
 	$(shell nm -A ./objs/*) > checkfunction.txt
+
+git:
+	git add .
+	git commit -am "update"
+	git push
 
 clean:
 	@rm -rf $(OBJS_DIR)

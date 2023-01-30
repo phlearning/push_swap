@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/27 19:45:30 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/30 17:00:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PUSH_SWAP_H
 
 # define ERROR_FD 2
-# define MALLOC_ERROR "Error"
-# define DUPE_ERROR "Error"
 
 # include <stdlib.h>
 # include "../libft/libft.h"
@@ -55,9 +53,9 @@ void	free_both_stacks(t_node *pile_a, t_node *pile_b);
 void	free_split(char **str);
 int		*transf_args_to_tab(char **str);
 
-
 /* Errors */
 int		check_and_split(t_node **pile_a, char **av);
+int		check_all_args(t_node **pile_a, char **av);
 int		check_error(char **str);
 int		check_sign(char *str);
 int		check_number(char *str);
@@ -69,9 +67,6 @@ void	rotate(t_node **head_ref);
 void	rrotate(t_node **head_ref);
 
 /* print */
-void	printnodeaddress(t_node *node, int nbprint);
 void	printlist(t_node *node);
 void	printlist2(t_node *node, t_node *node2);
-void	ft_printpilea(t_node *pile);
-void	ft_printpileb(t_node *pile);
 #endif

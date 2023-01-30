@@ -6,16 +6,11 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 16:13:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/30 14:55:16 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	printnodeaddress(t_node *node, int nbprint)
-{
-	ft_printf("%d pointer: %p\n", nbprint, node);
-}
 
 void	printlist(t_node *node)
 {
@@ -45,19 +40,5 @@ void	printlist2(t_node *node, t_node *node2)
 		}
 		ft_printf("\n");
 	}
-	ft_printf("\n");
-}
-
-void	ft_printpilea(t_node *pile)
-{
-	ft_printf("pile_a: \n");
-	printlist(pile);
-	ft_printf("\n");
-}
-
-void	ft_printpileb(t_node *pile)
-{
-	ft_printf("pile_b: \n");
-	printlist(pile);
 	ft_printf("\n");
 }

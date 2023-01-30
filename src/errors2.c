@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 14:28:11 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/30 11:20:07 by pvong            ###   ########.fr       */
+/*   Created: 2023/01/30 11:20:20 by pvong             #+#    #+#             */
+/*   Updated: 2023/01/30 17:00:08 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	is_empty(t_node *head)
+int	check_all_args(t_node **pile_a, char **av)
 {
-	return (head == NULL);
-}
-
-/**
- * Insert at the end of the pile the numbers.
- * 
- * @param head_ref 
- * @param data 
- */
-void	insert_all(t_node **head_ref, char **data)
-{
-	int	number_of_elements;
-
-	number_of_elements = 0;
-	while (data[number_of_elements])
-	{
-		insert_end(head_ref, ft_atoi(data[number_of_elements]));
-		number_of_elements++;
-	}
+	if (check_error(av + 1) == -1)
+		exit_error("Error");
+	insert_all(pile_a, av + 1);
+	return (0);
 }

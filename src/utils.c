@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/27 15:21:56 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/30 16:30:39 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	my_free(void *p)
 
 	tmp = p;
 	free(p);
-	ft_printf("Free memory %p, data: %d \t\t\t\t", p, tmp->data);
+	ft_printf("Free memory %p, data: %d \t\t", p, tmp->data);
 	ft_printf("Current leak counter %d\n", --mem_counter);
 }
 

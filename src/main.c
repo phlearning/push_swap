@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/27 19:46:29 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/30 17:00:33 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,13 @@ int	main(int ac, char **av)
 		return (0);
 	if (ac == 2)
 	{
-		if (check_and_split(&pile_a, av) == -1)
-		{
-			free_both_stacks(pile_a, pile_b);
+		if (av[1][0] == '\0')
 			return (0);
-		}
+		check_and_split(&pile_a, av);
 	}
 	if (ac > 2)
 	{
-		insert_all(&pile_a, av+1);
+		check_all_args(&pile_a, av);
 	}
 	// Printpiles
 	printlist2(pile_a, pile_b);
