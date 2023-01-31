@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:18:13 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/30 16:57:18 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/31 16:25:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	check_error(char **str)
 	while (str[i])
 	{
 		if (check_number(str[i]) == -1 || check_sign(str[i]) == -1)
+			return (-1);
+		if (ft_atol(str[i]) >= 2147483648 || ft_atol(str[i]) < -2147483648)
 			return (-1);
 		i++;
 	}

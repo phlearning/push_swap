@@ -31,7 +31,9 @@ SOURCES			= main.c \
 					print.c \
 					linkedlistfunctions.c \
 					errors.c \
-					errors2.c
+					errors2.c \
+					check.c \
+					sort.c
 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))

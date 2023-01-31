@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/30 16:30:39 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:07:12 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # ifndef MEM_COUNTER
 #  define MEM_COUNTER
 // !TO REMOVE
-int	mem_counter = 0;
+int	g_mem_counter = 0;
 # endif
 
 /**
@@ -32,7 +32,7 @@ void	*my_malloc(int size)
 	if (ret)
 	{
 		ft_printf("Allocated memory @%p of size %d \t", ret, size);
-		ft_printf("Current leak counter %d\n", ++mem_counter);
+		ft_printf("Current leak counter %d\n", ++g_mem_counter);
 	}
 	return (ret);
 } 
@@ -49,7 +49,7 @@ void	my_free(void *p)
 	tmp = p;
 	free(p);
 	ft_printf("Free memory %p, data: %d \t\t", p, tmp->data);
-	ft_printf("Current leak counter %d\n", --mem_counter);
+	ft_printf("Current leak counter %d\n", --g_mem_counter);
 }
 
 void	free_stack(t_node *head_ref)

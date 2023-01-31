@@ -6,11 +6,40 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/18 17:27:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:49:32 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/* Swap the first two elements in pile */
+void	swap(t_node **head_ref)
+{
+	t_node	*current;
+	t_node	*index;
+	int		tmp;
+
+	if (head_ref == NULL)
+		return ;
+	else
+	{
+		current = *head_ref;
+		tmp = current->data;
+		index = current->next;
+		current->data = index->data;
+		index->data = tmp;
+	}
+}
+
+/* Take the first element in pile_src and push it to pile_dst */
+void	push(t_node **pile_dst, t_node **pile_src)
+{
+	if (*pile_src == NULL)
+		return ;
+	ft_printf("inserting %d\t", (*pile_src)->data);
+	insert_beg(*(&pile_dst), (*pile_src)->data);
+	pop(*(&pile_src));
+}
 
 void	rotate(t_node **head_ref)
 {

@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 15:58:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/31 12:19:10 by pvong            ###   ########.fr       */
+/*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
+/*   Updated: 2023/01/31 18:40:04 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	sort(t_node **pile_a, t_node **pile_b)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	int		tmp;
+	t_node	*tmpa;
+	t_node	*tmpb;
 
-	i = 0;
-	j = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i])
+	/* Check if empty */
+	if (is_empty(*pile_a))
+		return ;
+	tmpa = *pile_a;
+	tmpb = *pile_b;
+	while (tmpa)
 	{
-		str[i] = s1[i];
-		i++;
+		tmp = tmpa->data;
+		while (tmpb && tmp < peek(0, pile_b))
+			
 	}
-	while (s2[j])
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return (str);
 }

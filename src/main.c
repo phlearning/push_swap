@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/30 17:00:33 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:50:57 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,20 @@ void	sort_linked_list(t_node **head_ref)
 	}
 }
 
+/**
+ * Push_swap: With different operations (swap, push, rotate)(a/b/r) 
+ * sort the pile_a. Show the different operations to sort the pile_a.
+ * Can use 2 piles (a or b) to sort.
+ * 
+ * TODO: 1. Check inputs for errors
+ * TODO: 2.	Insert inputs
+ * TODO: 3. Sort and show operations
+ * TODO: 4.	Free
+ * @param ac 
+ * @param av 
+ * @return int 
+ */
+
 int	main(int ac, char **av)
 {
 	t_node	*pile_a;
@@ -71,20 +85,14 @@ int	main(int ac, char **av)
 
 	pile_a = NULL;
 	pile_b = NULL;
-	if (ac < 2)
-		return (0);
-	if (ac == 2)
-	{
-		if (av[1][0] == '\0')
-			return (0);
-		check_and_split(&pile_a, av);
-	}
-	if (ac > 2)
-	{
-		check_all_args(&pile_a, av);
-	}
-	// Printpiles
+	check_inputs(ac, av, &pile_a);
+	// Printpiles before sorting
 	printlist2(pile_a, pile_b);
+	sort(&pile_a, &pile_b);
+	// Printpiles after sorting
+	ft_printf("-----Sort-----\n");
+	printlist2(pile_a, pile_b);
+	// Free piles
 	free_both_stacks(pile_a, pile_b);
 	return (0);
 }

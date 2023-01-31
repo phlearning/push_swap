@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/26 16:14:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:29:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,6 @@ void	insert_end(t_node **head_ref, int data)
 	}
 }
 
-/* Swap the first two elements in pile */
-void	swap(t_node **head_ref)
-{
-	t_node	*current;
-	t_node	*index;
-	int		tmp;
-
-	if (head_ref == NULL)
-		return ;
-	else
-	{
-		current = *head_ref;
-		tmp = current->data;
-		index = current->next;
-		current->data = index->data;
-		index->data = tmp;
-	}
-}
-
 void	pop(t_node **head_ref)
 {
 	t_node	*head;
@@ -87,12 +68,18 @@ void	pop(t_node **head_ref)
 	my_free(head);
 }
 
-/* Take the first element in pile_src and push it to pile_dst */
-void	push(t_node **pile_dst, t_node **pile_src)
+int	peek(int pos, t_node *node)
 {
-		if (*pile_src == NULL)
-		return ;
-	ft_printf("inserting %d\t", (*pile_src)->data);
-	insert_beg(*(&pile_dst), (*pile_src)->data);
-	pop(*(&pile_src));
+	int	i;
+
+	i = 0;
+	while (i < pos-1 && node != NULL)
+	{
+		node = node->next;
+		i++;
+	}
+	if (node != NULL)
+		return (node->data);
+	else
+		return (-1);
 }
