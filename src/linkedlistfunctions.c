@@ -6,11 +6,20 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/31 18:29:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/02 18:51:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+t_node	*new_node(int data)
+{
+	t_node	*tmp;
+	tmp = malloc(sizeof(t_node));
+	tmp->data = data;
+	tmp->next = NULL;
+	return (tmp);
+}
 
 t_node	*get_lastnode(t_node *head)
 {
@@ -57,15 +66,18 @@ void	insert_end(t_node **head_ref, int data)
 	}
 }
 
-void	pop(t_node **head_ref)
+int	pop(t_node **head_ref)
 {
 	t_node	*head;
+	int		popped;
 
 	if (*head_ref == NULL)
 		exit(EXIT_FAILURE);
 	head = *head_ref;
 	*head_ref = (*head_ref)->next;
+	popped = head->data;
 	my_free(head);
+	return (popped);
 }
 
 int	peek(int pos, t_node *node)
@@ -82,4 +94,50 @@ int	peek(int pos, t_node *node)
 		return (node->data);
 	else
 		return (-1);
+}
+
+void	org_push(t_node **pile, int data)
+{
+	t_node	*tmp;
+
+	tmp = new_node(data);
+	tmp->next = *pile;
+	*pile = tmp;
+}
+
+int	node_length(t_node *head)
+{
+	int		count;
+	t_node	*node;
+
+	count = 0;
+	node = head;
+	while (node != NULL)
+	{
+		count++;
+		node = node->next;
+	}
+	return (count);
+}
+
+int	median(t_node *head)
+{
+	int		len;
+	int		mid;
+	int		i;
+	t_node	*node;
+
+	len = node_length(head);
+	node = head;
+	i = 0;
+	mid = len/2;
+	while (i < mid)
+	{
+		node = node->next;
+		i++;
+	}
+	if (len % 2 == 0)
+		return ((node->data + node->next->data) / 2);
+	else
+		return (node->data);
 }

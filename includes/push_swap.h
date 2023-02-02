@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/31 18:29:23 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/02 19:01:33 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "../ft_printf/includes/ft_printf.h"
 
 typedef struct s_node {
-	int				index;
 	int				data;
 	struct s_node	*next;
 }	t_node;
@@ -37,7 +36,9 @@ void	*my_malloc(int size);
 
 /* linked list functions */
 
-void	pop(t_node **head_ref);
+t_node	*new_node(int data);
+void	org_push(t_node **pile, int data);
+int		pop(t_node **head_ref);
 int		is_empty(t_node *head);
 void	insert_beg(t_node **head_ref, int data);
 void	insert_end(t_node **head_ref, int data);
@@ -45,7 +46,8 @@ void	delete_node(t_node **head_ref, int key);
 t_node	*get_lastnode(t_node *node);
 void	insert_all(t_node **head_ref, char **data);
 int		peek(int pos, t_node *node);
-
+int		node_length(t_node *head);
+int		median(t_node *head);
 
 /* Utils */
 
@@ -71,8 +73,9 @@ void	exit_error(char *str);
 
 /* Sorting */
 
-void	sort(t_node **pile_a, t_node **pile_b);
+// void	sort(t_node **pile_a, t_node **pile_b);
 
+void	quicksort(t_node *first, t_node *last);
 
 /* Operations */
 void	swap(t_node **head_ref);

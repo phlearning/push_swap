@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/31 17:49:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/02 16:44:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ void	swap(t_node **head_ref)
 	}
 }
 
-/* Take the first element in pile_src and push it to pile_dst */
+/**
+ * Take the first element in pile_src and push it to pile_dst
+ * 
+ * @param pile_dst 
+ * @param pile_src 
+ */
 void	push(t_node **pile_dst, t_node **pile_src)
 {
 	if (*pile_src == NULL)
 		return ;
-	ft_printf("inserting %d\t", (*pile_src)->data);
+	ft_printf("inserting %d\n", (*pile_src)->data);
 	insert_beg(*(&pile_dst), (*pile_src)->data);
 	pop(*(&pile_src));
 }
