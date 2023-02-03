@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/02 19:05:50 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:28:13 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int ac, char **av)
 	check_inputs(ac, av, &pile_a);
 	// Printpiles before sorting
 	printlist2(pile_a, pile_b);
-	quicksort(pile_a, get_lastnode(pile_a));
+	sort(&pile_a);
 	// Printpiles after sorting
 	ft_printf("-----Sort-----\n");
 	printlist2(pile_a, pile_b);

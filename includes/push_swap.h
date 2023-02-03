@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/02 19:01:33 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:29:18 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	*my_malloc(int size);
 /* linked list functions */
 
 t_node	*new_node(int data);
-void	org_push(t_node **pile, int data);
 int		pop(t_node **head_ref);
 int		is_empty(t_node *head);
 void	insert_beg(t_node **head_ref, int data);
@@ -47,7 +46,8 @@ t_node	*get_lastnode(t_node *node);
 void	insert_all(t_node **head_ref, char **data);
 int		peek(int pos, t_node *node);
 int		node_length(t_node *head);
-int		median(t_node *head);
+int		get_median(t_node *head);
+t_node	*node_copy(t_node *stack);
 
 /* Utils */
 
@@ -72,14 +72,15 @@ int		check_dupe(char **str);
 void	exit_error(char *str);
 
 /* Sorting */
+int		get_pivot(t_node *stack);
 
-// void	sort(t_node **pile_a, t_node **pile_b);
+t_node	*sort(t_node **stack);
 
 void	quicksort(t_node *first, t_node *last);
 
 /* Operations */
 void	swap(t_node **head_ref);
-void	push(t_node **pile_dst, t_node **pile_src);
+void	push(t_node **pile_src, t_node **pile_dst);
 void	rotate(t_node **head_ref);
 void	rrotate(t_node **head_ref);
 

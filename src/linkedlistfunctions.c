@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/02 18:51:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/03 15:46:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ int	peek(int pos, t_node *node)
 		return (-1);
 }
 
-void	org_push(t_node **pile, int data)
+/* void	org_push(t_node **pile, int data)
 {
 	t_node	*tmp;
 
 	tmp = new_node(data);
 	tmp->next = *pile;
 	*pile = tmp;
-}
+} */
 
 int	node_length(t_node *head)
 {
@@ -120,7 +120,7 @@ int	node_length(t_node *head)
 	return (count);
 }
 
-int	median(t_node *head)
+int	get_median(t_node *head)
 {
 	int		len;
 	int		mid;
