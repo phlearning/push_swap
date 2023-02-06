@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/03 14:05:11 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:08:35 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	my_free(void *p)
 	ft_printf("Current leak counter %d\n", --g_mem_counter); */
 }
 
-void	free_stack(t_node *head_ref)
+void	free_nodes(t_node *head_ref)
 {
 	t_node	*tmp;
 
@@ -64,10 +64,11 @@ void	free_stack(t_node *head_ref)
 	}
 }
 
-void	free_both_stacks(t_node *pile_a, t_node *pile_b)
+void	free_stacks(t_stacks *stack)
 {
-	free_stack(pile_a);
-	free_stack(pile_b);
+	free_nodes(stack->stack_a);
+	free_nodes(stack->stack_b);
+	my_free(stack);
 }
 
 void	free_split(char **str)

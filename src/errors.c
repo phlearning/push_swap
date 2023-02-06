@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:18:13 by pvong             #+#    #+#             */
-/*   Updated: 2023/01/31 16:25:59 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:54:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	check_error(char **str)
  * @param av 
  * @return int 
  */
-int	check_and_split(t_node **pile_a, char **av)
+int	check_and_split(t_node **stack_a, char **av)
 {
 	char	**tmp;
 
@@ -161,7 +161,7 @@ int	check_and_split(t_node **pile_a, char **av)
 		free_split(tmp);
 		exit_error("Error");
 	}
-	insert_all(pile_a, tmp);
+	insert_all(stack_a, tmp);
 	free_split(tmp);
 	return (0);
 }

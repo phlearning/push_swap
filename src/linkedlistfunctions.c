@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/03 15:46:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:03:46 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int	node_length(t_node *head)
 	node = head;
 	while (node != NULL)
 	{
-		count++;
 		node = node->next;
+		count++;
 	}
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/05 22:18:52 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:05:11 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,24 @@ void	sort_linked_list(t_node **head_ref)
 
 int	main(int ac, char **av)
 {
-	t_node	*pile_a;
-	t_node	*pile_b;
+	t_stacks *stacks;
 
-	pile_a = NULL;
-	pile_b = NULL;
-	check_inputs(ac, av, &pile_a);
-	init_stacks()
+	stacks = my_malloc(sizeof(t_stacks));
+	if (!stacks)
+		exit(1);
+	init_stacks(stacks);
+	check_inputs(ac, av, stacks);
+	ft_printf("stack_a_len: %d\t", stacks->size_a);
+	ft_printf("stack_b_len: %d\n", stacks->size_b);
 	// Printpiles before sorting
-	printlist2(pile_a, pile_b);
-	sort(&pile_a);
+	printlist2(stacks);
+
+	// sort(&stacks->stack_a);
+	
 	// Printpiles after sorting
-	ft_printf("-----Sort-----\n");
-	printlist2(pile_a, pile_b);
+	// ft_printf("-----Sort-----\n");
+	printlist2(stacks);
 	// Free piles
-	free_both_stacks(pile_a, pile_b);
+	free_stacks(stacks);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/03 14:05:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:30:05 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void	swap(t_node **head_ref)
 	t_node	*index;
 	int		tmp;
 
-	if (head_ref == NULL)
+	if (head_ref == NULL || *head_ref == NULL)
 		return ;
 	else
 	{
 		current = *head_ref;
+		if (*head_ref != NULL && (*head_ref)->next == NULL)
+			return ;
 		tmp = current->data;
 		index = current->next;
 		current->data = index->data;
@@ -46,6 +48,12 @@ void	push(t_node **pile_src, t_node **pile_dst)
 	pop(*(&pile_src));
 }
 
+
+/**
+ * Rotate: Rotate towards the top, firstnode to the last spot.
+ * Moving each element next to the first to one sport before.
+ * @param head_ref 
+ */
 void	rotate(t_node **head_ref)
 {
 	t_node	*current;
@@ -62,18 +70,30 @@ void	rotate(t_node **head_ref)
 	index->next = NULL;
 }
 
-void	rrotate(t_node **head_ref)
+/**
+ * Reverse Rotate: rotate towards the bottom, lastnode to the top.
+ * Moving each node to the next.
+ * Linking the first element to the top (which corresponds to
+ * the rotate element).
+ * @param head 
+ */
+void rrotate(t_node **head)
 {
+	t_node	*lastnode_to_top;
 	t_node	*current;
-	t_node	*tmp;
+	int		len;
 
-	if (*head_ref == NULL)
+	if (!*head)
 		return ;
-	tmp = *head_ref;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	current = *head_ref;
-	tmp->next = *head_ref;
-	*head_ref = current->next;
+	lastnode_to_top = get_lastnode(*head);
+	len = node_length(*head) - 1;
+	current = *head;
+	while (len - 1 > 0 && current != NULL)
+	{
+		current = current->next;
+		len--;
+	}
+	lastnode_to_top->next = *head;
+	*head = current->next;
 	current->next = NULL;
 }

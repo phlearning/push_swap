@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/03 17:50:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:05:51 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_pivot(t_node *stack)
 	tmp = node_copy(stack);
 	quicksort(tmp, get_lastnode(tmp));
 	middle = get_median(tmp);
-	free_stack(tmp);
+	free_nodes(tmp);
 	return (middle);
 }
 

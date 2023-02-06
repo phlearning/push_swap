@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/05 22:20:25 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:55:25 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_stacks
 	t_node	*stack_b;
 	int		size_a;
 	int		size_b;
-}
+} t_stacks;
 
 // !TO REMOVE
 # ifndef MEM_COUNTEREXT
@@ -63,20 +63,20 @@ t_node	*node_copy(t_node *stack);
 
 /* Utils */
 
-void	free_stack(t_node *head_ref);
-void	free_both_stacks(t_node *pile_a, t_node *pile_b);
+void	free_nodes(t_node *head_ref);
+void	free_stacks(t_stacks *stacks);
 void	free_split(char **str);
 int		*transf_args_to_tab(char **str);
 long	ft_atol(char *str);
 
 /* Check */
 
-int		check_inputs(int ac, char **av, t_node **pile_a);
+int		check_inputs(int ac, char **av, t_stacks *stack);
 
 /* Errors */
 
-int		check_and_split(t_node **pile_a, char **av);
-int		check_all_args(t_node **pile_a, char **av);
+int		check_and_split(t_node **stack_a, char **av);
+int		check_all_args(t_node **stack_a, char **av);
 int		check_error(char **str);
 int		check_sign(char *str);
 int		check_number(char *str);
@@ -95,8 +95,20 @@ void	swap(t_node **head_ref);
 void	push(t_node **pile_src, t_node **pile_dst);
 void	rotate(t_node **head_ref);
 void	rrotate(t_node **head_ref);
+void	op_sa(t_stacks *stacks);
+void	op_sb(t_stacks *stacks);
+void	op_ss(t_stacks *stacks);
+void	op_ra(t_stacks *stacks);
+void	op_rb(t_stacks *stacks);
+void	op_rr(t_stacks *stacks);
+void	op_rra(t_stacks *stacks);
+void	op_rrb(t_stacks *stacks);
+void	op_rrr(t_stacks *stacks);
+void	op_pa(t_stacks *stacks);
+void	op_pb(t_stacks *stacks);
+void 	rrotate(t_node **head);
 
 /* print */
 void	printlist(t_node *node);
-void	printlist2(t_node *node, t_node *node2);
+void	printlist2(t_stacks *stacks);
 #endif

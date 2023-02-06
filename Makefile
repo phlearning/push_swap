@@ -26,6 +26,7 @@ SRC_DIR			= src
 
 SOURCES			= main.c \
 					operations.c \
+					operations2.c \
 					utils.c \
 					utils2.c \
 					print.c \
@@ -34,7 +35,7 @@ SOURCES			= main.c \
 					errors2.c \
 					check.c \
 					sort.c \
-					init.c
+					init.c 
 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
