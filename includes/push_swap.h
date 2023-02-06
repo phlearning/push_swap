@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/03 17:29:18 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/05 22:20:25 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,18 @@
 # include "../ft_printf/includes/ft_printf.h"
 
 typedef struct s_node {
+	int				index;
 	int				data;
 	struct s_node	*next;
 }	t_node;
+
+typedef struct	s_stacks
+{
+	t_node	*stack_a;
+	t_node	*stack_b;
+	int		size_a;
+	int		size_b;
+}
 
 // !TO REMOVE
 # ifndef MEM_COUNTEREXT
@@ -33,6 +42,9 @@ extern int	g_mem_counter;
 
 void	my_free(void *p);
 void	*my_malloc(int size);
+
+/* Init */
+void	init_stacks(t_stacks *stacks);
 
 /* linked list functions */
 

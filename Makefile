@@ -33,7 +33,8 @@ SOURCES			= main.c \
 					errors.c \
 					errors2.c \
 					check.c \
-					sort.c
+					sort.c \
+					init.c
 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
