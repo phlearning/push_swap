@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:59:24 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 17:00:48 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 18:21:53 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	check_inputs(int ac, char **av, t_stacks *stacks)
 	}
 	stacks->size_a = node_length(stacks->stack_a);
 	stacks->size_b = 0;
+	put_index(stacks);
 	return (0);
 }

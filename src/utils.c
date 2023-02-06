@@ -5,78 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 12:08:35 by pvong            ###   ########.fr       */
+/*   Created: 2023/01/18 14:28:11 by pvong             #+#    #+#             */
+/*   Updated: 2023/02/06 18:18:53 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-# ifndef MEM_COUNTER
-#  define MEM_COUNTER
-// !TO REMOVE
-int	g_mem_counter = 0;
-# endif
-
-/**
- * !Malloc: showing the allocated memory address and size.
- * 
- * @param size 
- * @return void* 
- */
-void	*my_malloc(int size)
+int	is_empty(t_node *head)
 {
-	void	*ret;
-
-	ret = malloc(size);
-	if (ret)
-	{
-/* 		ft_printf("Allocated memory @%p of size %d \t", ret, size);
-		ft_printf("Current leak counter %d\n", ++g_mem_counter); */
-	}
-	return (ret);
-} 
-
-/**
- * !Free: showing freed memory address
- * 
- * @param p 
- */
-void	my_free(void *p)
-{
-	t_node *tmp;
-
-	tmp = p;
-	free(p);
-/* 	ft_printf("Free memory %p, data: %d \t\t", p, tmp->data);
-	ft_printf("Current leak counter %d\n", --g_mem_counter); */
+	return (head == NULL);
 }
 
-void	free_nodes(t_node *head_ref)
+/**
+ * Insert at the end of the pile the numbers.
+ * 
+ * @param head_ref 
+ * @param data 
+ */
+void	insert_all(t_node **head_ref, char **data)
 {
-	t_node	*tmp;
+	int	number_of_elements;
 
-	while (head_ref != NULL)
+	number_of_elements = 0;
+	while (data[number_of_elements])
 	{
-		tmp = head_ref;
-		head_ref = head_ref->next;
-		my_free(tmp);
+		insert_end(head_ref, ft_atoi(data[number_of_elements]));
+		number_of_elements++;
 	}
 }
 
-void	free_stacks(t_stacks *stack)
+long	ft_atol(char *str)
 {
-	free_nodes(stack->stack_a);
-	free_nodes(stack->stack_b);
-	my_free(stack);
+	long	sign;
+	int		i;
+	long	res;
+
+	sign = 1;
+	res = 0;
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (res * 10) + (str[i] - '0');
+		i++;
+	}
+	return (res * sign);
 }
 
-void	free_split(char **str)
+void	put_index(t_stacks *stacks)
 {
 	int	i;
+	t_node	*tmp;
 
 	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
+	tmp = stacks->stack_a;
+	while (i < stacks->size_a)
+	{
+		stacks->stack_a->index = i;
+		stacks->stack_a = stacks->stack_a->next;
+		i++;
+	}
+	stacks->stack_a = tmp;
 }

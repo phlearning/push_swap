@@ -27,8 +27,8 @@ SRC_DIR			= src
 SOURCES			= main.c \
 					operations.c \
 					operations2.c \
+					free.c \
 					utils.c \
-					utils2.c \
 					print.c \
 					linkedlistfunctions.c \
 					errors.c \

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 16:30:05 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:53:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,22 @@ void	swap(t_node **head_ref)
  * @param pile_dst 
  * @param pile_src 
  */
-void	push(t_node **pile_src, t_node **pile_dst)
+void	push(t_node **stack_src, t_node **stack_dst)
 {
-	if (*pile_src == NULL)
+	if (*stack_src == NULL)
 		return ;
 	// ft_printf("inserting %d\n", (*pile_src)->data);
-	insert_beg(*(&pile_dst), (*pile_src)->data);
-	pop(*(&pile_src));
+	insert_beg(*(&stack_dst), (*stack_src)->data);
+	pop(*(&stack_src));
 }
+
+/* void	push(t_node **stack_src, t_node **stack_dst)
+{
+	if (*stack_src == NULL)
+		return ;
+	insert_beg(*(&stack_dst), (*stack_src)->data);
+	pop(*(&stack_src));
+} */
 
 
 /**

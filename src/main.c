@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 17:05:11 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/06 18:48:53 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,20 @@ int	main(int ac, char **av)
 		exit(1);
 	init_stacks(stacks);
 	check_inputs(ac, av, stacks);
-	ft_printf("stack_a_len: %d\t", stacks->size_a);
-	ft_printf("stack_b_len: %d\n", stacks->size_b);
 	// Printpiles before sorting
 	printlist2(stacks);
-
+	op_pb(stacks);
+	op_pb(stacks);
+	op_pb(stacks);
+	op_pb(stacks);
+	op_pa(stacks);
 	// sort(&stacks->stack_a);
-	
 	// Printpiles after sorting
 	// ft_printf("-----Sort-----\n");
 	printlist2(stacks);
 	// Free piles
+	ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
+	printcmds(stacks);
 	free_stacks(stacks);
 	return (0);
 }
