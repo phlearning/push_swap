@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 void	get_cmds_total(t_stacks *stacks, t_cmds *cmd)
 {

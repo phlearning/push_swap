@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 void	init_nums(t_nums *nums)
 {

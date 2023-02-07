@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 12:05:51 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:51:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,48 +81,12 @@ int	get_pivot(t_node *stack)
 	return (middle);
 }
 
-t_node	*sort(t_node **stack)
+void	sort(t_stacks *stacks)
 {
-	t_node	*lt;
-	t_node	*ge;
-	t_node	*node;
-	t_node	*next;
-
-	if (*stack == NULL)
-		return (NULL);
-	if ((*stack)->next == NULL)
-		return (*stack);
-		node = (*stack)->next;
-	lt = NULL;
-	ge = NULL;
-	while (node)
-	{
-		next = node->next;
-		if (node->data < (*stack)->data)
-		{
-			node->next = lt;
-			lt = node;
-		}
-		else
-		{
-			node->next = ge;
-			ge = node;
-		}
-		node = next;
-	}
-	ft_printf("\n----pile_a----\n");
-		printlist(*stack);
-	t_node	*ltail = sort(&lt);
-	t_node	*gtail = sort(&ge);
-
-	(*stack)->next = ge;
-
-	if (gtail == NULL)
-		gtail = *stack;
-	if (lt)
-	{
-		ltail->next = *stack;
-		*stack = lt;
-	}
-	return (gtail);
+	if (stacks->size_a <= 3)
+		sort_size_3(stacks);
+	else if (stacks->size_a <= 5)
+		sort_size_5(stacks);
+	else
+		sort_big_numbers(stacks);
 }

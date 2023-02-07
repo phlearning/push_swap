@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 16:03:46 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:19:34 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ int	peek(int pos, t_node *node)
 int	node_length(t_node *head)
 {
 	int		count;
-	t_node	*node;
+	t_node	*tmp;
 
 	count = 0;
-	node = head;
-	while (node != NULL)
+	tmp = head;
+	while (tmp != NULL)
 	{
-		node = node->next;
+		tmp = tmp->next;
 		count++;
 	}
 	return (count);
@@ -140,4 +140,41 @@ int	get_median(t_node *head)
 		return ((node->data + node->next->data) / 2);
 	else
 		return (node->data);
+}
+/* Look for the lowest number in the stack */
+int	get_min(t_node *node)
+{
+	int		min;
+	t_node	*tmp;
+
+	if (node == NULL)
+		return (0);
+	tmp = node;
+	min = tmp->data;
+	while (tmp != NULL)
+	{
+		if (tmp->data < min)
+			min = tmp->data;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+/* Look for the highest number in the stack */
+int	get_max(t_node *node)
+{
+	int		max;
+	t_node	*tmp;
+
+	if (node == NULL)
+		return (0);
+	tmp = node;
+	max = tmp->data;
+	while (tmp != NULL)
+	{
+		if (tmp->data > max)
+			max = tmp->data;
+		tmp = tmp->next;
+	}
+	return (max);
 }

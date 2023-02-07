@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 #include <stdio.h>
 
 static void	init_cmds(t_stacks *stacks, t_cmds *cmd)

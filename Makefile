@@ -35,6 +35,7 @@ SOURCES			= main.c \
 					errors2.c \
 					check.c \
 					sort.c \
+					sort2.c \
 					init.c 
 
 

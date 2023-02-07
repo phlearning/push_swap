@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 void	do_ra(t_stacks *stacks, int flag)
 {

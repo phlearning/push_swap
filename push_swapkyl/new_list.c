@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 void	list_add_front(t_stack **stack, t_stack *new)
 {

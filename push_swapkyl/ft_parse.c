@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 static void	fill_numbers(t_nums *nums, char **buff)
 {

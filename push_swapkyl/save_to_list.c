@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 void	save_to_list(t_stacks *stacks, t_nums *nums)
 {

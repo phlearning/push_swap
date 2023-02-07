@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./push_swap.h"
 
 static void	ft_if_max(t_stacks *stacks, t_cmds *cmd, int max, int i)
 {

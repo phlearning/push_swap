@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 18:41:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:57:04 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 
+/* CMDS SHORTCUTS */
 # define NB_SA stacks->cmds.nb_sa
 # define NB_SB stacks->cmds.nb_sb
 # define NB_SS stacks->cmds.nb_ss
@@ -30,6 +31,24 @@
 # define NB_RRR stacks->cmds.nb_rrr
 # define NB_PA stacks->cmds.nb_pa
 # define NB_PB stacks->cmds.nb_pb
+/* ------------- */
+
+/* STACKS SHORTCUT */
+# define STACK_A stacks->stack_a
+# define STACK_A_NEXT stacks->stack_a->next
+# define DATA_A stacks->stack_a->data
+# define DATA_A_NEXT stacks->stack_a->next->data
+# define SIZE_A stacks->size_a
+/* --- */
+# define STACK_B stacks->stack_b
+# define STACK_B_NEXT stacks->stack_b->next
+# define DATA_B stacks->stack_b->data
+# define DATA_B_NEXT stacks->stack_b->next->data
+# define SIZE_B stacks->size_b
+/* --- */
+# define STACKS_MIN stacks->min
+# define STACKS_MAX stacks->max
+/* --------------------------- */
 
 typedef struct s_node {
 	int				index;
@@ -60,6 +79,8 @@ typedef struct	s_stacks
 	t_cmds	cmds;
 	int		size_a;
 	int		size_b;
+	int		min;
+	int		max;
 } t_stacks;
 
 // !TO REMOVE
@@ -89,6 +110,8 @@ int		peek(int pos, t_node *node);
 int		node_length(t_node *head);
 int		get_median(t_node *head);
 t_node	*node_copy(t_node *stack);
+int		get_min(t_node *node);
+int		get_max(t_node *node);
 
 /* Utils */
 
@@ -116,7 +139,10 @@ void	exit_error(char *str);
 /* Sorting */
 int		get_pivot(t_node *stack);
 
-t_node	*sort(t_node **stack);
+void	sort(t_stacks *stacks);
+void	sort_size_3(t_stacks *stacks);
+void	sort_size_5(t_stacks *stacks);
+void	sort_big_numbers(t_stacks *stacks);
 
 void	quicksort(t_node *first, t_node *last);
 

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 18:44:19 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:40:32 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	printlist2(t_stacks *stacks)
 void	printcmds(t_stacks *stacks)
 {
 	ft_printf("\n----CMDS----\n");
+	ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
 	ft_printf("nb_sa: %d\n", NB_SA);
 	ft_printf("nb_sb: %d\n", NB_SB);
 	ft_printf("nb_ss: %d\n", NB_SS);
