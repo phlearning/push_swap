@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 17:25:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 18:23:48 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sort_size_3(t_stacks *stacks)
 		max = stacks->max;
 		if (stacks->stack_a->data == max)
 			op_ra(stacks);
-		if (stacks->stack_a->next->data == max)
+		else if (stacks->stack_a->next->data == max)
 			op_rra(stacks);
 		if (stacks->stack_a->data > stacks->stack_a->next->data)
 			op_sa(stacks);

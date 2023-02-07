@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 17:27:38 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/07 17:52:38 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	main(int ac, char **av)
 		exit(1);
 	init_stacks(stacks);
 	check_inputs(ac, av, stacks);
+	if (SIZE_A == 0)
+		return (0);
 	// Printpiles before sorting
 	printlist2(stacks);
 	sort(stacks);
