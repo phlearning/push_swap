@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 16:57:04 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:58:45 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,20 @@ typedef struct s_cmds
 	int		nb_rrr;
 	int		nb_pa;
 	int		nb_pb;
-} t_cmds;
+}	t_cmds;
+
+typedef struct s_chunk
+{
+	int	*chunk_delimitation;
+	int	nb_chunks;
+}	t_chunk;
 
 typedef struct	s_stacks
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
 	t_cmds	cmds;
+	t_chunk	chunk;
 	int		size_a;
 	int		size_b;
 	int		min;
@@ -95,6 +102,7 @@ void	*my_malloc(int size);
 
 /* Init */
 void	init_stacks(t_stacks *stacks);
+void	init_cmds(t_stacks *stacks);
 
 /* linked list functions */
 
@@ -120,7 +128,7 @@ void	free_stacks(t_stacks *stacks);
 void	free_split(char **str);
 int		*transf_args_to_tab(char **str);
 long	ft_atol(char *str);
-void	put_index(t_stacks *stacks);
+int		square_root(int	n);
 
 /* Check */
 
@@ -136,8 +144,22 @@ int		check_number(char *str);
 int		check_dupe(char **str);
 void	exit_error(char *str);
 
+/* Index */
+int		get_data_by_index(t_node *head, int index);
+int		get_index(t_node *head, int num);
+void	put_index_stack_a(t_stacks *stacks);
+void	put_index_stack_b(t_stacks *stacks);
+void	change_index(t_stacks *stacks, char *cmds);
+void	index_sa(t_stacks *stacks);
+void	index_sb(t_stacks *stacks);
+void	index_ss(t_stacks *stacks);
+void	index_reput(t_stacks *stacks);
+
+/* Chunks */
+int		get_chunks(t_stacks *stacks);
+
 /* Sorting */
-int		get_pivot(t_node *stack);
+int		get_first_pivot(t_node *stack);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);

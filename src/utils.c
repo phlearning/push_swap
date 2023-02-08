@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:28:11 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 18:18:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:42:26 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,13 @@ long	ft_atol(char *str)
 	return (res * sign);
 }
 
-void	put_index(t_stacks *stacks)
+/* Give the nearest square_root of the number */
+int	square_root(int	n)
 {
-	int	i;
-	t_node	*tmp;
+	int	root;
 
-	i = 0;
-	tmp = stacks->stack_a;
-	while (i < stacks->size_a)
-	{
-		stacks->stack_a->index = i;
-		stacks->stack_a = stacks->stack_a->next;
-		i++;
-	}
-	stacks->stack_a = tmp;
+	root = 0;
+	while (root * root < n)
+		root++;
+	return (root);
 }

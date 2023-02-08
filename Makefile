@@ -25,6 +25,7 @@ LIB_LNK			= -L $(LIBFT_DIR) -lft
 SRC_DIR			= src
 
 SOURCES			= main.c \
+					init.c \
 					operations.c \
 					operations2.c \
 					free.c \
@@ -36,8 +37,8 @@ SOURCES			= main.c \
 					check.c \
 					sort.c \
 					sort2.c \
-					init.c 
-
+					chunk.c \
+					index.c
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
 

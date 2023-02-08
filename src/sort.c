@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 16:51:02 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:15:27 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_node	*node_copy(t_node *stack)
 	return (tmp);
 }
 
-int	get_pivot(t_node *stack)
+int	get_first_pivot(t_node *stack)
 {
 	int	middle;
 	t_node	*tmp;

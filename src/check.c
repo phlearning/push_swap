@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:59:24 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 17:53:14 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:42:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	check_inputs(int ac, char **av, t_stacks *stacks)
 	stacks->size_b = 0;
 	stacks->min = get_min(stacks->stack_a);
 	stacks->max = get_max(stacks->stack_a);
-	put_index(stacks);
+	put_index_stack_a(stacks);
 	return (0);
 }

@@ -6,20 +6,14 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:18:20 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 14:43:29 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:59:54 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	init_stacks(t_stacks *stacks)
+void	init_cmds(t_stacks *stacks)
 {
-	stacks->stack_a = NULL;
-	stacks->stack_b = NULL;
-	stacks->size_a = 0;
-	stacks->size_b = 0;
-	stacks->min = 0;
-	stacks->max = 0;
 	stacks->cmds.nb_cmds = 0;
 	stacks->cmds.nb_sa = 0;
 	stacks->cmds.nb_sb = 0;
@@ -32,4 +26,17 @@ void	init_stacks(t_stacks *stacks)
 	stacks->cmds.nb_rrr = 0;
 	stacks->cmds.nb_pa = 0;
 	stacks->cmds.nb_pb = 0;
+}
+
+void	init_stacks(t_stacks *stacks)
+{
+	stacks->stack_a = NULL;
+	stacks->stack_b = NULL;
+	stacks->size_a = 0;
+	stacks->size_b = 0;
+	stacks->min = 0;
+	stacks->max = 0;
+	stacks->chunk.chunk_delimitation = NULL;
+	stacks->chunk.nb_chunks = 0;
+	init_cmds(stacks);
 }

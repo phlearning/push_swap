@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:47:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 18:48:36 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:36:00 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	addcommands(t_stacks *stacks, char *cmds)
 		stacks->cmds.nb_pa++;
 	if (!ft_strncmp(cmds, "pb", 10))
 		stacks->cmds.nb_pb++;
+	change_index(stacks, cmds);
 }
 
 /* Swap_a: Swap the first 2 elements in stack_a  */
