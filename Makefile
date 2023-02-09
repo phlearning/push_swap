@@ -33,7 +33,6 @@ SOURCES			= main.c \
 					print.c \
 					linkedlistfunctions.c \
 					errors.c \
-					errors2.c \
 					check.c \
 					sort.c \
 					sort2.c \
@@ -64,15 +63,15 @@ temp:
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(LIB_INC) $(INCLUDE) -c $< -o $@
-	@echo "Compiling..."
+	@echo "Compiling $@..."
 
 $(NAME):	$(OBJS)
 	@make -s -C $(LIBFT_DIR)
 	@echo "$(GREEN) Libft compiled $(END)"
 	@make -s -C $(FT_PRINTF_DIR)
-	@echo "$(BLUE) Ft_printf compiled $(END)"
+	@echo "$(GREEN) Ft_printf compiled $(END)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(NAME)
-	@echo "$(BLUE) $(NAME) Compiled $(END)"
+	@echo "$(GREEN) $(NAME) Compiled $(END)"
 
 
 checkfunction:
@@ -89,13 +88,13 @@ clean:
 	@rm -rf checkfunction.txt
 	@make -sC $(LIBFT_DIR) clean
 	@make -sC $(FT_PRINTF_DIR) clean
-	@echo "$(NAME) Cleaning Done"
+	@echo "$(BLUE)$(NAME) Cleaning Done$(END)"
 
 fclean: clean
 	@rm -rf $(NAME)
 	@make -sC $(LIBFT_DIR) fclean
 	@make -sC $(FT_PRINTF_DIR) fclean
-	@echo "$(NAME) Fcleaning Done"
+	@echo "$(BLUE)$(NAME) Fcleaning Done$(END)"
 
 re: fclean all
 

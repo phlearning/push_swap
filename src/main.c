@@ -6,63 +6,11 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 17:49:02 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:30:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	delete_node(t_node **head_ref, int key)
-{
-	t_node	*tmp;
-	t_node	*prev;
-
-	tmp = *head_ref;
-	if (tmp != NULL && tmp->data == key)
-	{
-		*head_ref = tmp->next;
-		free(tmp);
-		return ;
-	}
-	while (tmp != NULL && tmp->data != key)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		return ;
-	prev->next = tmp->next;
-	free(tmp);
-}
-
-void	sort_linked_list(t_node **head_ref)
-{
-	t_node	*current;
-	t_node	*index;
-	int		tmp;
-
-	current = *head_ref;
-	if (head_ref == NULL)
-		return ;
-	else
-	{
-		while (current != NULL)
-		{
-			index = current->next;
-			while (index != NULL)
-			{
-				if (current->data > index->data)
-				{
-					tmp = current->data;
-					current->data = index->data;
-					index->data = tmp;
-				}
-				index = index->next;
-			}
-			current = current->next;
-		}
-	}
-}
 
 /**
  * Push_swap: With different operations (swap, push, rotate)(a/b/r) 
@@ -90,17 +38,12 @@ int	main(int ac, char **av)
 	if (SIZE_A == 0)
 		return (0);
 
-	ft_printf("nb: %d\n", 500/11);
-
-	// Printpiles before sorting
-	printlist2(stacks);
-	// sort(stacks);
-	// Printpiles after sorting
+	// printlist2(stacks);
+	sort(stacks);
 	// ft_printf("-----Sort-----\n");
 	printlist2(stacks);
-
+	ft_printf("CHUNKS: %d \n", NB_CHUNKS);
 	ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
-
 	// Free piles
 	free_stacks(stacks);
 	return (0);

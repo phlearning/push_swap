@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 18:23:48 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:17:35 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,118 @@ void	sort_size_5(t_stacks *stacks)
 		op_sa(stacks);
 		op_ra(stacks);
 	}
+}
 
+/* void	sort_big_numbers(t_stacks *stacks)
+{
+	int	i;
+
+	i = 0;
+	while (STACK_A != NULL)
+	{
+		if (DATA_A != STACKS_MIN)
+		{
+			if (INDEX_MIN < SIZE_A/2)
+				op_ra(stacks);
+			else
+				op_rra(stacks);
+		}
+		if (DATA_A == STACKS_MIN)
+		{
+			op_pb(stacks);
+			STACKS_MIN = get_min(STACK_A);
+			INDEX_MIN = get_index(STACK_A, STACKS_MIN);
+		}
+	}
+	while (STACK_B != NULL)
+		op_pa(stacks);
+} */
+
+int	compare_pos(int min_pos, int max_pos, t_stacks *stacks)
+{
+	int	distance_min;
+	int	distance_max;
+	int	half_size;
+
+	half_size = SIZE_A / 2;
+
+	if (min_pos > half_size)
+		distance_min = SIZE_A - min_pos;
+	else
+		distance_min = min_pos;
+	if (max_pos > half_size)
+		distance_max = SIZE_A - max_pos;
+	else
+		distance_max = max_pos;
+	if (distance_min <= distance_max && min_pos <= half_size)
+		return (1);
+	else if (distance_max <= distance_min && max_pos <= half_size)
+		return (1);
+	else if (distance_min <= distance_max && min_pos > half_size)
+		return (0);
+	else if (distance_max <= distance_min && max_pos > half_size)
+		return (0);
+	return (0);
 }
 
 void	sort_big_numbers(t_stacks *stacks)
 {
-	int	min;
+	int	count;
+	int	i;
+	int	delimitation;
+	int	delimit_index;
 
-	min = STACKS_MIN;
+	count = 1;
+	while (STACK_A != NULL && count < NB_CHUNKS - 1)
+	{
+	ft_printf("test1\n");
+		i = 0;
+		delimitation = SORTED_TAB[ONE_CHUNK * count + i];
+		delimit_index = get_index(STACK_A, delimitation);
+		while (SIZE_A >= STACK_SIZE - ONE_CHUNK)
+		{
+			ft_printf("test2\n");
+			if (DATA_A == STACKS_MIN)
+			{
+				op_pb(stacks);
+				if (SIZE_B > 1)
+				{
+					op_rrb(stacks);
+					if (DATA_B < DATA_B_NEXT)
+					{
+						op_sb(stacks);
+					}
+					op_rb(stacks);
+					op_rb(stacks);
+				}
+				STACKS_MIN = get_min(STACK_A);
+				INDEX_MIN = get_index(STACK_A, STACKS_MIN);
+			}
+			ft_printf("test3\n");
+			if (DATA_B == delimitation)
+			{
+				op_pb(stacks);
+				i--;
+				delimitation = SORTED_TAB[ONE_CHUNK * count + i];
+				delimit_index = get_index(STACK_A, delimitation);
+			}
+			ft_printf("test4\n");
+			if (compare_pos(INDEX_MIN, delimit_index, stacks))
+				op_ra(stacks);
+			else
+				op_rra(stacks);
+		}
+		++count;
+	}
 	while (STACK_A != NULL)
 	{
-		if (DATA_A == min)
+		STACKS_MIN = get_min(STACK_A);
+		if (DATA_A == STACKS_MIN)
 		{
 			op_pb(stacks);
-			min = get_min(STACK_A);
+			op_rb(stacks);
 		}
 		else
 			op_ra(stacks);
 	}
-	while (STACK_B != NULL)
-		op_pa(stacks);
 }

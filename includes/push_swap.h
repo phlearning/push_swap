@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 17:58:45 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:31:49 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@
 # define SIZE_B stacks->size_b
 /* --- */
 # define STACKS_MIN stacks->min
+# define INDEX_MIN stacks->index_min
 # define STACKS_MAX stacks->max
+# define INDEX_MAX stacks->index_max
+# define SORTED_TAB stacks->sorted_tab
+# define STACK_SIZE stacks->size_start
+# define NB_CHUNKS stacks->nb_chunks
+# define ONE_CHUNK stacks->one_chunk
 /* --------------------------- */
 
 typedef struct s_node {
@@ -72,22 +78,21 @@ typedef struct s_cmds
 	int		nb_pb;
 }	t_cmds;
 
-typedef struct s_chunk
-{
-	int	*chunk_delimitation;
-	int	nb_chunks;
-}	t_chunk;
-
 typedef struct	s_stacks
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
 	t_cmds	cmds;
-	t_chunk	chunk;
+	int		*sorted_tab;
+	int		nb_chunks;
+	int		one_chunk;
+	int		size_start;
 	int		size_a;
 	int		size_b;
 	int		min;
+	int		index_min;
 	int		max;
+	int		index_max;
 } t_stacks;
 
 // !TO REMOVE
@@ -111,7 +116,6 @@ int		pop(t_node **head_ref);
 int		is_empty(t_node *head);
 void	insert_beg(t_node **head_ref, int data);
 void	insert_end(t_node **head_ref, int data);
-void	delete_node(t_node **head_ref, int key);
 t_node	*get_lastnode(t_node *node);
 void	insert_all(t_node **head_ref, char **data);
 int		peek(int pos, t_node *node);
@@ -132,12 +136,13 @@ int		square_root(int	n);
 
 /* Check */
 
+int		check_and_split(t_node **stack_a, char **av);
+int		check_all_args(t_node **stack_a, char **av);
 int		check_inputs(int ac, char **av, t_stacks *stack);
+void	input_param(t_stacks *stacks);
 
 /* Errors */
 
-int		check_and_split(t_node **stack_a, char **av);
-int		check_all_args(t_node **stack_a, char **av);
 int		check_error(char **str);
 int		check_sign(char *str);
 int		check_number(char *str);
@@ -145,6 +150,7 @@ int		check_dupe(char **str);
 void	exit_error(char *str);
 
 /* Index */
+
 int		get_data_by_index(t_node *head, int index);
 int		get_index(t_node *head, int num);
 void	put_index_stack_a(t_stacks *stacks);
@@ -156,10 +162,14 @@ void	index_ss(t_stacks *stacks);
 void	index_reput(t_stacks *stacks);
 
 /* Chunks */
+
 int		get_chunks(t_stacks *stacks);
 
 /* Sorting */
+
 int		get_first_pivot(t_node *stack);
+int		compare_pos(int min_pos, int max_pos, t_stacks *stacks);
+int		*get_sorted_tab(t_node *stack);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
@@ -169,6 +179,7 @@ void	sort_big_numbers(t_stacks *stacks);
 void	quicksort(t_node *first, t_node *last);
 
 /* Operations */
+
 void	swap(t_node **head_ref);
 void	push(t_node **stack_src, t_node **stack_dst);
 void	rotate(t_node **head_ref);
@@ -186,12 +197,15 @@ void	op_pa(t_stacks *stacks);
 void	op_pb(t_stacks *stacks);
 void 	rrotate(t_node **head);
 
+/* cmds */
+
+void	addcommands(t_stacks *stacks, char *cmds);
+
 /* print */
+
 void	printlist(t_node *node);
 void	printlist2(t_stacks *stacks);
 void	printcmds(t_stacks *stack);
-
-/* cmds */
-void	addcommands(t_stacks *stacks, char *cmds);
+void	printchunks(t_stacks *stacks);
 
 #endif

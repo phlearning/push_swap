@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:18:20 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 17:59:54 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 12:24:01 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_stacks(t_stacks *stacks)
 	stacks->size_b = 0;
 	stacks->min = 0;
 	stacks->max = 0;
-	stacks->chunk.chunk_delimitation = NULL;
-	stacks->chunk.nb_chunks = 0;
+	stacks->sorted_tab = NULL;
+	stacks->nb_chunks = 0;
 	init_cmds(stacks);
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 15:15:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:14:08 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,32 @@ int	get_first_pivot(t_node *stack)
 	middle = get_median(tmp);
 	free_nodes(tmp);
 	return (middle);
+}
+
+/* Sort a first time and put into the array sorted_tab.
+Pass in the parameter a copy of the stack to not sort the main one. */
+int	*get_sorted_tab(t_node *stack)
+{
+	int *tab;
+	int	size;
+	int	i;
+	t_node	*tmp;
+	
+	if (stack == NULL)
+		return (0);
+	size = node_length(stack);
+	tab = malloc(sizeof(size) + 1);
+	tmp = (stack);
+	quicksort(tmp, get_lastnode(tmp));
+	i = 0;
+	while (i < size)
+	{
+		tab[i] = tmp->data;
+		tmp = tmp->next;
+		++i;
+	}
+	tab[i] = '\0';
+	return (tab);
 }
 
 void	sort(t_stacks *stacks)

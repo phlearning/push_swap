@@ -8,6 +8,8 @@
 		"vector": "c",
 		"algorithm": "c",
 		"__node_handle": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"chrono": "c",
+		"variant": "c"
 	}
 }

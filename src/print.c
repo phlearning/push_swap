@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 15:40:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 13:43:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ void	printcmds(t_stacks *stacks)
 	ft_printf("nb_pa: %d\n", NB_PA);
 	ft_printf("nb_pb: %d\n", NB_PB);
 	ft_printf("\n------------\n");
+}
+
+void	printchunks(t_stacks *stacks)
+{
+	int	i;
+	
+	i = 1;
+	ft_printf("size: %d ", STACK_SIZE);
+	ft_printf("chunks: %d | size/chunk: %d\n", NB_CHUNKS, STACK_SIZE / NB_CHUNKS);
+	ft_printf("-------------\n");
+	while (i < NB_CHUNKS)
+	{
+		ft_printf("Stacks Pivots[%d]:\t%d\n",i , SORTED_TAB[ONE_CHUNK * i]);
+		++i;
+	}
 }

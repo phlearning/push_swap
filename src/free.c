@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 12:08:35 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/09 13:52:58 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ void	free_nodes(t_node *head_ref)
 	}
 }
 
-void	free_stacks(t_stacks *stack)
+void	free_stacks(t_stacks *stacks)
 {
-	free_nodes(stack->stack_a);
-	free_nodes(stack->stack_b);
-	my_free(stack);
+	free_nodes(stacks->stack_a);
+	free_nodes(stacks->stack_b);
+	free(SORTED_TAB);
+	my_free(stacks);
 }
 
 void	free_split(char **str)
