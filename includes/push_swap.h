@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/09 16:31:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 00:46:57 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,6 @@ typedef struct	s_stacks
 	int		index_max;
 } t_stacks;
 
-// !TO REMOVE
-# ifndef MEM_COUNTEREXT
-#  define MEM_COUNTEREXT
-// !TO REMOVE
-extern int	g_mem_counter;
-# endif
-
-void	my_free(void *p);
-void	*my_malloc(int size);
-
 /* Init */
 void	init_stacks(t_stacks *stacks);
 void	init_cmds(t_stacks *stacks);
@@ -153,6 +143,10 @@ void	exit_error(char *str);
 
 int		get_data_by_index(t_node *head, int index);
 int		get_index(t_node *head, int num);
+int		get_lastindex(t_node *head, int num);
+int		lastindex_by_comparaison(t_node *node, int value);
+int		index_by_comparaison(t_node *node, int value);
+int		index_smaller_than(t_stacks *stacks, int value);
 void	put_index_stack_a(t_stacks *stacks);
 void	put_index_stack_b(t_stacks *stacks);
 void	change_index(t_stacks *stacks, char *cmds);
@@ -163,10 +157,17 @@ void	index_reput(t_stacks *stacks);
 
 /* Chunks */
 
+int		compare_stack_to_value(t_node *node, int value);
 int		get_chunks(t_stacks *stacks);
+int		chunk_size(t_stacks *stacks);
+int		chunk_limit(t_stacks *stacks, int counter);
+void	chunking(t_stacks *stacks);
+void	push_chunk(t_stacks *stacks, int value, int i);
+
 
 /* Sorting */
-
+void	rotate_min_a(t_stacks *stacks);
+int		is_sorted(t_node *head);
 int		get_first_pivot(t_node *stack);
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks);
 int		*get_sorted_tab(t_node *stack);

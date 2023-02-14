@@ -44,8 +44,9 @@ SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
 # OBJS
 
 OBJS_DIR 		= objs
-
 OBJS 			= $(addprefix ./$(OBJS_DIR)/,$(SOURCES:.c=.o))
+OBJS_DIRFS 		= objsfs
+OBJSFS 			= $(addprefix ./$(OBJS_DIRFS)/,$(SOURCES:.c=.o))
 
 # Compiling
 
@@ -60,6 +61,9 @@ all: temp $(NAME)
 temp:
 	@mkdir -p $(OBJS_DIR)
 
+tempfs:
+	@mkdir -p $(OBJS_DIRFS)
+
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(LIB_INC) $(INCLUDE) -c $< -o $@
@@ -73,6 +77,18 @@ $(NAME):	$(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(NAME)
 	@echo "$(GREEN) $(NAME) Compiled $(END)"
 
+$(OBJS_DIRFS)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJS_DIRFS)
+	@$(CC) -g3 -fsanitize=address $(CFLAGS) $(LIB_INC) $(INCLUDE) -c $< -o $@
+	@echo "Compiling $@..."
+
+fsanitize: tempfs	$(OBJSFS)
+	@make -s -C $(LIBFT_DIR)
+	@echo "$(GREEN) Libft compiled $(END)"
+	@make -s -C $(FT_PRINTF_DIR)
+	@echo "$(BLUE) Ft_printf compiled $(END)"
+	@$(CC) $(CFLAGS) -g3 -fsanitize=address -static-libasan $(OBJSFS) $(LIB_LNK) $(FT_PRINTF_LNK) -o debug
+	@echo "$(BLUE) $(NAME) Compiled $(END)"
 
 checkfunction:
 	$(shell nm -A ./objs/*) > checkfunction.txt
@@ -84,6 +100,7 @@ git:
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJS_DIRFS)
 	@rm -rf norminette.txt
 	@rm -rf checkfunction.txt
 	@make -sC $(LIBFT_DIR) clean
@@ -92,6 +109,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@rm -f debug
 	@make -sC $(LIBFT_DIR) fclean
 	@make -sC $(FT_PRINTF_DIR) fclean
 	@echo "$(BLUE)$(NAME) Fcleaning Done$(END)"

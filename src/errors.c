@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:18:13 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 16:54:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 00:47:10 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	*transf_args_to_tab(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	tmp = my_malloc(sizeof(int) * i);
+	tmp = malloc(sizeof(int) * (i + 1));
 	if (!tmp)
 		return (0);
 	i = 0;
@@ -101,12 +101,12 @@ int	check_dupe(char **str)
 		{
 			if (tmp[i] == tmp[j])
 			{
-				my_free(tmp);
+				free(tmp);
 				return (-1);
 			}
 		}
 	}
-	my_free(tmp);
+	free(tmp);
 	return (0);
 }
 

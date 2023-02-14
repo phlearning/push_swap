@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:04:26 by pvong             #+#    #+#             */
-/*   Updated: 2022/11/09 12:57:01 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/13 11:39:39 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ int	ft_get_unbr_len(unsigned int n)
 
 char	*ft_uitoa(unsigned int n)
 {
-	int		i;
 	int		len;
 	char	*nbr;
 
-	i = 0;
 	len = ft_get_unbr_len(n);
 	nbr = malloc(sizeof(char) * (len + 1));
 	if (!nbr)

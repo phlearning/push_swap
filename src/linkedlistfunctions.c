@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/07 16:19:34 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 00:46:06 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	insert_beg(t_node **head_ref, int data)
 {
 	t_node	*new;
 
-	new = my_malloc(sizeof(t_node));
+	new = malloc(sizeof(t_node));
 	if (!new)
 		exit(-1);
 	new->data = data;
@@ -50,7 +50,7 @@ void	insert_end(t_node **head_ref, int data)
 	t_node	*new;
 	t_node	*lastnode;
 
-	new = my_malloc(sizeof(t_node));
+	new = malloc(sizeof(t_node));
 	if (!new)
 		exit(-1);
 	new->data = data;
@@ -76,7 +76,7 @@ int	pop(t_node **head_ref)
 	head = *head_ref;
 	*head_ref = (*head_ref)->next;
 	popped = head->data;
-	my_free(head);
+	free(head);
 	return (popped);
 }
 

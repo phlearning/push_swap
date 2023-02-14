@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:01 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 16:25:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/13 15:26:28 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,24 @@ int	get_index(t_node *head, int num)
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+int	get_lastindex(t_node *head, int num)
+{
+	t_node	*tmp;
+	int		index;
+
+	if (head == NULL)
+		return (0);
+	tmp = head;
+	index = 0;
+	while (tmp != NULL)
+	{
+		if (tmp->data == num)
+			index = tmp->index;
+		tmp = tmp->next;
+	}
+	return (index);
 }
 
 /**

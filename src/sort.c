@@ -6,11 +6,49 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/09 16:14:08 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 00:48:31 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	rotate_min_a(t_stacks *stacks)
+{
+	int	mid;
+	int	min;
+	int	index_min;
+
+	min = get_min(STACK_A);	
+	while (DATA_A != min)
+	{
+		min = get_min(STACK_A);
+		mid = SIZE_A / 2;
+		index_min = get_index(STACK_A, min);
+		if (index_min < mid)
+			op_ra(stacks);
+		else
+			op_rra(stacks);
+	}
+}
+
+int	is_sorted(t_node *head)
+{
+	t_node *tmp;
+	int		size;
+	int		i;
+
+	tmp = head;
+	size = node_length(head);
+	i = 0;
+	while (i < size -1)
+	{
+		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
+}
 
 t_node	*partition(t_node *first, t_node *last)
 {
@@ -93,7 +131,7 @@ int	*get_sorted_tab(t_node *stack)
 	if (stack == NULL)
 		return (0);
 	size = node_length(stack);
-	tab = malloc(sizeof(size) + 1);
+	tab = malloc(sizeof(int) * (size + 1));
 	tmp = (stack);
 	quicksort(tmp, get_lastnode(tmp));
 	i = 0;

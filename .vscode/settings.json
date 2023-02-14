@@ -10,6 +10,7 @@
 		"__node_handle": "c",
 		"stdio.h": "c",
 		"chrono": "c",
-		"variant": "c"
+		"variant": "c",
+		"limits": "c"
 	}
 }
