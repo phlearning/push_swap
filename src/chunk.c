@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:59:22 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/13 16:24:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:08:18 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	chunk_limit(t_stacks *stacks, int counter)
 
 	size_chunk = STACK_SIZE / get_chunks(stacks);
 	index = (counter + 1) * size_chunk;
-	limit = SORTED_TAB[index];
-	return (limit);
+	if (index < STACK_SIZE)
+	{
+		limit = SORTED_TAB[index];
+		return (limit);
+	}
+	return (0);
 }
 
 int	chunk_size(t_stacks *stacks)

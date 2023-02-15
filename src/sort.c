@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 00:48:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 16:26:04 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	rotate_min_a(t_stacks *stacks)
 		min = get_min(STACK_A);
 		mid = SIZE_A / 2;
 		index_min = get_index(STACK_A, min);
-		if (index_min < mid)
+		if (index_min <= mid)
 			op_ra(stacks);
 		else
 			op_rra(stacks);

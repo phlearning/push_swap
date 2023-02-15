@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 00:45:43 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:36:40 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	main(int ac, char **av)
 		return (0);
 	}
 
-	printlist2(stacks);
+	// printlist2(stacks);
 	sort(stacks);
-	// ft_printf("-----Sort-----\n");
-	printlist2(stacks);
-	ft_printf("CHUNKS: %d \n", NB_CHUNKS);
-	ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
+	// printlist2(stacks);
+	// ft_printf("CHUNKS: %d \n", NB_CHUNKS);
+	// ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
+	// printcmds(stacks);
 	// Free piles
 	free_stacks(stacks);
 	return (0);

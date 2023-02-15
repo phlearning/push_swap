@@ -12,5 +12,6 @@
 		"chrono": "c",
 		"variant": "c",
 		"limits": "c"
-	}
+	},
+	"cmake.configureOnOpen": false
 }

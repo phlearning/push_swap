@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/14 19:26:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:48:43 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,14 @@ int	index_smaller_than(t_stacks *stacks, int value)
 	int	second_pos;
 
 	first_pos = index_by_comparaison(STACK_A, value);
-	second_pos = index_by_comparaison(STACK_A, value);
+	second_pos = lastindex_by_comparaison(STACK_A, value);
 	if (compare_pos(first_pos, second_pos, stacks))
 		index = first_pos;
 	else
 		index = second_pos;
+/* 	ft_printf("value[%d]: %d ||", first_pos, get_data_by_index(STACK_A, first_pos));
+	ft_printf("value[%d]: %d\t", second_pos, get_data_by_index(STACK_A, second_pos));
+	ft_printf("index[%d]: %d\n", index, get_data_by_index(STACK_A, index)); */
 	return (index);
 }
 
@@ -198,10 +201,6 @@ void	smart_chunk_rotate(t_stacks *stacks, int value)
 	{
 		smaller = index_smaller_than(stacks, value);
 		half_size = SIZE_A / 2;
-		ft_printf("top of a[%d]: %d\n",STACK_A->index, DATA_A);
-		ft_printf("next a[%d]: %d\n", STACK_A_NEXT->index, DATA_A_NEXT);
-		ft_printf("value: %d\n", value);
-		ft_printf("middle: %d\n", half_size);
 		if (smaller < half_size)
 			op_ra(stacks);
 		else
@@ -220,10 +219,20 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 {
 	while (compare_stack_to_value(STACK_A, value))
 	{
-		if (DATA_A < value)
+		// ft_printf("----pivot [%d]: %d----\n", i, value);
+		if (DATA_A <= value)
+		{
 			op_pb(stacks);
+			if (STACK_B_NEXT && DATA_B_NEXT > DATA_B)
+				op_sb(stacks);
+		}	
 		if (!(compare_stack_to_value(STACK_A, value)))
+		{
+			// ft_printf("prev_value: %d ||", value);
 			value = chunk_limit(stacks, ++i);
+			// ft_printf("next_value: %d\n", value);
+			// sleep(2);
+		}	
 		else
 			smart_chunk_rotate(stacks, value);
 	}
@@ -241,9 +250,45 @@ void	chunking(t_stacks *stacks)
 	int	value;
 	int	counter;
 
-	counter = 1;
+	counter = 0;
 	value = chunk_limit(stacks, counter);
 	push_chunk(stacks, value, counter);
+}
+
+void	rotate_max_b(t_stacks *stacks)
+{
+	int	mid;
+	int	max;
+	int	index_max;
+
+	if (STACK_B == NULL)
+		return ;	
+	while (DATA_B != max)
+	{
+		max = get_max(STACK_B);
+		mid = SIZE_B / 2;
+		index_max = get_index(STACK_B, max);
+		if (index_max <= mid)
+			op_rb(stacks);
+		else
+			op_rrb(stacks);
+	}
+}
+
+void	push_biggest_b_to_a(t_stacks *stacks)
+{
+	int	max;
+
+	if (STACK_B == NULL)
+		return ;
+	while (STACK_B != NULL)
+	{
+		max = get_max(STACK_B);
+		if (DATA_B == max)
+			op_pa(stacks);
+		else
+			rotate_max_b(stacks);
+	}
 }
 
 void	sort_big_numbers(t_stacks *stacks)
@@ -252,7 +297,7 @@ void	sort_big_numbers(t_stacks *stacks)
 
 	if (!STACK_A)
 		return ;
-	// chunking(stacks);
+	chunking(stacks);
 	while (!is_sorted(STACK_A))
 	{
 		min = get_min(STACK_A);
@@ -264,5 +309,5 @@ void	sort_big_numbers(t_stacks *stacks)
 			sort_size_3(stacks);
 	}
 	while (STACK_B != NULL)
-		op_pa(stacks);
+		push_biggest_b_to_a(stacks);
 }

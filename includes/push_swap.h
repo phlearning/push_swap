@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 00:46:57 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/15 17:49:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
+# include <stdio.h>
 
 /* CMDS SHORTCUTS */
 # define NB_SA stacks->cmds.nb_sa
@@ -167,10 +168,12 @@ void	push_chunk(t_stacks *stacks, int value, int i);
 
 /* Sorting */
 void	rotate_min_a(t_stacks *stacks);
+void	rotate_max_b(t_stacks *stacks);
 int		is_sorted(t_node *head);
 int		get_first_pivot(t_node *stack);
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks);
 int		*get_sorted_tab(t_node *stack);
+void	push_biggest_b_to_a(t_stacks *stacks);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
