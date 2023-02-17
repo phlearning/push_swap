@@ -64,7 +64,7 @@ temp:
 tempfs:
 	@mkdir -p $(OBJS_DIRFS)
 
-	$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(LIB_INC) $(INCLUDE) -c $< -o $@
 	@echo "Compiling $@..."
