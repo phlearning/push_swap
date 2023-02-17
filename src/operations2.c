@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:47:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/08 15:36:00 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/16 23:15:27 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,14 @@ void	op_rrr(t_stacks *stacks)
 }
 
 /* Push_a: Push the first element of stack_b to stack_a.
-	Do nothing if b is empty */
+	Do nothing if b is empty.
+	The index doesn't matter here it will be changed
+	by the function change_index.*/
 void	op_pa(t_stacks *stacks)
 {
-	int	tmp;
 	if (stacks == NULL || stacks->stack_b == NULL)
 		return ;
-	tmp = stacks->stack_b->index;
 	push(&stacks->stack_b, &stacks->stack_a);
-	stacks->stack_a->index = tmp;
 	stacks->size_a++;
 	stacks->size_b--;
 	addcommands(stacks, "pa");
@@ -154,15 +153,14 @@ void	op_pa(t_stacks *stacks)
 }
 
 /* Push_b: Push the first element of stack_a to stack_b.
-	Do nothing if a is empty */
+	Do nothing if a is empty
+	The index doesn't matter here it will be changed
+	by the function change_index*/
 void	op_pb(t_stacks *stacks)
 {
-	int	tmp;
 	if (stacks == NULL || stacks->stack_a == NULL)
 		return ;
-	tmp = stacks->stack_a->index;
 	push(&stacks->stack_a, &stacks->stack_b);
-	stacks->stack_b->index = tmp;
 	stacks->size_a--;
 	stacks->size_b++;
 	addcommands(stacks, "pb");

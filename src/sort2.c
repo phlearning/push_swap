@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 18:48:43 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/17 01:41:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	sort_size_3(t_stacks *stacks)
 	}
 	if (stacks->size_a == 3)
 	{
-		max = stacks->max;
+		max = get_max(STACK_A);
 		if (stacks->stack_a->data == max)
 			op_ra(stacks);
-		else if (stacks->stack_a->next->data == max)
+		if (stacks->stack_a->next->data == max)
 			op_rra(stacks);
 		if (stacks->stack_a->data > stacks->stack_a->next->data)
 			op_sa(stacks);
@@ -44,9 +44,14 @@ void	sort_size_3(t_stacks *stacks)
 
 void	sort_size_5(t_stacks *stacks)
 {
+	int	min;
+	int	max;
+
+	min = get_min(STACK_A);
+	max = get_max(STACK_A);
 	while (SIZE_B != 2)
 	{
-		if (DATA_A == STACKS_MIN || DATA_A == STACKS_MAX)
+		if (DATA_A == min || DATA_A == max)
 			op_pb(stacks);
 		else
 			op_ra(stacks);
@@ -54,7 +59,7 @@ void	sort_size_5(t_stacks *stacks)
 	sort_size_3(stacks);
 	op_pa(stacks);
 	op_pa(stacks);
-	if (DATA_A > DATA_A_NEXT)
+	if (DATA_A == max)
 		op_ra(stacks);
 	else
 	{
@@ -96,23 +101,28 @@ void	sort_size_5(t_stacks *stacks)
  * If second value's distance is smaller
  * returns (0);
  */
-int	compare_pos(int first_pos, int sec_pos, t_stacks *stacks)
+int	compare_pos(int first_pos, int sec_pos, t_stacks *stacks, char *a_or_b)
 {
 	int	distance_first;
 	int	distance_sec;
 	int	half_size;
+	int	size;
 
-	half_size = SIZE_A / 2;
+	if (!ft_strncmp(a_or_b, "A", 2))
+		size = SIZE_A;
+	else
+		size = SIZE_B;
+	half_size = size / 2;
 
 	if (first_pos > half_size)
-		distance_first = SIZE_A - first_pos;
+		distance_first = size - first_pos;
 	else
 		distance_first = first_pos;
 	if (sec_pos > half_size)
-		distance_sec = SIZE_A - sec_pos;
+		distance_sec = size - sec_pos;
 	else
 		distance_sec = sec_pos;
-	if (distance_first <= distance_sec)
+	if (distance_first < distance_sec)
 		return (1);
 	else
 		return (0);
@@ -181,7 +191,7 @@ int	index_smaller_than(t_stacks *stacks, int value)
 
 	first_pos = index_by_comparaison(STACK_A, value);
 	second_pos = lastindex_by_comparaison(STACK_A, value);
-	if (compare_pos(first_pos, second_pos, stacks))
+	if (compare_pos(first_pos, second_pos, stacks, "A"))
 		index = first_pos;
 	else
 		index = second_pos;
@@ -204,7 +214,7 @@ void	smart_chunk_rotate(t_stacks *stacks, int value)
 		if (smaller < half_size)
 			op_ra(stacks);
 		else
-			op_rra(stacks);	
+			op_rra(stacks);
 	}
 }
 
@@ -219,19 +229,15 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 {
 	while (compare_stack_to_value(STACK_A, value))
 	{
-		// ft_printf("----pivot [%d]: %d----\n", i, value);
 		if (DATA_A <= value)
 		{
 			op_pb(stacks);
-			if (STACK_B_NEXT && DATA_B_NEXT > DATA_B)
-				op_sb(stacks);
+	/* 		if (STACK_B_NEXT && DATA_B_NEXT > DATA_B)
+				op_sb(stacks); */
 		}	
 		if (!(compare_stack_to_value(STACK_A, value)))
 		{
-			// ft_printf("prev_value: %d ||", value);
 			value = chunk_limit(stacks, ++i);
-			// ft_printf("next_value: %d\n", value);
-			// sleep(2);
 		}	
 		else
 			smart_chunk_rotate(stacks, value);
@@ -253,6 +259,38 @@ void	chunking(t_stacks *stacks)
 	counter = 0;
 	value = chunk_limit(stacks, counter);
 	push_chunk(stacks, value, counter);
+}
+
+void	rotate_nb_a(t_stacks *stacks, int nb)
+{
+	int	mid;
+	int	index_nb;
+
+	while (DATA_A != nb)
+	{
+		mid = SIZE_A / 2;
+		index_nb = get_index(STACK_A, nb);
+		if (index_nb <= mid)
+			op_ra(stacks);
+		else
+			op_rra(stacks);
+	}
+}
+
+void	rotate_nb_b(t_stacks *stacks, int nb)
+{
+	int	mid;
+	int	index_nb;
+
+	while (DATA_B != nb)
+	{
+		mid = SIZE_B / 2;
+		index_nb = get_index(STACK_B, nb);
+		if (index_nb <= mid)
+			op_rb(stacks);
+		else
+			op_rrb(stacks);
+	}
 }
 
 void	rotate_max_b(t_stacks *stacks)
@@ -279,16 +317,86 @@ void	push_biggest_b_to_a(t_stacks *stacks)
 {
 	int	max;
 
+	max = get_max(STACK_B);
 	if (STACK_B == NULL)
 		return ;
-	while (STACK_B != NULL)
-	{
-		max = get_max(STACK_B);
-		if (DATA_B == max)
+	rotate_nb_b(stacks, max);
+	if (DATA_B == max)
 			op_pa(stacks);
+}
+
+void	rotate_min_b(t_stacks *stacks)
+{
+	int	mid;
+	int	min;
+	int	index_min;
+
+	if (STACK_B == NULL)
+		return ;	
+	while (DATA_B != min)
+	{
+		min = get_min(STACK_B);
+		mid = SIZE_B / 2;
+		index_min = get_index(STACK_B, min);
+		if (index_min <= mid)
+			op_rb(stacks);
 		else
-			rotate_max_b(stacks);
+			op_rrb(stacks);
 	}
+}
+
+void	push_smallest_b_to_a(t_stacks *stacks)
+{
+	int	min;
+
+	min = get_min(STACK_B);
+	if (STACK_B == NULL)
+		return ;
+	rotate_nb_b(stacks, min);
+	if (DATA_B == min)
+			op_pa(stacks);
+}
+
+int	get_last_value(t_node *node)
+{
+	t_node *tmp;
+
+	if (node == NULL)
+		return (0);
+	tmp = get_lastnode(node);
+	return (tmp->data);
+}
+
+void	push_and_sort(t_stacks *stacks)
+{
+	// int	min_a;
+	// int	max_a;
+	int	last_a;
+	// int	last_b;
+
+	// min_a = get_min(STACK_A);
+	// max_a = get_max(STACK_A);
+	last_a = get_last_value(STACK_A);
+	// last_b = get_last_value(STACK_B);
+	if (DATA_B < DATA_B_NEXT)
+		op_sb(stacks);
+	if (DATA_B < DATA_A)
+	{
+		op_pa(stacks);
+	}
+	else if (DATA_B > last_a)
+	{
+		op_pa(stacks);
+		op_ra(stacks);
+	}
+	else if (DATA_A > last_a)
+	{
+		ft_printf("last_value: %d || first value: %d \n", last_a, DATA_A);
+		op_rra(stacks);
+		op_sa(stacks);
+	}
+	else
+		op_rb(stacks);
 }
 
 void	sort_big_numbers(t_stacks *stacks)
@@ -296,6 +404,8 @@ void	sort_big_numbers(t_stacks *stacks)
 	int	min;
 
 	if (!STACK_A)
+		return ;
+	if (is_sorted(STACK_A))
 		return ;
 	chunking(stacks);
 	while (!is_sorted(STACK_A))
@@ -309,5 +419,9 @@ void	sort_big_numbers(t_stacks *stacks)
 			sort_size_3(stacks);
 	}
 	while (STACK_B != NULL)
+	{
 		push_biggest_b_to_a(stacks);
+	}
+/* 	while (DATA_A != STACKS_MIN)
+		rotate_min_a(stacks); */
 }

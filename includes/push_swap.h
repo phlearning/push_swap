@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 17:49:44 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/17 11:14:30 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 typedef struct s_node {
 	int				index;
 	int				data;
+	struct s_node	*prev;
 	struct s_node	*next;
 }	t_node;
 
@@ -156,6 +157,14 @@ void	index_sb(t_stacks *stacks);
 void	index_ss(t_stacks *stacks);
 void	index_reput(t_stacks *stacks);
 
+/* Rotate */
+
+void	rotate_min_a(t_stacks *stacks);
+void	rotate_max_b(t_stacks *stacks);
+void	rotate_min_b(t_stacks *stacks);
+void	rotate_nb_a(t_stacks *stacks, int nb);
+void	rotate_nb_b(t_stacks *stacks, int nb);
+
 /* Chunks */
 
 int		compare_stack_to_value(t_node *node, int value);
@@ -167,12 +176,11 @@ void	push_chunk(t_stacks *stacks, int value, int i);
 
 
 /* Sorting */
-void	rotate_min_a(t_stacks *stacks);
-void	rotate_max_b(t_stacks *stacks);
 int		is_sorted(t_node *head);
 int		get_first_pivot(t_node *stack);
-int		compare_pos(int min_pos, int max_pos, t_stacks *stacks);
+int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 int		*get_sorted_tab(t_node *stack);
+void	push_smallest_b_to_a(t_stacks *stacks);
 void	push_biggest_b_to_a(t_stacks *stacks);
 
 void	sort(t_stacks *stacks);

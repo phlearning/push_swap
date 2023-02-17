@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 16:26:04 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/17 01:29:04 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int	*get_sorted_tab(t_node *stack)
 
 void	sort(t_stacks *stacks)
 {
+	if (is_sorted(STACK_A))
+		return ;
 	if (stacks->size_a <= 3)
 		sort_size_3(stacks);
 	else if (stacks->size_a <= 5)
