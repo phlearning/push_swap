@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 17:44:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 18:25:31 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char **av)
 	// ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
 	// printcmds(stacks);
 	// Free piles
-	// free_stacks(stacks);
+	free_stacks(stacks);
 
 	return (0);
 }
