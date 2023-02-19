@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/17 01:41:02 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 17:43:01 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,14 @@ int	compare_stack_to_value(t_node *node, int value)
 	t_node	*tmp;
 
 	tmp = node;
-	while (tmp)
+	while (tmp->next != node)
 	{
 		if (tmp->data <= value)
 			return (1);
 		tmp = tmp->next;
 	}
+	if (tmp->data <= value)
+		return (1);
 	return (0);
 }
 
@@ -157,10 +159,12 @@ int	lastindex_by_comparaison(t_node *node, int value)
 
 	tmp = node;
 	index = 0;
-	while (tmp)
+	while (tmp->next != node)
 	{
 		if (tmp->data <= value)
 			index = tmp->index;
+		if (tmp->next->data <= value)
+			index = tmp->next->index;
 		tmp = tmp->next;
 	}
 	return (index);
@@ -171,12 +175,21 @@ int	index_by_comparaison(t_node *node, int value)
 	t_node	*tmp;
 
 	tmp = node;
-	while (tmp)
+	while (tmp->next != node)
 	{
 		if (tmp->data <= value)
+		{
+			ft_printf("\n");
 			return (tmp->index);
+		}
+		if (tmp->next->data <= value)
+		{
+			ft_printf("\n");
+			return (tmp->next->index);
+		}
 		tmp = tmp->next;
 	}
+
 	return (0);
 }
 
@@ -196,7 +209,7 @@ int	index_smaller_than(t_stacks *stacks, int value)
 	else
 		index = second_pos;
 /* 	ft_printf("value[%d]: %d ||", first_pos, get_data_by_index(STACK_A, first_pos));
-	ft_printf("value[%d]: %d\t", second_pos, get_data_by_index(STACK_A, second_pos));
+	ft_printf("value[%d]: %d\t->", second_pos, get_data_by_index(STACK_A, second_pos));
 	ft_printf("index[%d]: %d\n", index, get_data_by_index(STACK_A, index)); */
 	return (index);
 }
@@ -210,6 +223,8 @@ void	smart_chunk_rotate(t_stacks *stacks, int value)
 	while (DATA_A > value)
 	{
 		smaller = index_smaller_than(stacks, value);
+	// ft_printf("DATA[%d]: %d\n",STACK_A->index, DATA_A);
+	// ft_printf("DATA[%d]: %d\n",STACK_A->prev->index, STACK_A->prev->data);
 		half_size = SIZE_A / 2;
 		if (smaller < half_size)
 			op_ra(stacks);
@@ -236,9 +251,7 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 				op_sb(stacks); */
 		}	
 		if (!(compare_stack_to_value(STACK_A, value)))
-		{
 			value = chunk_limit(stacks, ++i);
-		}	
 		else
 			smart_chunk_rotate(stacks, value);
 	}
