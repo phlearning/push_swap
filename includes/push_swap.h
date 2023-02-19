@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/17 11:14:30 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:06:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@
 # define DATA_A stacks->stack_a->data
 # define DATA_A_NEXT stacks->stack_a->next->data
 # define SIZE_A stacks->size_a
+# define TAIL_A stacks->tail_a
 /* --- */
 # define STACK_B stacks->stack_b
 # define STACK_B_NEXT stacks->stack_b->next
 # define DATA_B stacks->stack_b->data
 # define DATA_B_NEXT stacks->stack_b->next->data
 # define SIZE_B stacks->size_b
+# define TAIL_B stacks->tail_b
 /* --- */
 # define STACKS_MIN stacks->min
-# define INDEX_MIN stacks->index_min
 # define STACKS_MAX stacks->max
-# define INDEX_MAX stacks->index_max
 # define SORTED_TAB stacks->sorted_tab
 # define STACK_SIZE stacks->size_start
 # define NB_CHUNKS stacks->nb_chunks
@@ -83,7 +83,9 @@ typedef struct s_cmds
 typedef struct	s_stacks
 {
 	t_node	*stack_a;
+	t_node	*tail_a;
 	t_node	*stack_b;
+	t_node	*tail_b;
 	t_cmds	cmds;
 	int		*sorted_tab;
 	int		nb_chunks;
@@ -92,9 +94,7 @@ typedef struct	s_stacks
 	int		size_a;
 	int		size_b;
 	int		min;
-	int		index_min;
 	int		max;
-	int		index_max;
 } t_stacks;
 
 /* Init */
@@ -104,7 +104,7 @@ void	init_cmds(t_stacks *stacks);
 /* linked list functions */
 
 t_node	*new_node(int data);
-int		pop(t_node **head_ref);
+void	pop(t_node **head_ref);
 int		is_empty(t_node *head);
 void	insert_beg(t_node **head_ref, int data);
 void	insert_end(t_node **head_ref, int data);
@@ -119,7 +119,7 @@ int		get_max(t_node *node);
 
 /* Utils */
 
-void	free_nodes(t_node *head_ref);
+void	free_nodes(t_node **stack);
 void	free_stacks(t_stacks *stacks);
 void	free_split(char **str);
 int		*transf_args_to_tab(char **str);
@@ -143,19 +143,20 @@ void	exit_error(char *str);
 
 /* Index */
 
-int		get_data_by_index(t_node *head, int index);
 int		get_index(t_node *head, int num);
 int		get_lastindex(t_node *head, int num);
+int		get_data_by_index(t_node *head, int index);
 int		lastindex_by_comparaison(t_node *node, int value);
 int		index_by_comparaison(t_node *node, int value);
 int		index_smaller_than(t_stacks *stacks, int value);
 void	put_index_stack_a(t_stacks *stacks);
 void	put_index_stack_b(t_stacks *stacks);
-void	change_index(t_stacks *stacks, char *cmds);
 void	index_sa(t_stacks *stacks);
 void	index_sb(t_stacks *stacks);
 void	index_ss(t_stacks *stacks);
 void	index_reput(t_stacks *stacks);
+void	change_index(t_stacks *stacks, char *cmds);
+void	change_tail(t_stacks *stacks);
 
 /* Rotate */
 

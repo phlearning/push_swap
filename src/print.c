@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/09 13:43:59 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:15:15 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,55 @@
 
 void	printlist(t_node *node)
 {
-	while (node != NULL)
+	t_node	*tmp;
+
+	if (node != NULL)
+		tmp = node;
+	else
+		return ;
+	ft_printf("---------------\n");
+	while (tmp->next != node)
 	{
-		ft_printf("node: %d (%p)\n", node->data, node);
-		node = node->next;
+		ft_printf("node: %d (%p)\n", tmp->data, tmp);
+		tmp = tmp->next;
 	}
+	ft_printf("node: %d (%p)\n", tmp->data, tmp);
+	ft_printf("---------------\n");
 }
 
 void	printlist2(t_stacks *stacks)
 {
 	t_node	*tmp_a;
 	t_node	*tmp_b;
+	int		count_a;
+	int		count_b;
 
 	tmp_a = stacks->stack_a;
 	tmp_b = stacks->stack_b;
+	count_a = 0;
+	count_b = 0;
 	ft_printf("\n------------------Stack_a & Stack_b------------------\n");
 	ft_printf("stack_a_len: %d\t\t\t", stacks->size_a);
 	ft_printf("stack_b_len: %d\n", stacks->size_b);
-	while (tmp_a != NULL || tmp_b != NULL)
+	while (count_a < SIZE_A || count_b < SIZE_B)
 	{
-		if (tmp_a != NULL)
+		if (SIZE_A > 0 && count_a < SIZE_A)
 		{
 			ft_printf("stack_a[%d]: %d (%p)\t", tmp_a->index, tmp_a->data, tmp_a);
 			tmp_a = tmp_a->next;
+			++count_a;
 		}
 		else
 			ft_printf("\t\t\t\t");
-		if (tmp_b != NULL)
+		if (SIZE_B > 0 && count_b < SIZE_B)
 		{
 			ft_printf("stack_b[%d]: %d (%p)\t", tmp_b->index, tmp_b->data, tmp_b);
 			tmp_b = tmp_b->next;
+			++count_b;
 		}
 		ft_printf("\n");
 	}
 	ft_printf("-----------------------------------------------------\n");
-	free(tmp_a);
-	free(tmp_b);
 }
 
 void	printcmds(t_stacks *stacks)

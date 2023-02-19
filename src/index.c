@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:01 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/13 15:26:28 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 15:58:50 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,12 @@ int	get_index(t_node *head, int num)
 	if (head == NULL)
 		return (0);
 	tmp = head;
-	while (tmp != NULL)
+	while (tmp->next != head)
 	{
 		if (tmp->data == num)
 			return (tmp->index);
+		if (tmp->next->data == num)
+			return (tmp->next->index);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -155,10 +157,12 @@ int	get_lastindex(t_node *head, int num)
 		return (0);
 	tmp = head;
 	index = 0;
-	while (tmp != NULL)
+	while (tmp->next != head)
 	{
 		if (tmp->data == num)
 			index = tmp->index;
+		if (tmp->next->data == num)
+			index = tmp->next->index;
 		tmp = tmp->next;
 	}
 	return (index);
@@ -184,4 +188,16 @@ int	get_data_by_index(t_node *head, int index)
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+void	change_tail(t_stacks *stacks)
+{
+	if (SIZE_A == 0)
+		TAIL_A = NULL;
+	if (SIZE_B == 0)
+		TAIL_B = NULL;	
+	if (SIZE_A == 1)
+		TAIL_A = STACK_A;
+	if (SIZE_B == 1)
+		TAIL_B = STACK_B;
 }

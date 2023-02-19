@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:47:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/16 23:15:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:09:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	addcommands(t_stacks *stacks, char *cmds)
 	if (!ft_strncmp(cmds, "pb", 10))
 		stacks->cmds.nb_pb++;
 	change_index(stacks, cmds);
+	change_tail(stacks);
 }
 
 /* Swap_a: Swap the first 2 elements in stack_a  */
@@ -143,7 +144,7 @@ void	op_rrr(t_stacks *stacks)
 	by the function change_index.*/
 void	op_pa(t_stacks *stacks)
 {
-	if (stacks == NULL || stacks->stack_b == NULL)
+	if (stacks == NULL || stacks->stack_b == NULL || SIZE_B == 0)
 		return ;
 	push(&stacks->stack_b, &stacks->stack_a);
 	stacks->size_a++;
@@ -158,7 +159,7 @@ void	op_pa(t_stacks *stacks)
 	by the function change_index*/
 void	op_pb(t_stacks *stacks)
 {
-	if (stacks == NULL || stacks->stack_a == NULL)
+	if (stacks == NULL || stacks->stack_a == NULL || SIZE_A == 0)
 		return ;
 	push(&stacks->stack_a, &stacks->stack_b);
 	stacks->size_a--;

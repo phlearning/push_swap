@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:18:20 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/09 12:24:01 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/17 14:43:58 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	init_cmds(t_stacks *stacks)
 void	init_stacks(t_stacks *stacks)
 {
 	stacks->stack_a = NULL;
+	stacks->tail_a = NULL;
 	stacks->stack_b = NULL;
+	stacks->tail_b = NULL;
 	stacks->size_a = 0;
 	stacks->size_b = 0;
 	stacks->min = 0;

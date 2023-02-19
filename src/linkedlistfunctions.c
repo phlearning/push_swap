@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/15 00:46:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:09:50 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_node	*new_node(int data)
 	tmp = malloc(sizeof(t_node));
 	tmp->data = data;
 	tmp->next = NULL;
+	tmp->prev = NULL;
 	return (tmp);
 }
 
@@ -28,56 +29,85 @@ t_node	*get_lastnode(t_node *head)
 	lastnode = head;
 	if (lastnode == NULL)
 		return (NULL);
-	while (lastnode->next != NULL)
+	while (lastnode->next != head)
 		lastnode = lastnode->next;
 	return (lastnode);
 }
 
 void	insert_beg(t_node **head_ref, int data)
 {
-	t_node	*new;
-
-	new = malloc(sizeof(t_node));
-	if (!new)
-		exit(-1);
-	new->data = data;
-	new->next = (*head_ref);
-	*head_ref = new;
+	insert_end(head_ref, data);
+	if (!(head_ref && *head_ref))
+		return ;
+	*head_ref = (*head_ref)->prev;
 }
 
 void	insert_end(t_node **head_ref, int data)
 {
 	t_node	*new;
-	t_node	*lastnode;
 
 	new = malloc(sizeof(t_node));
 	if (!new)
 		exit(-1);
 	new->data = data;
 	new->next = NULL;
-	if (*head_ref == NULL)
-		*head_ref = new;
+	new->prev = NULL;
+	if (*head_ref)
+	{
+		(*head_ref)->prev->next = new;
+		new->prev = (*head_ref)->prev;
+		new->next = *head_ref;
+		(*head_ref)->prev = new;
+	}
 	else
 	{
-		lastnode = *head_ref;
-		while (lastnode->next != NULL)
-			lastnode = lastnode->next;
-		lastnode->next = new;
+		*head_ref = new;
+		new->prev = new;
+		new->next = new;
 	}
 }
 
-int	pop(t_node **head_ref)
+/* void	pop(t_node **head_ref)
 {
 	t_node	*head;
-	int		popped;
 
 	if (*head_ref == NULL)
-		exit(EXIT_FAILURE);
+		return ;
 	head = *head_ref;
-	*head_ref = (*head_ref)->next;
-	popped = head->data;
-	free(head);
-	return (popped);
+	if (head->next == head)
+	{
+		*head_ref = NULL;
+		return ;
+	}
+	else
+	{
+		*head_ref = (*head_ref)->next;
+		free(head);
+		head = NULL;
+		return ;
+	}
+} */
+
+/**
+ * Connect the link between the nodes before freeing
+ * 
+ * @param head_ref 
+ */
+void	pop(t_node **head_ref)
+{
+	t_node	*node;
+
+	if (!(head_ref && *head_ref))
+        return ;
+	node = *head_ref;
+    node->next->prev = node->prev;
+    node->prev->next = node->next;
+	if (node != node->next)
+		*head_ref = node->next;
+	else
+		*head_ref = NULL;
+    free(node);
+    return ;
 }
 
 int	peek(int pos, t_node *node)
@@ -112,7 +142,9 @@ int	node_length(t_node *head)
 
 	count = 0;
 	tmp = head;
-	while (tmp != NULL)
+	if (head)
+		++count;
+	while (tmp->next != head)
 	{
 		tmp = tmp->next;
 		count++;
@@ -151,10 +183,12 @@ int	get_min(t_node *node)
 		return (0);
 	tmp = node;
 	min = tmp->data;
-	while (tmp != NULL)
+	while (tmp->next != node)
 	{
 		if (tmp->data < min)
 			min = tmp->data;
+		if (tmp->next->data < min)
+			min = tmp->next->data;
 		tmp = tmp->next;
 	}
 	return (min);
@@ -170,10 +204,12 @@ int	get_max(t_node *node)
 		return (0);
 	tmp = node;
 	max = tmp->data;
-	while (tmp != NULL)
+	while (tmp->next != node)
 	{
 		if (tmp->data > max)
 			max = tmp->data;
+		if (tmp->next->data > max)
+			max = tmp->next->data;
 		tmp = tmp->next;
 	}
 	return (max);

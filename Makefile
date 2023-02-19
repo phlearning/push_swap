@@ -56,6 +56,8 @@ CFLAGS 			= -Wall -Werror -Wextra
 
 INCLUDE 		= -I include
 
+DEBUG			= debug
+
 all: temp $(NAME)
 
 temp:
@@ -82,13 +84,13 @@ $(OBJS_DIRFS)/%.o: $(SRC_DIR)/%.c
 	@$(CC) -g3 -fsanitize=address $(CFLAGS) $(LIB_INC) $(INCLUDE) -c $< -o $@
 	@echo "Compiling $@..."
 
-fsanitize: tempfs	$(OBJSFS)
+fsanitize: tempfs $(OBJSFS)
 	@make -s -C $(LIBFT_DIR)
 	@echo "$(GREEN) Libft compiled $(END)"
 	@make -s -C $(FT_PRINTF_DIR)
 	@echo "$(BLUE) Ft_printf compiled $(END)"
-	@$(CC) $(CFLAGS) -g3 -fsanitize=address -static-libasan $(OBJSFS) $(LIB_LNK) $(FT_PRINTF_LNK) -o debug
-	@echo "$(BLUE) $(NAME) Compiled $(END)"
+	@$(CC) $(CFLAGS) -g3 -fsanitize=address -static-libasan $(OBJSFS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(DEBUG)
+	@echo "$(BLUE) $(DEBUG) Compiled $(END)"
 
 checkfunction:
 	$(shell nm -A ./objs/*) > checkfunction.txt

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/06 17:53:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 16:33:40 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,38 +44,20 @@ void	push(t_node **stack_src, t_node **stack_dst)
 	if (*stack_src == NULL)
 		return ;
 	// ft_printf("inserting %d\n", (*pile_src)->data);
-	insert_beg(*(&stack_dst), (*stack_src)->data);
-	pop(*(&stack_src));
+	insert_beg(stack_dst, (*stack_src)->data);
+	pop(stack_src);
 }
-
-/* void	push(t_node **stack_src, t_node **stack_dst)
-{
-	if (*stack_src == NULL)
-		return ;
-	insert_beg(*(&stack_dst), (*stack_src)->data);
-	pop(*(&stack_src));
-} */
-
 
 /**
  * Rotate: Rotate towards the top, firstnode to the last spot.
- * Moving each element next to the first to one sport before.
+ * 
  * @param head_ref 
  */
 void	rotate(t_node **head_ref)
 {
-	t_node	*current;
-	t_node	*index;
-
-	current = *head_ref;
-	if (current == NULL)
+	if (*head_ref == NULL)
 		return ;
-	index = current;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = *head_ref;
-	*head_ref = index->next;
-	index->next = NULL;
+	*head_ref = (*head_ref)->next;
 }
 
 /**
@@ -85,23 +67,9 @@ void	rotate(t_node **head_ref)
  * the rotate element).
  * @param head 
  */
-void rrotate(t_node **head)
+void rrotate(t_node **head_ref)
 {
-	t_node	*lastnode_to_top;
-	t_node	*current;
-	int		len;
-
-	if (!*head)
+	if (*head_ref == NULL)
 		return ;
-	lastnode_to_top = get_lastnode(*head);
-	len = node_length(*head) - 1;
-	current = *head;
-	while (len - 1 > 0 && current != NULL)
-	{
-		current = current->next;
-		len--;
-	}
-	lastnode_to_top->next = *head;
-	*head = current->next;
-	current->next = NULL;
+	*head_ref = (*head_ref)->prev;
 }
