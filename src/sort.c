@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 18:47:05 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 18:48:28 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,18 +107,6 @@ t_node	*node_copy(t_node *stack)
 	if (stack->next == stop)
 		insert_end(&tmp, stack->data);
 	return (tmp);
-}
-
-int	get_first_pivot(t_node *stack)
-{
-	int	middle;
-	t_node	*tmp;
-
-	tmp = node_copy(stack);
-	quicksort(tmp, tmp->prev);
-	middle = get_median(tmp);
-	free_nodes(&tmp);
-	return (middle);
 }
 
 /* Sort a first time and put into the array sorted_tab.
