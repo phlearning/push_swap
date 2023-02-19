@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 16:36:54 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 17:44:12 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 		free_stacks(stacks);
 		return (0);
 	}
-	printlist2(stacks);
+	// printlist2(stacks);
 
 
 	// ft_printf("SIZE_A = %d | SIZE_B %d \n", SIZE_A, SIZE_B);
@@ -58,12 +58,12 @@ int	main(int ac, char **av)
 	// ft_printf("tail_b: %d\n", TAIL_B->data);
 	// ft_printf("tail_a: %d\n", TAIL_A->data);
 	sort(stacks);
-	printlist2(stacks);
+	// printlist2(stacks);
 	// ft_printf("CHUNKS: %d \n", NB_CHUNKS);
 	// ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
 	// printcmds(stacks);
 	// Free piles
-	free_stacks(stacks);
+	// free_stacks(stacks);
 
 	return (0);
 }

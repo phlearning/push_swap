@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 17:43:01 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 17:45:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,10 @@ int	index_by_comparaison(t_node *node, int value)
 	{
 		if (tmp->data <= value)
 		{
-			ft_printf("\n");
 			return (tmp->index);
 		}
 		if (tmp->next->data <= value)
 		{
-			ft_printf("\n");
 			return (tmp->next->index);
 		}
 		tmp = tmp->next;
@@ -378,38 +376,6 @@ int	get_last_value(t_node *node)
 		return (0);
 	tmp = get_lastnode(node);
 	return (tmp->data);
-}
-
-void	push_and_sort(t_stacks *stacks)
-{
-	// int	min_a;
-	// int	max_a;
-	int	last_a;
-	// int	last_b;
-
-	// min_a = get_min(STACK_A);
-	// max_a = get_max(STACK_A);
-	last_a = get_last_value(STACK_A);
-	// last_b = get_last_value(STACK_B);
-	if (DATA_B < DATA_B_NEXT)
-		op_sb(stacks);
-	if (DATA_B < DATA_A)
-	{
-		op_pa(stacks);
-	}
-	else if (DATA_B > last_a)
-	{
-		op_pa(stacks);
-		op_ra(stacks);
-	}
-	else if (DATA_A > last_a)
-	{
-		ft_printf("last_value: %d || first value: %d \n", last_a, DATA_A);
-		op_rra(stacks);
-		op_sa(stacks);
-	}
-	else
-		op_rb(stacks);
 }
 
 void	sort_big_numbers(t_stacks *stacks)
