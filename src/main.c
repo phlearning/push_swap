@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 18:25:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 18:47:09 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@ int	main(int ac, char **av)
 	}
 	// printlist2(stacks);
 
-
-	// ft_printf("SIZE_A = %d | SIZE_B %d \n", SIZE_A, SIZE_B);
-	// ft_printf("tail_a: %d\n", TAIL_A->data);
-	// ft_printf("prev_a: %d\n", STACK_A->prev->data);
-	// op_ra(stacks);
-	// ft_printf("pointer restant STACK_A: %p\n", STACK_A);
-	// ft_printf("SIZE_A = %d | SIZE_B %d \n", SIZE_A, SIZE_B);
-
-
-	// ft_printf("prev_b: %d\n", STACK_B->prev->data);
-	// ft_printf("tail_b: %d\n", TAIL_B->data);
-	// ft_printf("tail_a: %d\n", TAIL_A->data);
 	sort(stacks);
 	// printlist2(stacks);
 	// ft_printf("CHUNKS: %d \n", NB_CHUNKS);

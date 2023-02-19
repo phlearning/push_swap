@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 16:17:47 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 18:47:05 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	rotate_min_a(t_stacks *stacks)
 
 int	is_sorted(t_node *head)
 {
-	t_node *tmp;
+	t_node	*tmp;
 	int		size;
 	int		i;
 
@@ -59,8 +59,6 @@ t_node	*partition(t_node *first, t_node *last)
 	pivot = first;
 	front = first;
 	tmp = 0;
-	int	i;
-	i = 0;
 	while (front != NULL && front != last)
 	{
 		if (front->data < last->data)
@@ -71,7 +69,6 @@ t_node	*partition(t_node *first, t_node *last)
 			front->data = tmp;
 
 			first = first->next;
-			i++;
 		}
 		front = front->next;
 	}
@@ -118,7 +115,7 @@ int	get_first_pivot(t_node *stack)
 	t_node	*tmp;
 
 	tmp = node_copy(stack);
-	quicksort(tmp, get_lastnode(tmp));
+	quicksort(tmp, tmp->prev);
 	middle = get_median(tmp);
 	free_nodes(&tmp);
 	return (middle);
@@ -138,7 +135,7 @@ int	*get_sorted_tab(t_node *stack)
 	size = node_length(stack);
 	tab = malloc(sizeof(int) * (size + 1));
 	tmp = (stack);
-	quicksort(tmp, get_lastnode(tmp));
+	quicksort(tmp, tmp->prev);
 	i = 0;
 	while (i < size)
 	{
