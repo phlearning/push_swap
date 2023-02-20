@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 17:45:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 00:57:34 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,30 @@ void	sort_size_3(t_stacks *stacks)
 			op_rra(stacks);
 		if (stacks->stack_a->data > stacks->stack_a->next->data)
 			op_sa(stacks);
+	}
+}
+
+void	sort_size_3b(t_stacks *stacks)
+{
+	int	max;
+
+	if (SIZE_B == 1)
+		return ;
+	if (SIZE_B == 2)
+	{
+		if (DATA_B > DATA_B_NEXT)
+			op_rb(stacks);
+		return ;
+	}
+	if (SIZE_B == 3)
+	{
+		max = get_max(STACK_B);
+		if (DATA_B == max)
+			op_rb(stacks);
+		if (DATA_B_NEXT == max)
+			op_rrb(stacks);
+		if (DATA_B > DATA_B_NEXT)
+			op_sb(stacks);
 	}
 }
 
@@ -140,10 +164,14 @@ int	compare_stack_to_value(t_node *node, int value)
 {
 	t_node	*tmp;
 
+	if (node == NULL)
+		return (0);
 	tmp = node;
 	while (tmp->next != node)
 	{
 		if (tmp->data <= value)
+			return (1);
+		if (tmp->next->data <= value)
 			return (1);
 		tmp = tmp->next;
 	}
@@ -262,7 +290,7 @@ void	push_chunk(t_stacks *stacks, int value, int i)
  * 
  * @param stacks 
  */
-void	chunking(t_stacks *stacks)
+/* void	chunking(t_stacks *stacks)
 {
 	int	value;
 	int	counter;
@@ -270,6 +298,26 @@ void	chunking(t_stacks *stacks)
 	counter = 0;
 	value = chunk_limit(stacks, counter);
 	push_chunk(stacks, value, counter);
+} */
+
+void	chunking(t_stacks *stacks)
+{
+	int	value;
+
+	value = get_median(STACK_A);
+
+	while (compare_stack_to_value(STACK_A, value) && SIZE_A > 3)
+	{
+		if (DATA_A <= value)
+		{
+			op_pb(stacks);
+		}	
+		if (!(compare_stack_to_value(STACK_A, value)))
+			value = get_median(STACK_A);
+		else
+			smart_chunk_rotate(stacks, value);
+		// ft_printf("value : %d\n", value);
+	}
 }
 
 void	rotate_nb_a(t_stacks *stacks, int nb)

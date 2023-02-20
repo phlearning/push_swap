@@ -11,7 +11,8 @@
 		"stdio.h": "c",
 		"chrono": "c",
 		"variant": "c",
-		"limits": "c"
+		"limits": "c",
+		"type_traits": "c"
 	},
 	"cmake.configureOnOpen": false
 }

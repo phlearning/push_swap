@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:59:24 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 18:45:41 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 00:43:53 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_all_args(t_node **stack_a, char **av)
  * @param pile_a 
  * @return * int 
  */
-int	check_inputs(int ac, char **av, t_stacks *stacks)
+int	check_inputs_and_insert(int ac, char **av, t_stacks *stacks)
 {
 	int		i;
 

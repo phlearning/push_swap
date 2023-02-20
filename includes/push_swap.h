@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 18:48:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 00:57:42 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	init_cmds(t_stacks *stacks);
 
 t_node	*new_node(int data);
 void	pop(t_node **head_ref);
-int		is_empty(t_node *head);
 void	insert_beg(t_node **head_ref, int data);
 void	insert_end(t_node **head_ref, int data);
 t_node	*get_lastnode(t_node *node);
@@ -130,7 +129,7 @@ int		square_root(int	n);
 
 int		check_and_split(t_node **stack_a, char **av);
 int		check_all_args(t_node **stack_a, char **av);
-int		check_inputs(int ac, char **av, t_stacks *stack);
+int		check_inputs_and_insert(int ac, char **av, t_stacks *stack);
 void	input_param(t_stacks *stacks);
 
 /* Errors */
@@ -185,6 +184,7 @@ void	push_biggest_b_to_a(t_stacks *stacks);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
+void	sort_size_3b(t_stacks *stacks);
 void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
 

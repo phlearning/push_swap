@@ -6,16 +6,11 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:28:11 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 12:03:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/19 23:07:41 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int	is_empty(t_node *head)
-{
-	return (head == NULL);
-}
 
 /**
  * Insert at the end of the pile the numbers.
