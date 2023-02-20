@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 00:44:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 09:55:23 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,42 @@ int	get_median(t_node *head)
 	free_nodes(&tmp);
 	free(tab);
 	return (median);
+}
+
+int	get_quarter(t_node *head, int quarters)
+{
+		t_node *tmp;
+	int		quarter;
+	int		*tab;
+	int		len;
+
+	if (head == NULL)
+		return (0);
+	tmp = node_copy(head);
+	len = node_length(head);
+	tab = get_sorted_tab(tmp);
+	quarter = tab[len/4 * quarters];
+	free_nodes(&tmp);
+	free(tab);
+	return (quarter);
+}
+
+int	get_portion(t_node *head, int part, int portion_nb)
+{
+		t_node *tmp;
+	int		portion;
+	int		*tab;
+	int		len;
+
+	if (head == NULL)
+		return (0);
+	tmp = node_copy(head);
+	len = node_length(head);
+	tab = get_sorted_tab(tmp);
+	portion = tab[len/portion_nb * part];
+	free_nodes(&tmp);
+	free(tab);
+	return (portion);
 }
 
 /* Look for the lowest number in the stack */

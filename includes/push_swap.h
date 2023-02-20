@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 00:57:42 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 09:47:16 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	insert_all(t_node **head_ref, char **data);
 int		peek(int pos, t_node *node);
 int		node_length(t_node *head);
 int		get_median(t_node *head);
+int		get_quarter(t_node *head, int quarters);
+int		get_portion(t_node *head, int part, int portion_nb);
 t_node	*node_copy(t_node *stack);
 int		get_min(t_node *node);
 int		get_max(t_node *node);
@@ -164,6 +166,7 @@ void	rotate_max_b(t_stacks *stacks);
 void	rotate_min_b(t_stacks *stacks);
 void	rotate_nb_a(t_stacks *stacks, int nb);
 void	rotate_nb_b(t_stacks *stacks, int nb);
+void	smart_chunk_rotate(t_stacks *stacks, int value);
 
 /* Chunks */
 

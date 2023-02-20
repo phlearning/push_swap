@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 00:57:34 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/20 09:55:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ void	smart_chunk_rotate(t_stacks *stacks, int value)
 	int	smaller;
 	int	half_size;
 
-	while (DATA_A > value)
+	if (DATA_A > value)
 	{
 		smaller = index_smaller_than(stacks, value);
 	// ft_printf("DATA[%d]: %d\n",STACK_A->index, DATA_A);
@@ -275,7 +275,7 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 			op_pb(stacks);
 	/* 		if (STACK_B_NEXT && DATA_B_NEXT > DATA_B)
 				op_sb(stacks); */
-		}	
+		}
 		if (!(compare_stack_to_value(STACK_A, value)))
 			value = chunk_limit(stacks, ++i);
 		else
@@ -317,6 +317,30 @@ void	chunking(t_stacks *stacks)
 		else
 			smart_chunk_rotate(stacks, value);
 		// ft_printf("value : %d\n", value);
+	}
+}
+
+void	chunking(t_stacks *stacks)
+{
+	int	value;
+	int	part;
+
+	part = 2;
+	value = get_portion(STACK_A, part, NB_CHUNKS);
+
+	while (compare_stack_to_value(STACK_A, value) && SIZE_A > 3)
+	{
+		if (DATA_A <= value)
+		{
+			op_pb(stacks);
+		}	
+		if (!(compare_stack_to_value(STACK_A, value)))
+		{
+			++part;
+			value = get_portion(STACK_A, part, NB_CHUNKS);
+		}
+		else
+			smart_chunk_rotate(stacks, value);
 	}
 }
 
