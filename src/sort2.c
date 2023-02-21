@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/21 10:45:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/21 18:07:03 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,15 @@ void	sort_3(t_stacks *stacks, int len)
 	}
 }
 
+/**
+ * If the pushed element to b is 1, push it back
+ * If there are 2 elements pushed to b, check which one is biggest
+ * and push both back;
+ * If there are 3 elements pushed to b, check for optimal disposition
+ * in A and check that the biggest of 3 is pushed
+ * @param stacks 
+ * @param len 
+ */
 void	push_sort_3(t_stacks *stacks, int len)
 {
 	if (len == 1)
@@ -122,7 +131,7 @@ void	push_sort_3(t_stacks *stacks, int len)
 				|| (len == 3 && DATA_B1 > DATA_B3))
 			{
 				op_pa(stacks);
-				--len;
+				len--;
 			}
 			else
 				op_sb(stacks);
@@ -378,7 +387,7 @@ void	push_chunk(t_stacks *stacks, int value, int i)
  * 
  * @param stacks 
  */
-/* void	chunking(t_stacks *stacks)
+void	chunking(t_stacks *stacks)
 {
 	int	value;
 	int	counter;
@@ -386,10 +395,10 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 	counter = 0;
 	value = chunk_limit(stacks, counter);
 	push_chunk(stacks, value, counter);
-} */
+}
 
 
-void	chunking(t_stacks *stacks)
+/* void	chunking(t_stacks *stacks)
 {
 	int	value;
 
@@ -406,7 +415,7 @@ void	chunking(t_stacks *stacks)
 		else
 			smart_chunk_rotate(stacks, value);
 	}
-}
+} */
 
 void	quick_sort_a(t_stacks *stacks, int len)
 {
@@ -605,29 +614,50 @@ int	get_last_value(t_node *node)
 	return (tmp->data);
 }
 
+void smart_rotate_index(t_stacks *stacks, int index)
+{
+
+}
+
+void	push_smart_big_small_a_to_b(t_stacks *stacks)
+{
+	int i_min;
+	int	i_max;
+	int	index;
+
+	i_min = get_index(STACK_A, get_min(STACK_A));
+	i_max = get_index(STACK_A, get_max(STACK_A));
+	if (compare_pos(i_min, i_max, stacks, "A"))
+		index = i_min;
+	else
+		index = i_max;
+	smart_rotate_index
+}
+
 void	sort_big_numbers(t_stacks *stacks)
 {
-	// int	min;
+	int	min;
 
 	if (!STACK_A)
 		return ;
 	if (is_sorted(STACK_A))
 		return ;
+	// chunking(stacks);
 	quick_sort_a(stacks, SIZE_A);
-	// while (!is_sorted(STACK_A))
-	// {
-	// 	min = get_min(STACK_A);
-	// 	if (DATA_A == min && SIZE_A > 3)
-	// 		op_pb(stacks);
-	// 	else
-	// 		rotate_min_a(stacks);
-	// 	if (SIZE_A <= 3)
-	// 		sort_size_3(stacks);
-	// }
-	// while (STACK_B != NULL)
-	// {
-	// 	push_biggest_b_to_a(stacks);
-	// }
+	while (!is_sorted(STACK_A))
+	{
+		min = get_min(STACK_A);
+		if (DATA_A == min && SIZE_A > 3)
+			op_pb(stacks);
+		else
+			rotate_min_a(stacks);
+		if (SIZE_A <= 3)
+			sort_size_3(stacks);
+	}
+	while (STACK_B != NULL)
+	{
+		push_biggest_b_to_a(stacks);
+	}
 /* 	while (DATA_A != STACKS_MIN)
 		rotate_min_a(stacks); */
 }

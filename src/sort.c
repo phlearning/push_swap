@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/21 10:00:03 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/21 16:10:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_sorted(t_node *head)
 	tmp = head;
 	size = node_length(head);
 	i = 0;
-	while (i < size -1)
+	while (i < size - 1)
 	{
 		if (tmp->data > tmp->next->data)
 			return (0);
@@ -59,7 +59,7 @@ int	is_rev_sorted(t_node *head)
 	tmp = head;
 	size = node_length(head);
 	i = 0;
-	while (i < size -1)
+	while (i < size - 1)
 	{
 		if (tmp->data < tmp->next->data)
 			return (0);
