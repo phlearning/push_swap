@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 09:55:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/21 10:45:53 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,94 @@ void	sort_size_3(t_stacks *stacks)
 			op_rra(stacks);
 		if (stacks->stack_a->data > stacks->stack_a->next->data)
 			op_sa(stacks);
+	}
+}
+
+void	quick_sort_3(t_stacks *stacks)
+{
+	if (DATA_A1 < DATA_A2 && DATA_A1 < DATA_A3)
+	{
+		if (DATA_A2 > DATA_A3)
+		{
+			op_rra(stacks);
+			op_sa(stacks);
+		}
+	}
+	else if (DATA_A1 > DATA_A2 && DATA_A1 > DATA_A3)
+	{
+		if (DATA_A2 < DATA_A3)
+			op_ra(stacks);
+		else
+		{
+			op_sa(stacks);
+			op_rra(stacks);
+		}
+	}
+	else
+	{
+		if (DATA_A2 < DATA_A3)
+			op_sa(stacks);
+		else
+			op_rra(stacks);
+	}
+}
+
+void	sort_3(t_stacks *stacks, int len)
+{
+	if (len == 3 && SIZE_A == 3)
+		quick_sort_3(stacks);
+	else if (len == 2)
+	{
+		if (DATA_A1 > DATA_A2)
+			op_sa(stacks);
+	}
+	else if (len == 3)
+	{
+		while (len != 3 || !(DATA_A1 < DATA_A2 \
+		&& DATA_A2 < DATA_A3))
+		{
+			if (len == 3 && DATA_A1 > DATA_A2 && DATA_A3)
+				op_sa(stacks);
+			else if (len == 3 && !(DATA_A3 > DATA_A1 \
+				&& DATA_A3 > DATA_A2))
+			{
+				op_pb(stacks);
+				len--;
+			}
+			else if (DATA_A1 > DATA_A2)
+				op_sa(stacks);
+			else if (len++)
+				op_pa(stacks);	
+		}
+	}
+}
+
+void	push_sort_3(t_stacks *stacks, int len)
+{
+	if (len == 1)
+		op_pa(stacks);
+	else if (len == 2)
+	{
+		if (DATA_B1 < DATA_B2)
+			op_sb(stacks);
+		op_pa(stacks);
+		op_pa(stacks);
+	}
+	else if (len == 3)
+	{
+		while (len || !(DATA_A1 < DATA_A2 && DATA_A2 < DATA_A3))
+		{
+			if (len == 1 && DATA_A1 > DATA_A2)
+				op_sa(stacks);
+			else if (len == 1 || (len >= 2 && (DATA_B1 > DATA_B2)) \
+				|| (len == 3 && DATA_B1 > DATA_B3))
+			{
+				op_pa(stacks);
+				--len;
+			}
+			else
+				op_sb(stacks);
+		}
 	}
 }
 
@@ -300,6 +388,7 @@ void	push_chunk(t_stacks *stacks, int value, int i)
 	push_chunk(stacks, value, counter);
 } */
 
+
 void	chunking(t_stacks *stacks)
 {
 	int	value;
@@ -316,11 +405,75 @@ void	chunking(t_stacks *stacks)
 			value = get_median(STACK_A);
 		else
 			smart_chunk_rotate(stacks, value);
-		// ft_printf("value : %d\n", value);
 	}
 }
 
-void	chunking(t_stacks *stacks)
+void	quick_sort_a(t_stacks *stacks, int len)
+{
+	int	median;
+	int	nb_elem;
+	int	is_under;
+
+	if (is_sorted(STACK_A))
+		return ;
+	nb_elem = len;
+	if (nb_elem && len <= 3)
+	{
+		sort_3(stacks, len);
+		return ;
+	}
+	is_under = 0;
+	median = get_median2(STACK_A, len);
+	if (!is_under && !median)
+		return ;
+	while (len != (nb_elem / 2 + nb_elem % 2))
+	{
+		if (DATA_A1 < median && (len--))
+			op_pb(stacks);
+		else if ((++is_under))
+			op_ra(stacks);
+	}
+	while (nb_elem / 2 + nb_elem % 2 != SIZE_A && is_under--)
+		op_rra(stacks);
+	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
+	quick_sort_b(stacks, nb_elem / 2);
+}
+
+void	quick_sort_b(t_stacks *stacks, int len)
+{
+	int	median;
+	int	nb_elem;
+	int	is_under;
+
+	is_under = 0;
+	if (!(is_under) && is_rev_sorted(STACK_B))
+	{
+		while (len--)
+			op_pa(stacks);
+	}
+	if (len <= 3)
+	{
+		push_sort_3(stacks, len);
+		return ;
+	}
+	nb_elem = len;
+	median = get_median2(STACK_B, len);
+	if (nb_elem && !median)
+		return ;
+	while (len != nb_elem / 2)
+	{
+		if (DATA_B1 >= median && (len--))
+			op_pa(stacks);
+		else if ((++is_under))
+			op_rb(stacks);
+	}
+	while (nb_elem / 2 != SIZE_B && is_under--)
+		op_rrb(stacks);
+	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
+	quick_sort_b(stacks, nb_elem / 2);
+}
+
+/* void	chunking(t_stacks *stacks)
 {
 	int	value;
 	int	part;
@@ -342,7 +495,7 @@ void	chunking(t_stacks *stacks)
 		else
 			smart_chunk_rotate(stacks, value);
 	}
-}
+} */
 
 void	rotate_nb_a(t_stacks *stacks, int nb)
 {
@@ -383,7 +536,8 @@ void	rotate_max_b(t_stacks *stacks)
 	int	index_max;
 
 	if (STACK_B == NULL)
-		return ;	
+		return ;
+	max = get_max(STACK_B);
 	while (DATA_B != max)
 	{
 		max = get_max(STACK_B);
@@ -415,7 +569,8 @@ void	rotate_min_b(t_stacks *stacks)
 	int	index_min;
 
 	if (STACK_B == NULL)
-		return ;	
+		return ;
+	min = get_min(STACK_B);
 	while (DATA_B != min)
 	{
 		min = get_min(STACK_B);
@@ -452,27 +607,27 @@ int	get_last_value(t_node *node)
 
 void	sort_big_numbers(t_stacks *stacks)
 {
-	int	min;
+	// int	min;
 
 	if (!STACK_A)
 		return ;
 	if (is_sorted(STACK_A))
 		return ;
-	chunking(stacks);
-	while (!is_sorted(STACK_A))
-	{
-		min = get_min(STACK_A);
-		if (DATA_A == min && SIZE_A > 3)
-			op_pb(stacks);
-		else
-			rotate_min_a(stacks);
-		if (SIZE_A <= 3)
-			sort_size_3(stacks);
-	}
-	while (STACK_B != NULL)
-	{
-		push_biggest_b_to_a(stacks);
-	}
+	quick_sort_a(stacks, SIZE_A);
+	// while (!is_sorted(STACK_A))
+	// {
+	// 	min = get_min(STACK_A);
+	// 	if (DATA_A == min && SIZE_A > 3)
+	// 		op_pb(stacks);
+	// 	else
+	// 		rotate_min_a(stacks);
+	// 	if (SIZE_A <= 3)
+	// 		sort_size_3(stacks);
+	// }
+	// while (STACK_B != NULL)
+	// {
+	// 	push_biggest_b_to_a(stacks);
+	// }
 /* 	while (DATA_A != STACKS_MIN)
 		rotate_min_a(stacks); */
 }

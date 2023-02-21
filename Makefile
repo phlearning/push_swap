@@ -37,7 +37,8 @@ SOURCES			= main.c \
 					sort.c \
 					sort2.c \
 					chunk.c \
-					index.c
+					index.c \
+					reg_quick_sort.c
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
 

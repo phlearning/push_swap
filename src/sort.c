@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 00:43:41 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/21 10:00:03 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,25 @@ int	is_sorted(t_node *head)
 	while (i < size -1)
 	{
 		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
+}
+
+int	is_rev_sorted(t_node *head)
+{
+	t_node	*tmp;
+	int		size;
+	int		i;
+
+	tmp = head;
+	size = node_length(head);
+	i = 0;
+	while (i < size -1)
+	{
+		if (tmp->data < tmp->next->data)
 			return (0);
 		tmp = tmp->next;
 		i++;
@@ -102,6 +121,28 @@ t_node	*node_copy(t_node *stack)
 		stop = stack;
 	tmp = NULL;
 	while (stack != NULL && stack->next != stop)
+	{
+		insert_end(&tmp, stack->data);
+		stack = stack->next;
+	}
+	if (stack->next == stop)
+		insert_end(&tmp, stack->data);
+	return (tmp);
+}
+
+t_node	*node_copy2(t_node *stack, int len)
+{
+	t_node	*tmp;
+	t_node	*stop;
+	int		i;
+
+	if (stack == NULL)
+		return (NULL);
+	if (stack != NULL)
+		stop = stack;
+	tmp = NULL;
+	i = 0;
+	while (stack != NULL && stack->next != stop && i < len)
 	{
 		insert_end(&tmp, stack->data);
 		stack = stack->next;

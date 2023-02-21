@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 09:47:16 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/21 10:05:13 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define STACK_A_NEXT stacks->stack_a->next
 # define DATA_A stacks->stack_a->data
 # define DATA_A_NEXT stacks->stack_a->next->data
+# define DATA_A1 stacks->stack_a->data
+# define DATA_A2 stacks->stack_a->next->data
+# define DATA_A3 stacks->stack_a->next->next->data
 # define SIZE_A stacks->size_a
 # define TAIL_A stacks->tail_a
 /* --- */
@@ -46,6 +49,9 @@
 # define STACK_B_NEXT stacks->stack_b->next
 # define DATA_B stacks->stack_b->data
 # define DATA_B_NEXT stacks->stack_b->next->data
+# define DATA_B1 stacks->stack_b->data
+# define DATA_B2 stacks->stack_b->next->data
+# define DATA_B3 stacks->stack_b->next->next->data
 # define SIZE_B stacks->size_b
 # define TAIL_B stacks->tail_b
 /* --- */
@@ -112,9 +118,11 @@ void	insert_all(t_node **head_ref, char **data);
 int		peek(int pos, t_node *node);
 int		node_length(t_node *head);
 int		get_median(t_node *head);
+int		get_median2(t_node *head, int len);
 int		get_quarter(t_node *head, int quarters);
 int		get_portion(t_node *head, int part, int portion_nb);
 t_node	*node_copy(t_node *stack);
+t_node	*node_copy2(t_node *stack, int len);
 int		get_min(t_node *node);
 int		get_max(t_node *node);
 
@@ -180,6 +188,7 @@ void	push_chunk(t_stacks *stacks, int value, int i);
 
 /* Sorting */
 int		is_sorted(t_node *head);
+int		is_rev_sorted(t_node *head);
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 int		*get_sorted_tab(t_node *stack);
 void	push_smallest_b_to_a(t_stacks *stacks);
@@ -188,9 +197,15 @@ void	push_biggest_b_to_a(t_stacks *stacks);
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
 void	sort_size_3b(t_stacks *stacks);
+void	quick_sort_3(t_stacks *stacks);
+void	sort_3(t_stacks *stacks, int len);
 void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
+void	quick_sort_a(t_stacks *stacks, int len);
+void	quick_sort_b(t_stacks *stacks, int len);
 
+int		part(int *array, int len);
+void	reg_quick_sort(int *array, int len);
 void	quicksort(t_node *first, t_node *last);
 
 /* Operations */
