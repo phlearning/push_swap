@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/21 09:49:57 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/22 10:06:39 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,10 +162,9 @@ int	get_median(t_node *head)
 	return (median);
 }
 
-int	get_median2(t_node *head, int len)
+int	get_median2(t_node *head, int len, int *median)
 {
 	t_node *tmp;
-	int	median;
 	int	*tab;
 	int	size;
 
@@ -174,10 +173,10 @@ int	get_median2(t_node *head, int len)
 	tmp = node_copy2(head, len);
 	size = node_length(tmp);
 	tab = get_sorted_tab(tmp);
-	median = tab[size/2];
+	*median = tab[size/2];
 	free_nodes(&tmp);
 	free(tab);
-	return (median);
+	return (1);
 }
 
 int	get_quarter(t_node *head, int quarters)

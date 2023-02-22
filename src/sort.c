@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/21 16:10:44 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/22 10:23:19 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ void	rotate_min_a(t_stacks *stacks)
 	}
 }
 
+int	is_len_sorted(t_node *head, int len)
+{
+	t_node	*tmp;
+	int		i;
+
+	tmp = head;
+	i = 0;
+	while (i < len - 1)
+	{
+		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
+}
+
 int	is_sorted(t_node *head)
 {
 	t_node	*tmp;
@@ -43,6 +60,23 @@ int	is_sorted(t_node *head)
 	while (i < size - 1)
 	{
 		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	return (1);
+}
+
+int	is_len_rev_sorted(t_node *head, int len)
+{
+	t_node	*tmp;
+	int		i;
+
+	tmp = head;
+	i = 0;
+	while (i < len - 1)
+	{
+		if (tmp->data < tmp->next->data)
 			return (0);
 		tmp = tmp->next;
 		i++;
