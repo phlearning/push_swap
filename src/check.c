@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:59:24 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/20 00:43:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/22 14:01:31 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	check_inputs_and_insert(int ac, char **av, t_stacks *stacks)
 		if (av[1][0] == '\0')
 			return (0);
 		check_and_split(&stacks->stack_a, av);
+		if (STACK_A == NULL)
+			return (0);
 	}
 	if (ac > 2)
 	{

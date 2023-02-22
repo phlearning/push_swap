@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/22 10:34:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/22 13:47:50 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void	quick_sort_3(t_stacks *stacks);
 void	sort_3(t_stacks *stacks, int len);
 void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
+void	push_sort_3_b_to_a(t_stacks *stacks, int len);
 int		quick_sort_a(t_stacks *stacks, int len);
 int		quick_sort_b(t_stacks *stacks, int len);
 

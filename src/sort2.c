@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/22 10:44:10 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/22 17:40:46 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ void	quick_sort_3(t_stacks *stacks)
 	}
 }
 
+/**
+ * 1. If the size of stack_a == 3 && given len == 3:
+ * 		quick_sort_3 optimized sort for 3 numbers;
+ * 2. Else if the len == 2:
+ * 		check if 1rst element > 2nd element if yes swap
+ * 3. Else if len == 3
+ * 		check for the best placement and if the element of
+ * 		stack_b: 1rst < 2nd < 3rd push
+ * 		needed if for the first 3 elements;
+ * @param stacks 
+ * @param len 
+ */
 void	sort_3(t_stacks *stacks, int len)
 {
 	if (len == 3 && SIZE_A == 3)
@@ -83,7 +95,7 @@ void	sort_3(t_stacks *stacks, int len)
 	else if (len == 3)
 	{
 		while (len != 3 || !(DATA_A1 < DATA_A2 \
-		&& DATA_A2 < DATA_A3))
+			&& DATA_A2 < DATA_A3))
 		{
 			if (len == 3 && DATA_A1 > DATA_A2 && DATA_A3)
 				op_sa(stacks);
@@ -110,7 +122,7 @@ void	sort_3(t_stacks *stacks, int len)
  * @param stacks 
  * @param len 
  */
-void	push_sort_3(t_stacks *stacks, int len)
+void	push_sort_3_b_to_a(t_stacks *stacks, int len)
 {
 	if (len == 1)
 		op_pa(stacks);
@@ -423,55 +435,87 @@ int	quick_sort_a(t_stacks *stacks, int len)
 	int	nb_elem;
 	int	is_under;
 
+	// ft_printf("Size_a: %d | Size_b: %d | len: %d\n", SIZE_A, SIZE_B, len);
+	// sleep(1);
 	if (is_len_sorted(STACK_A, len))
-		return (1);
+		{
+			// ft_printf("IS_SORTED\n");
+			// sleep(1);
+			return (1);
+		}
 	nb_elem = len;
 	if (nb_elem && len <= 3)
 	{
 		sort_3(stacks, len);
 		return (1);
 	}
-	if (!(is_under = 0) && !get_median2(STACK_A, len, &median))
+	is_under = 0;
+	if ((is_under == 0) && !get_median2(STACK_A, len, &median))
 		return (0);
 	while (len != (nb_elem / 2 + nb_elem % 2))
 	{
 		if (DATA_A1 < median && (len--))
 			op_pb(stacks);
 		else if ((++is_under))
+		{
 			op_ra(stacks);
+		}
 	}
-	while (nb_elem / 2 + nb_elem % 2 != SIZE_A && is_under--)
+	while (((nb_elem / 2 + nb_elem % 2) != SIZE_A) && is_under)
+	{
+		is_under--;
 		op_rra(stacks);
+		// sleep(1);
+	}
 	return (quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2) && \
 		quick_sort_b(stacks, nb_elem / 2));
 	return (1);
 }
 
+/**
+ * quicksort_b: if the len of the stack is already reversed sorted 
+ * then push to stack_a.
+ * If the len <= 3 then do optimize sort for 3 and push it to stack_a;
+ * Else if check if the top is > to the median:
+ * push to stack_a if yes.
+ * Else rotate till the top is > median and count rotate_b;
+ * Revert the rotate to before while the nb of elements isn't half.
+ * @param stacks 
+ * @param len 
+ * @return int 
+ */
 int	quick_sort_b(t_stacks *stacks, int len)
 {
 	int	median;
 	int	nb_elem;
 	int	is_under;
 
-	if (!(is_under = 0) && is_len_rev_sorted(STACK_B, len))
+	is_under = 0;
+	if (is_under == 0 && is_len_rev_sorted(STACK_B, len))
 	{
 		while (len--)
 			op_pa(stacks);
 	}
 	if (len <= 3)
 	{
-		push_sort_3(stacks, len);
+		push_sort_3_b_to_a(stacks, len);
 		return (1);
 	}
-	if ((nb_elem = len) && !get_median2(STACK_B, len, &median))
+	nb_elem = len;
+	if (nb_elem && !get_median2(STACK_B, len, &median))
 		return (0);
 	while (len != nb_elem / 2)
+	{
 		if (DATA_B1 >= median && (len--))
 			op_pa(stacks);
-		else if ((++is_under))
+		else if (++is_under)
 			op_rb(stacks);
+	}
 	while (nb_elem / 2 != SIZE_B && is_under--)
+	{
 		op_rrb(stacks);
+		// sleep(1);
+	}
 	return (quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2) && \
 	quick_sort_b(stacks, nb_elem / 2));
 }
