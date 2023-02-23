@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:01:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/23 19:00:40 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/23 21:54:00 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	quick_sort_a(t_stacks *stacks, int len)
 	{
 		if (DATA_A1 < median && (len--))
 			op_pb(stacks);
-		else if ((++is_under))
+		else
 		{
+			is_under++;
 			op_ra(stacks);
 		}
 	}
@@ -108,10 +109,10 @@ int	quick_sort_b(t_stacks *stacks, int len)
 			op_rb(stacks);
 		}
 	}
-		ft_printf("recursive_b: %d\n", recursive_b);
+/* 		ft_printf("recursive_b: %d\n", recursive_b);
 		ft_printf("is_under: %d | len: %d | data_b1: %d next: %d \n", is_under, len, DATA_B, DATA_B2);
 		ft_printf("nb_elem/2 : %d | SIZE_B: %d\n", nb_elem/2, SIZE_B);
-		sleep(1);
+		sleep(1); */
 	while (nb_elem / 2 != SIZE_B && is_under)
 	{
 		op_rrb(stacks);
