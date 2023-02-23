@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/23 21:56:18 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/23 22:31:15 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,21 @@ int	get_median2(t_node *head, int len, int *median)
 {
 	t_node *tmp;
 	int	*tab;
+	int	i;
 
-	if (head == NULL)
+	if (head == NULL || len == 0)
 		return (0);
+	tab = malloc(sizeof(int) * len);
+	if (!tab)
+		return (0);
+	i = -1;
 	tmp = node_copy2(head, len);
-	tab = get_sorted_tab(tmp);
+	while (++i < len)
+	{
+		tab[i] = tmp->data;
+		tmp = tmp->next;
+	}
+	reg_quick_sort(tab, len);
 	*median = tab[len/2];
 	free_nodes(&tmp);
 	free(tab);
