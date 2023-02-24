@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:01:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/23 22:25:24 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/24 17:29:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	quick_sort_b(t_stacks *stacks, int len)
 		ft_printf("nb_elem/2 : %d | SIZE_B: %d\n", nb_elem/2, SIZE_B);
 		sleep(1); */
 	}
+	// ft_printf("hello\n");
 	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
 	quick_sort_b(stacks, nb_elem / 2);
 	return (1);

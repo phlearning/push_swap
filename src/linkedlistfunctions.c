@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/23 22:31:15 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/24 14:17:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,24 @@ int	get_median(t_node *head)
 	free(tab);
 	return (median);
 }
+
+/* int	get_median2(t_node *head, int len, int *median)
+{
+	t_node *tmp;
+	int		*tab;
+	int		i;
+
+	i = 0;
+	if (head == NULL || len == 0)
+		return (0);
+	tmp = node_copy2(head, len);
+	tab = get_sorted_tab(tmp);
+	reg_quick_sort(tab, len);
+	*median = tab[len/2];
+	free_nodes(&tmp);
+	free(tab);
+	return (1);
+} */
 
 int	get_median2(t_node *head, int len, int *median)
 {
