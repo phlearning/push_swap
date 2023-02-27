@@ -33,6 +33,7 @@ SOURCES			= main.c \
 					print.c \
 					linkedlistfunctions.c \
 					errors.c \
+					errors2.c \
 					check.c \
 					sort.c \
 					sort2.c \

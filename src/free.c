@@ -6,47 +6,30 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 15:21:36 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 18:04:56 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void free_nodes(t_node **head) 
+void	free_nodes(t_node **head)
 {
 	t_node	*next;
 	t_node	*tmp;
-	
-    if (head && *head)
-    {
-		next = (*head)->next;
-        while (next && (next != *head))
-        {
-            tmp = next;
-            next = next->next;
-            free(tmp);
-        }
 
-        free(*head);
-        *head = NULL;
-    }
-}
-
-
-/* void	free_nodes(t_node *head_ref)
-{
-	t_node	*tmp;
-
-	while (head_ref != NULL)
+	if (head && *head)
 	{
-		tmp = head_ref;
-		if (head_ref->next)
-			head_ref = head_ref->next;
-		free(tmp);
+		next = (*head)->next;
+		while (next && (next != *head))
+		{
+			tmp = next;
+			next = next->next;
+			free(tmp);
+		}
+		free(*head);
+		*head = NULL;
 	}
-	free(head_ref);
-	head_ref = NULL;
-} */
+}
 
 void	free_stacks(t_stacks *stacks)
 {
