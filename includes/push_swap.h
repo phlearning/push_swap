@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 16:17:18 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 17:38:32 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,6 @@ int		compare_stack_to_value(t_node *node, int value);
 int		get_chunks(t_stacks *stacks);
 int		chunk_size(t_stacks *stacks);
 int		chunk_limit(t_stacks *stacks, int counter);
-void	push_chunk(t_stacks *stacks, int value, int i);
-
 
 /* Sorting */
 int		is_sorted(t_node *head);

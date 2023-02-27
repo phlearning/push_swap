@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 16:17:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 17:54:35 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,47 +295,6 @@ int	index_smaller_than(t_stacks *stacks, int value)
 	else
 		index = second_pos;
 	return (index);
-}
-
-/* Get a smaller number to the top of the stack */
-void	smart_chunk_rotate(t_stacks *stacks, int value)
-{
-	int	smaller;
-	int	half_size;
-
-	if (DATA_A > value)
-	{
-		smaller = index_smaller_than(stacks, value);
-		half_size = SIZE_A / 2;
-		if (smaller < half_size)
-			op_ra(stacks);
-		else
-			op_rra(stacks);
-	}
-}
-
-/**
- * Push_chunk: Push the top of stack_a if smaller than the value
- * else get the next value according to the chunks limit.
- * @param stacks 
- * @param size 
- * @param increment 
- */
-void	push_chunk(t_stacks *stacks, int value, int i)
-{
-	while (compare_stack_to_value(STACK_A, value))
-	{
-		if (DATA_A <= value)
-		{
-			op_pb(stacks);
-	/* 		if (STACK_B_NEXT && DATA_B_NEXT > DATA_B)
-				op_sb(stacks); */
-		}
-		if (!(compare_stack_to_value(STACK_A, value)))
-			value = chunk_limit(stacks, ++i);
-		else
-			smart_chunk_rotate(stacks, value);
-	}
 }
 
 void	sort_big_numbers(t_stacks *stacks)
