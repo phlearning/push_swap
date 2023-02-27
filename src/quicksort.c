@@ -6,14 +6,155 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:01:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/24 17:29:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 16:52:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	recursive_a = -1;
-int	recursive_b = -1;
+int	index_smaller_strict(t_node *node, int value)
+{
+	t_node	*tmp;
+
+	tmp = node;
+	while (tmp->next != node)
+	{
+		if (tmp->data < value)
+			return (tmp->index);
+		if (tmp->next->data < value)
+			return (tmp->next->index);
+		tmp = tmp->next;
+	}
+
+	return (0);
+}
+
+int	lastindex_smaller_strict(t_node *node, int value)
+{
+	int		index;
+	t_node	*tmp;
+
+	tmp = node;
+	index = 0;
+	while (tmp->next != node)
+	{
+		if (tmp->data < value)
+			index = tmp->index;
+		if (tmp->next->data < value)
+			index = tmp->next->index;
+		tmp = tmp->next;
+	}
+	return (index);
+}
+
+int	index_smaller_strict_than_a(t_stacks *stacks, int value)
+{
+	int	index;
+	int	first_pos;
+	int	second_pos;
+
+	first_pos = index_smaller_strict(STACK_A, value);
+	second_pos = lastindex_smaller_strict(STACK_A, value);
+	if (compare_pos(first_pos, second_pos, stacks, "A"))
+		index = first_pos;
+	else
+		index = second_pos;
+	return (index);
+}
+
+void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count)
+{
+	int	smaller;
+	int	half_size;
+
+	if (DATA_A >= value)
+	{
+		half_size = SIZE_A /2 + SIZE_A % 2;
+		smaller = index_smaller_strict_than_a(stacks, value);
+		if (smaller <= half_size)
+		{
+			op_ra(stacks);
+			(*count)++;
+		}
+		else
+		{
+			op_rra(stacks);
+			(*count)--;
+		}
+	}
+}
+
+int	index_bigger_equal(t_node *node, int value)
+{
+	t_node	*tmp;
+
+	tmp = node;
+	while (tmp->next != node)
+	{
+		if (tmp->data >= value)
+			return (tmp->index);
+		if (tmp->next->data >= value)
+			return (tmp->next->index);
+		tmp = tmp->next;
+	}
+
+	return (0);
+}
+
+int	lastindex_bigger_equal(t_node *node, int value)
+{
+	int		index;
+	t_node	*tmp;
+
+	tmp = node;
+	index = 0;
+	while (tmp->next != node)
+	{
+		if (tmp->data >= value)
+			index = tmp->index;
+		if (tmp->next->data >= value)
+			index = tmp->next->index;
+		tmp = tmp->next;
+	}
+	return (index);
+}
+
+int	index_bigger_equal_b(t_stacks *stacks, int value)
+{
+	int	index;
+	int	first_pos;
+	int	second_pos;
+
+	first_pos = index_bigger_equal(STACK_B, value);
+	second_pos = lastindex_bigger_equal(STACK_B, value);
+	if (compare_pos(first_pos, second_pos, stacks, "B"))
+		index = first_pos;
+	else
+		index = second_pos;
+	return (index);
+}
+
+void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count)
+{
+	int	smaller;
+	int	half_size;
+
+	if (DATA_B < value)
+	{
+		half_size = SIZE_B /2 + SIZE_B % 2;
+		smaller = index_bigger_equal_b(stacks, value);
+		if (smaller <= half_size)
+		{
+			op_rb(stacks);
+			(*count)++;
+		}
+		else
+		{
+			op_rrb(stacks);
+			(*count)--;
+		}
+	}
+}
 
 int	quick_sort_a(t_stacks *stacks, int len)
 {
@@ -21,15 +162,10 @@ int	quick_sort_a(t_stacks *stacks, int len)
 	int	nb_elem;
 	int	is_under;
 
-	recursive_a++;
 	// ft_printf("Size_a: %d | Size_b: %d | len: %d\n", SIZE_A, SIZE_B, len);
 	// sleep(1);
 	if (is_len_sorted(STACK_A, len))
-		{
-			// ft_printf("IS_SORTED\n");
-			// sleep(1);
 			return (1);
-		}
 	nb_elem = len;
 	if (nb_elem && len <= 3)
 	{
@@ -45,14 +181,23 @@ int	quick_sort_a(t_stacks *stacks, int len)
 			op_pb(stacks);
 		else
 		{
-			is_under++;
-			op_ra(stacks);
+			// is_under++;
+			// op_ra(stacks);
+			rotate_smaller_strict_a(stacks, median, &is_under);
 		}
 	}
 	while (((nb_elem / 2 + nb_elem % 2) != SIZE_A) && is_under)
 	{
-		is_under--;
-		op_rra(stacks);
+		if (is_under > 0)
+		{
+			is_under--;
+			op_rra(stacks);
+		}
+		if (is_under < 0)
+		{
+			is_under++;
+			op_ra(stacks);
+		}
 		// sleep(1);
 	}
 	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
@@ -79,7 +224,6 @@ int	quick_sort_b(t_stacks *stacks, int len)
 	int	is_under;
 
 	is_under = 0;
-	recursive_b++;
 	if (is_under == 0 && is_len_rev_sorted(STACK_B, len))
 	{
 		while (len)
@@ -109,19 +253,11 @@ int	quick_sort_b(t_stacks *stacks, int len)
 			op_rb(stacks);
 		}
 	}
-/* 		ft_printf("recursive_b: %d\n", recursive_b);
-		ft_printf("is_under: %d | len: %d | data_b1: %d next: %d \n", is_under, len, DATA_B, DATA_B2);
-		ft_printf("nb_elem/2 : %d | SIZE_B: %d\n", nb_elem/2, SIZE_B);
-		sleep(1); */
 	while (nb_elem / 2 != SIZE_B && is_under)
 	{
 		op_rrb(stacks);
 		is_under--;
-/* 		ft_printf("is_under: %d | len: %d | data_b1: %d next: %d \n", is_under, len, DATA_B, DATA_B1);
-		ft_printf("nb_elem/2 : %d | SIZE_B: %d\n", nb_elem/2, SIZE_B);
-		sleep(1); */
 	}
-	// ft_printf("hello\n");
 	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
 	quick_sort_b(stacks, nb_elem / 2);
 	return (1);

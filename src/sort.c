@@ -6,30 +6,11 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:41:53 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/22 10:23:19 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 16:15:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	rotate_min_a(t_stacks *stacks)
-{
-	int	mid;
-	int	min;
-	int	index_min;
-
-	min = get_min(STACK_A);	
-	while (DATA_A != min)
-	{
-		min = get_min(STACK_A);
-		mid = SIZE_A / 2;
-		index_min = get_index(STACK_A, min);
-		if (index_min <= mid)
-			op_ra(stacks);
-		else
-			op_rra(stacks);
-	}
-}
 
 int	is_len_sorted(t_node *head, int len)
 {

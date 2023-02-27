@@ -91,7 +91,7 @@ fsanitize: tempfs $(OBJSFS)
 	@echo "$(GREEN) Libft compiled $(END)"
 	@make -s -C $(FT_PRINTF_DIR)
 	@echo "$(BLUE) Ft_printf compiled $(END)"
-	@$(CC) $(CFLAGS) -g3 -fsanitize=address -static-libasan $(OBJSFS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(DEBUG)
+	@$(CC) $(CFLAGS) -g3 -fsanitize=address $(OBJSFS) $(LIB_LNK) $(FT_PRINTF_LNK) -o $(DEBUG)
 	@echo "$(BLUE) $(DEBUG) Compiled $(END)"
 
 checkfunction:

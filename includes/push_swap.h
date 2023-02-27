@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/22 13:47:50 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 16:17:18 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,11 +169,6 @@ void	change_tail(t_stacks *stacks);
 
 /* Rotate */
 
-void	rotate_min_a(t_stacks *stacks);
-void	rotate_max_b(t_stacks *stacks);
-void	rotate_min_b(t_stacks *stacks);
-void	rotate_nb_a(t_stacks *stacks, int nb);
-void	rotate_nb_b(t_stacks *stacks, int nb);
 void	smart_chunk_rotate(t_stacks *stacks, int value);
 
 /* Chunks */
@@ -182,7 +177,6 @@ int		compare_stack_to_value(t_node *node, int value);
 int		get_chunks(t_stacks *stacks);
 int		chunk_size(t_stacks *stacks);
 int		chunk_limit(t_stacks *stacks, int counter);
-void	chunking(t_stacks *stacks);
 void	push_chunk(t_stacks *stacks, int value, int i);
 
 
@@ -193,12 +187,9 @@ int		is_len_sorted(t_node *head, int len);
 int		is_len_rev_sorted(t_node *head, int len);
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 int		*get_sorted_tab(t_node *stack);
-void	push_smallest_b_to_a(t_stacks *stacks);
-void	push_biggest_b_to_a(t_stacks *stacks);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
-void	sort_size_3b(t_stacks *stacks);
 void	quick_sort_3(t_stacks *stacks);
 void	sort_3(t_stacks *stacks, int len);
 void	sort_size_5(t_stacks *stacks);
