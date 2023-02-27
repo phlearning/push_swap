@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 17:38:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:53:38 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 # define DATA_A2 stacks->stack_a->next->data
 # define DATA_A3 stacks->stack_a->next->next->data
 # define SIZE_A stacks->size_a
-# define TAIL_A stacks->tail_a
 /* --- */
 # define STACK_B stacks->stack_b
 # define STACK_B_NEXT stacks->stack_b->next
@@ -53,14 +52,8 @@
 # define DATA_B2 stacks->stack_b->next->data
 # define DATA_B3 stacks->stack_b->next->next->data
 # define SIZE_B stacks->size_b
-# define TAIL_B stacks->tail_b
 /* --- */
-# define STACKS_MIN stacks->min
-# define STACKS_MAX stacks->max
-# define SORTED_TAB stacks->sorted_tab
 # define STACK_SIZE stacks->size_start
-# define NB_CHUNKS stacks->nb_chunks
-# define ONE_CHUNK stacks->one_chunk
 /* --------------------------- */
 
 typedef struct s_node {
@@ -89,18 +82,11 @@ typedef struct s_cmds
 typedef struct	s_stacks
 {
 	t_node	*stack_a;
-	t_node	*tail_a;
 	t_node	*stack_b;
-	t_node	*tail_b;
 	t_cmds	cmds;
-	int		*sorted_tab;
-	int		nb_chunks;
-	int		one_chunk;
 	int		size_start;
 	int		size_a;
 	int		size_b;
-	int		min;
-	int		max;
 } t_stacks;
 
 /* Init */
@@ -113,16 +99,10 @@ t_node	*new_node(int data);
 void	pop(t_node **head_ref);
 void	insert_beg(t_node **head_ref, int data);
 void	insert_end(t_node **head_ref, int data);
-t_node	*get_lastnode(t_node *node);
 void	insert_all(t_node **head_ref, char **data);
-int		peek(int pos, t_node *node);
 int		node_length(t_node *head);
-int		get_median(t_node *head);
-int		get_median2(t_node *head, int len, int *median);
-int		get_quarter(t_node *head, int quarters);
-int		get_portion(t_node *head, int part, int portion_nb);
-t_node	*node_copy(t_node *stack);
-t_node	*node_copy2(t_node *stack, int len);
+int		get_median(t_node *head, int len, int *median);
+t_node	*node_copy(t_node *stack, int len);
 int		get_min(t_node *node);
 int		get_max(t_node *node);
 
@@ -152,12 +132,6 @@ void	exit_error(char *str);
 
 /* Index */
 
-int		get_index(t_node *head, int num);
-int		get_lastindex(t_node *head, int num);
-int		get_data_by_index(t_node *head, int index);
-int		lastindex_by_comparaison(t_node *node, int value);
-int		index_by_comparaison(t_node *node, int value);
-int		index_smaller_than(t_stacks *stacks, int value);
 void	put_index_stack_a(t_stacks *stacks);
 void	put_index_stack_b(t_stacks *stacks);
 void	index_sa(t_stacks *stacks);
@@ -165,18 +139,10 @@ void	index_sb(t_stacks *stacks);
 void	index_ss(t_stacks *stacks);
 void	index_reput(t_stacks *stacks);
 void	change_index(t_stacks *stacks, char *cmds);
-void	change_tail(t_stacks *stacks);
 
 /* Rotate */
 
-void	smart_chunk_rotate(t_stacks *stacks, int value);
-
-/* Chunks */
-
 int		compare_stack_to_value(t_node *node, int value);
-int		get_chunks(t_stacks *stacks);
-int		chunk_size(t_stacks *stacks);
-int		chunk_limit(t_stacks *stacks, int counter);
 
 /* Sorting */
 int		is_sorted(t_node *head);
@@ -184,7 +150,6 @@ int		is_rev_sorted(t_node *head);
 int		is_len_sorted(t_node *head, int len);
 int		is_len_rev_sorted(t_node *head, int len);
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
-int		*get_sorted_tab(t_node *stack);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
@@ -193,12 +158,24 @@ void	sort_3(t_stacks *stacks, int len);
 void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
 void	push_sort_3_b_to_a(t_stacks *stacks, int len);
+
+/* Quicksort Utils */
+int		index_smaller_strict(t_node *node, int value);
+int		lastindex_smaller_strict(t_node *node, int value);
+int		index_smaller_strict_than_a(t_stacks *stacks, int value);
+void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count);
+int		index_bigger_equal(t_node *node, int value);
+int		lastindex_bigger_equal(t_node *node, int value);
+int		index_bigger_equal_b(t_stacks *stacks, int value);
+void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count);
+
+/* Quicksort */
+
 int		quick_sort_a(t_stacks *stacks, int len);
 int		quick_sort_b(t_stacks *stacks, int len);
 
 int		part(int *array, int len);
 void	reg_quick_sort(int *array, int len);
-void	quicksort(t_node *first, t_node *last);
 
 /* Operations */
 
@@ -226,8 +203,7 @@ void	addcommands(t_stacks *stacks, char *cmds);
 /* print */
 
 void	printlist(t_node *node);
-void	printlist2(t_stacks *stacks);
+// void	printlist2(t_stacks *stacks);
 void	printcmds(t_stacks *stack);
-void	printchunks(t_stacks *stacks);
 
 #endif

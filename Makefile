@@ -24,23 +24,28 @@ LIB_LNK			= -L $(LIBFT_DIR) -lft
 
 SRC_DIR			= src
 
-SOURCES			= main.c \
-					init.c \
-					operations.c \
-					operations2.c \
-					free.c \
-					utils.c \
-					print.c \
-					linkedlistfunctions.c \
+SOURCES			= 	main.c \
+					check.c \
 					errors.c \
 					errors2.c \
-					check.c \
+					free.c \
+					index.c \
+					index2.c \
+					init.c \
+					is_sorted.c \
+					linkedlistfunctions.c \
+					linkedlistfunctions2.c \
+					operations.c \
+					operations2.c \
+					operations3.c \
+					operations4.c \
+					print.c \
+					quicksort.c \
+					quicksort_utils.c \
+					reg_quick_sort.c \
 					sort.c \
 					sort2.c \
-					chunk.c \
-					index.c \
-					reg_quick_sort.c \
-					quicksort.c
+					utils.c \
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
 

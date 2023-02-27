@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 16:15:15 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:47:49 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	printlist(t_node *node)
 	ft_printf("---------------\n");
 }
 
-void	printlist2(t_stacks *stacks)
+/* void	printlist2(t_stacks *stacks)
 {
 	t_node	*tmp_a;
 	t_node	*tmp_b;
@@ -63,7 +63,7 @@ void	printlist2(t_stacks *stacks)
 		ft_printf("\n");
 	}
 	ft_printf("-----------------------------------------------------\n");
-}
+} */
 
 void	printcmds(t_stacks *stacks)
 {
@@ -81,19 +81,4 @@ void	printcmds(t_stacks *stacks)
 	ft_printf("nb_pa: %d\n", NB_PA);
 	ft_printf("nb_pb: %d\n", NB_PB);
 	ft_printf("\n------------\n");
-}
-
-void	printchunks(t_stacks *stacks)
-{
-	int	i;
-	
-	i = 1;
-	ft_printf("size: %d ", STACK_SIZE);
-	ft_printf("chunks: %d | size/chunk: %d\n", NB_CHUNKS, STACK_SIZE / NB_CHUNKS);
-	ft_printf("-------------\n");
-	while (i < NB_CHUNKS)
-	{
-		ft_printf("Stacks Pivots[%d]:\t%d\n",i , SORTED_TAB[ONE_CHUNK * i]);
-		++i;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:25:15 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 16:33:40 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:45:56 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	push(t_node **stack_src, t_node **stack_dst)
 {
 	if (*stack_src == NULL)
 		return ;
-	// ft_printf("inserting %d\n", (*pile_src)->data);
 	insert_beg(stack_dst, (*stack_src)->data);
 	pop(stack_src);
 }
@@ -67,7 +66,7 @@ void	rotate(t_node **head_ref)
  * the rotate element).
  * @param head 
  */
-void rrotate(t_node **head_ref)
+void	rrotate(t_node **head_ref)
 {
 	if (*head_ref == NULL)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:59:24 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 18:01:30 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:08:13 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,10 @@
 
 void	input_param(t_stacks *stacks)
 {
-	t_node	*tmp;
-
 	SIZE_A = node_length(STACK_A);
 	SIZE_B = 0;
 	STACK_SIZE = SIZE_A;
-	stacks->min = get_min(STACK_A);
-	stacks->max = get_max(STACK_A);
 	put_index_stack_a(stacks);
-	TAIL_A = get_lastnode(STACK_A);
-	TAIL_A->next = STACK_A;
-	STACK_A->prev = TAIL_A;
-	NB_CHUNKS = get_chunks(stacks);
-	tmp = node_copy(STACK_A);
-	SORTED_TAB = get_sorted_tab(tmp);
-	free_nodes(&tmp);
-	if (NB_CHUNKS > 0)
-		ONE_CHUNK = (int)(STACK_SIZE / NB_CHUNKS);
 }
 
 int	check_all_args(t_node **stack_a, char **av)

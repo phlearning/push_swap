@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 17:54:35 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:18:31 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,63 +238,6 @@ int	compare_stack_to_value(t_node *node, int value)
 	if (tmp->data <= value)
 		return (1);
 	return (0);
-}
-
-int	lastindex_by_comparaison(t_node *node, int value)
-{
-	int		index;
-	t_node	*tmp;
-
-	tmp = node;
-	index = 0;
-	while (tmp->next != node)
-	{
-		if (tmp->data <= value)
-			index = tmp->index;
-		if (tmp->next->data <= value)
-			index = tmp->next->index;
-		tmp = tmp->next;
-	}
-	return (index);
-}
-
-int	index_by_comparaison(t_node *node, int value)
-{
-	t_node	*tmp;
-
-	tmp = node;
-	while (tmp->next != node)
-	{
-		if (tmp->data <= value)
-		{
-			return (tmp->index);
-		}
-		if (tmp->next->data <= value)
-		{
-			return (tmp->next->index);
-		}
-		tmp = tmp->next;
-	}
-
-	return (0);
-}
-
-
-/* The index corresponds to the index of the number smaller than the value.
-It should be either the closest to the top or bottom */
-int	index_smaller_than(t_stacks *stacks, int value)
-{
-	int	index;
-	int	first_pos;
-	int	second_pos;
-
-	first_pos = index_by_comparaison(STACK_A, value);
-	second_pos = lastindex_by_comparaison(STACK_A, value);
-	if (compare_pos(first_pos, second_pos, stacks, "A"))
-		index = first_pos;
-	else
-		index = second_pos;
-	return (index);
 }
 
 void	sort_big_numbers(t_stacks *stacks)

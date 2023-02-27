@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:01 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 15:58:50 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:38:58 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 void	put_index_stack_a(t_stacks *stacks)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
 
 	if (STACK_A == NULL)
@@ -38,7 +38,7 @@ void	put_index_stack_a(t_stacks *stacks)
 /* Add index to the stack_b */
 void	put_index_stack_b(t_stacks *stacks)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
 
 	if (STACK_B == NULL)
@@ -89,115 +89,4 @@ void	index_ss(t_stacks *stacks)
 {
 	index_sa(stacks);
 	index_sb(stacks);
-}
-
-/* Put the index to the stack_a and stack_b */
-void	index_reput(t_stacks *stacks)
-{
-	put_index_stack_a(stacks);
-	put_index_stack_b(stacks);
-}
-
-void	change_index(t_stacks *stacks, char *cmds)
-{
-	if (!ft_strncmp(cmds, "sa", 10))
-		index_sa(stacks);
-	if (!ft_strncmp(cmds, "sb", 10))
-		index_sb(stacks);
-	if (!ft_strncmp(cmds, "ss", 10))
-		index_ss(stacks);
-	if (!ft_strncmp(cmds, "ra", 10))
-		put_index_stack_a(stacks);
-	if (!ft_strncmp(cmds, "rb", 10))
-		put_index_stack_b(stacks);
-	if (!ft_strncmp(cmds, "rr", 10))
-		index_reput(stacks);
-	if (!ft_strncmp(cmds, "rra", 10))
-		put_index_stack_a(stacks);
-	if (!ft_strncmp(cmds, "rrb", 10))
-		put_index_stack_b(stacks);
-	if (!ft_strncmp(cmds, "rrr", 10))
-		index_reput(stacks);
-	if (!ft_strncmp(cmds, "pa", 10))
-		index_reput(stacks);
-	if (!ft_strncmp(cmds, "pb", 10))
-		index_reput(stacks);
-}
-
-/**
- * get_index: look for the index based on the data
- * @param head 
- * @param num 
- * @return int 
- */
-int	get_index(t_node *head, int num)
-{
-	t_node	*tmp;
-
-	if (head == NULL)
-		return (0);
-	tmp = head;
-	while (tmp->next != head)
-	{
-		if (tmp->data == num)
-			return (tmp->index);
-		if (tmp->next->data == num)
-			return (tmp->next->index);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	get_lastindex(t_node *head, int num)
-{
-	t_node	*tmp;
-	int		index;
-
-	if (head == NULL)
-		return (0);
-	tmp = head;
-	index = 0;
-	while (tmp->next != head)
-	{
-		if (tmp->data == num)
-			index = tmp->index;
-		if (tmp->next->data == num)
-			index = tmp->next->index;
-		tmp = tmp->next;
-	}
-	return (index);
-}
-
-/**
- * get_data_by_index: look for the data on the stack by index
- * @param head 
- * @param index 
- * @return int 
- */
-int	get_data_by_index(t_node *head, int index)
-{
-	t_node *tmp;
-
-	if (head == NULL)
-		return (0);
-	tmp = head;
-	while (tmp != NULL)
-	{
-		if (tmp->index == index)
-			return (tmp->data);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-void	change_tail(t_stacks *stacks)
-{
-	if (SIZE_A == 0)
-		TAIL_A = NULL;
-	if (SIZE_B == 0)
-		TAIL_B = NULL;	
-	if (SIZE_A == 1)
-		TAIL_A = STACK_A;
-	if (SIZE_B == 1)
-		TAIL_B = STACK_B;
 }

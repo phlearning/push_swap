@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 18:04:56 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:01:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	free_stacks(t_stacks *stacks)
 		free_nodes(&STACK_A);
 	if (STACK_B)
 		free_nodes(&STACK_B);
-	if (SORTED_TAB)
-		free(SORTED_TAB);
 	if (stacks)
 		free(stacks);
 }

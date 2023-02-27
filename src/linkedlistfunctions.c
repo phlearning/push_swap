@@ -6,64 +6,11 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/24 14:17:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:31:47 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-t_node	*new_node(int data)
-{
-	t_node	*tmp;
-	
-	tmp = malloc(sizeof(t_node));
-	if (!tmp)
-		exit_error("Error");
-	tmp->data = data;
-	tmp->next = NULL;
-	tmp->prev = NULL;
-	return (tmp);
-}
-
-t_node	*get_lastnode(t_node *head)
-{
-	t_node *lastnode;
-
-	lastnode = head;
-	if (lastnode == NULL)
-		return (NULL);
-	while (lastnode->next != head)
-		lastnode = lastnode->next;
-	return (lastnode);
-}
-
-void	insert_beg(t_node **head_ref, int data)
-{
-	insert_end(head_ref, data);
-	if (!(head_ref && *head_ref))
-		return ;
-	*head_ref = (*head_ref)->prev;
-}
-
-void	insert_end(t_node **head_ref, int data)
-{
-	t_node	*new;
-
-	new = new_node(data);
-	if (*head_ref)
-	{
-		(*head_ref)->prev->next = new;
-		new->prev = (*head_ref)->prev;
-		new->next = *head_ref;
-		(*head_ref)->prev = new;
-	}
-	else
-	{
-		*head_ref = new;
-		new->prev = new;
-		new->next = new;
-	}
-}
 
 /**
  * Connect the link between the nodes before freeing
@@ -87,22 +34,6 @@ void	pop(t_node **head_ref)
     return ;
 }
 
-int	peek(int pos, t_node *node)
-{
-	int	i;
-
-	i = 0;
-	while (i < pos-1 && node != NULL)
-	{
-		node = node->next;
-		i++;
-	}
-	if (node != NULL)
-		return (node->data);
-	else
-		return (-1);
-}
-
 int	node_length(t_node *head)
 {
 	int		count;
@@ -122,65 +53,29 @@ int	node_length(t_node *head)
 	return (count);
 }
 
-/* int	get_median(t_node *head)
+t_node	*node_copy(t_node *stack, int len)
 {
-	int		len;
-	int		mid;
+	t_node	*tmp;
+	t_node	*stop;
 	int		i;
-	t_node	*node;
 
-	len = node_length(head);
-	node = head;
+	if (stack == NULL)
+		return (NULL);
+	if (stack != NULL)
+		stop = stack;
+	tmp = NULL;
 	i = 0;
-	mid = len/2;
-	while (i < mid)
+	while (stack != NULL && stack->next != stop && i < len)
 	{
-		node = node->next;
-		i++;
+		insert_end(&tmp, stack->data);
+		stack = stack->next;
 	}
-	if (len % 2 == 0)
-		return ((node->data + node->next->data) / 2);
-	else
-		return (node->data);
-} */
-
-int	get_median(t_node *head)
-{
-	t_node *tmp;
-	int		median;
-	int		*tab;
-	int		len;
-
-	if (head == NULL)
-		return (0);
-	tmp = node_copy(head);
-	len = node_length(head);
-	tab = get_sorted_tab(tmp);
-	median = tab[len/2];
-	free_nodes(&tmp);
-	free(tab);
-	return (median);
+	if (stack->next == stop)
+		insert_end(&tmp, stack->data);
+	return (tmp);
 }
 
-/* int	get_median2(t_node *head, int len, int *median)
-{
-	t_node *tmp;
-	int		*tab;
-	int		i;
-
-	i = 0;
-	if (head == NULL || len == 0)
-		return (0);
-	tmp = node_copy2(head, len);
-	tab = get_sorted_tab(tmp);
-	reg_quick_sort(tab, len);
-	*median = tab[len/2];
-	free_nodes(&tmp);
-	free(tab);
-	return (1);
-} */
-
-int	get_median2(t_node *head, int len, int *median)
+int	get_median(t_node *head, int len, int *median)
 {
 	t_node *tmp;
 	int	*tab;
@@ -192,7 +87,7 @@ int	get_median2(t_node *head, int len, int *median)
 	if (!tab)
 		return (0);
 	i = -1;
-	tmp = node_copy2(head, len);
+	tmp = node_copy(head, len);
 	while (++i < len)
 	{
 		tab[i] = tmp->data;
@@ -203,42 +98,6 @@ int	get_median2(t_node *head, int len, int *median)
 	free_nodes(&tmp);
 	free(tab);
 	return (1);
-}
-
-int	get_quarter(t_node *head, int quarters)
-{
-		t_node *tmp;
-	int		quarter;
-	int		*tab;
-	int		len;
-
-	if (head == NULL)
-		return (0);
-	tmp = node_copy(head);
-	len = node_length(head);
-	tab = get_sorted_tab(tmp);
-	quarter = tab[len/4 * quarters];
-	free_nodes(&tmp);
-	free(tab);
-	return (quarter);
-}
-
-int	get_portion(t_node *head, int part, int portion_nb)
-{
-		t_node *tmp;
-	int		portion;
-	int		*tab;
-	int		len;
-
-	if (head == NULL)
-		return (0);
-	tmp = node_copy(head);
-	len = node_length(head);
-	tab = get_sorted_tab(tmp);
-	portion = tab[len/portion_nb * part];
-	free_nodes(&tmp);
-	free(tab);
-	return (portion);
 }
 
 /* Look for the lowest number in the stack */

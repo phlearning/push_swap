@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:47:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/23 13:28:21 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/27 23:43:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	addcommands(t_stacks *stacks, char *cmds)
 	if (!ft_strncmp(cmds, "pb", 10))
 		stacks->cmds.nb_pb++;
 	change_index(stacks, cmds);
-	change_tail(stacks);
 }
 
 /* Swap_a: Swap the first 2 elements in stack_a  */
@@ -82,88 +81,4 @@ void	op_ra(t_stacks *stacks)
 	rotate(&stacks->stack_a);
 	addcommands(stacks, "ra");
 	ft_printf("ra\n");
-}
-
-/* Rotate_b: Rotate the stack_a towards the top */
-void	op_rb(t_stacks *stacks)
-{
-	if (stacks == NULL || stacks->stack_b == NULL)
-		return ;
-	rotate(&stacks->stack_b);
-	addcommands(stacks, "rb");
-	ft_printf("rb\n");
-}
-
-void	op_rr(t_stacks *stacks)
-{
-	if (stacks->stack_a == NULL && stacks->stack_b == NULL)
-		return ;
-	if (stacks != NULL && stacks->stack_a != NULL)
-		rotate(&stacks->stack_a);
-	if (stacks != NULL && stacks->stack_b != NULL)
-		rotate(&stacks->stack_b);
-	addcommands(stacks, "rr");
-	ft_printf("rr\n");
-}
-
-/* Reverse_Rotate_a: Rotate the stack_a towards the bottom */
-void	op_rra(t_stacks *stacks)
-{
-	if (stacks == NULL || stacks->stack_a == NULL)
-		return ;
-	rrotate(&stacks->stack_a);
-	addcommands(stacks, "rra");
-	ft_printf("rra\n");
-}
-
-/* Reverse_Rotate_b: Rotate the stack_a towards the bottom */
-void	op_rrb(t_stacks *stacks)
-{
-	if (stacks == NULL || stacks->stack_b == NULL)
-		return ;
-	rrotate(&stacks->stack_b);
-	addcommands(stacks, "rrb");
-	ft_printf("rrb\n");
-}
-
-void	op_rrr(t_stacks *stacks)
-{
-	if (stacks->stack_a == NULL && stacks->stack_b == NULL)
-		return ;
-	if (stacks != NULL && stacks->stack_a != NULL)
-		rrotate(&stacks->stack_a);
-	if (stacks != NULL && stacks->stack_b != NULL)
-		rrotate(&stacks->stack_b);
-	addcommands(stacks, "rrr");
-	ft_printf("rrr\n");
-}
-
-/* Push_a: Push the first element of stack_b to stack_a.
-	Do nothing if b is empty.
-	The index doesn't matter here it will be changed
-	by the function change_index.*/
-void	op_pa(t_stacks *stacks)
-{
-	if (stacks == NULL || stacks->stack_b == NULL || SIZE_B == 0)
-		return ;
-	push(&stacks->stack_b, &stacks->stack_a);
-	stacks->size_a++;
-	stacks->size_b--;
-	addcommands(stacks, "pa");
-	ft_printf("pa\n");
-}
-
-/* Push_b: Push the first element of stack_a to stack_b.
-	Do nothing if a is empty
-	The index doesn't matter here it will be changed
-	by the function change_index*/
-void	op_pb(t_stacks *stacks)
-{
-	if (stacks == NULL || stacks->stack_a == NULL || SIZE_A == 0)
-		return ;
-	push(&stacks->stack_a, &stacks->stack_b);
-	stacks->size_a--;
-	stacks->size_b++;
-	addcommands(stacks, "pb");
-	ft_printf("pb\n");
 }
