@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:34:43 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 10:43:49 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,7 @@
 # include "../libft/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 # include <stdio.h>
-
-/* CMDS SHORTCUTS */
-# define NB_SA stacks->cmds.nb_sa
-# define NB_SB stacks->cmds.nb_sb
-# define NB_SS stacks->cmds.nb_ss
-# define NB_RA stacks->cmds.nb_ra
-# define NB_RB stacks->cmds.nb_rb
-# define NB_RR stacks->cmds.nb_rr
-# define NB_RRA stacks->cmds.nb_rra
-# define NB_RRB stacks->cmds.nb_rrb
-# define NB_RRR stacks->cmds.nb_rrr
-# define NB_PA stacks->cmds.nb_pa
-# define NB_PB stacks->cmds.nb_pb
-/* ------------- */
-
-/* STACKS SHORTCUT */
-# define STACK_A stacks->stack_a
-# define STACK_A_NEXT stacks->stack_a->next
-# define DATA_A stacks->stack_a->data
-# define DATA_A_NEXT stacks->stack_a->next->data
-# define DATA_A1 stacks->stack_a->data
-# define DATA_A2 stacks->stack_a->next->data
-# define DATA_A3 stacks->stack_a->next->next->data
-# define SIZE_A stacks->size_a
-/* --- */
-# define STACK_B stacks->stack_b
-# define STACK_B_NEXT stacks->stack_b->next
-# define DATA_B stacks->stack_b->data
-# define DATA_B_NEXT stacks->stack_b->next->data
-# define DATA_B1 stacks->stack_b->data
-# define DATA_B2 stacks->stack_b->next->data
-# define DATA_B3 stacks->stack_b->next->next->data
-# define SIZE_B stacks->size_b
-/* --- */
-# define STACK_SIZE stacks->size_start
-# define FLAG stacks->flagprint
-/* --------------------------- */
+# include "./define.h"
 
 typedef struct s_node {
 	int				index;
@@ -80,7 +44,7 @@ typedef struct s_cmds
 	int		nb_pb;
 }	t_cmds;
 
-typedef struct	s_stacks
+typedef struct s_stacks
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
@@ -89,7 +53,7 @@ typedef struct	s_stacks
 	int		size_a;
 	int		size_b;
 	int		flagprint;
-} t_stacks;
+}	t_stacks;
 
 /* Init */
 void	init_stacks(t_stacks *stacks, int flag);

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:47:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 10:54:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ void	printcmds(t_stacks *stacks)
 {
 	ft_printf("\n----CMDS----\n");
 	ft_printf("\nNb cmds: %d\n", stacks->cmds.nb_cmds);
-	ft_printf("nb_sa: %d\n", NB_SA);
-	ft_printf("nb_sb: %d\n", NB_SB);
-	ft_printf("nb_ss: %d\n", NB_SS);
-	ft_printf("nb_ra: %d\n", NB_RA);
-	ft_printf("nb_rb: %d\n", NB_RB);
-	ft_printf("nb_rr: %d\n", NB_RR);
-	ft_printf("nb_rra: %d\n", NB_RRA);
-	ft_printf("nb_rrb: %d\n", NB_RRB);
-	ft_printf("nb_rrr: %d\n", NB_RRR);
-	ft_printf("nb_pa: %d\n", NB_PA);
-	ft_printf("nb_pb: %d\n", NB_PB);
+	ft_printf("nb_sa: %d\n", stacks->cmds.nb_sa);
+	ft_printf("nb_sb: %d\n", stacks->cmds.nb_sb);
+	ft_printf("nb_ss: %d\n", stacks->cmds.nb_ss);
+	ft_printf("nb_ra: %d\n", stacks->cmds.nb_ra);
+	ft_printf("nb_rb: %d\n", stacks->cmds.nb_rb);
+	ft_printf("nb_rr: %d\n", stacks->cmds.nb_rr);
+	ft_printf("nb_rra: %d\n", stacks->cmds.nb_rra);
+	ft_printf("nb_rrb: %d\n", stacks->cmds.nb_rrb);
+	ft_printf("nb_rrr: %d\n", stacks->cmds.nb_rrr);
+	ft_printf("nb_pa: %d\n", stacks->cmds.nb_pa);
+	ft_printf("nb_pb: %d\n", stacks->cmds.nb_pb);
 	ft_printf("\n------------\n");
 }
