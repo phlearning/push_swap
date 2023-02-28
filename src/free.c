@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 21:56:12 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:01:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:02:30 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	free_stacks(t_stacks *stacks)
 {
 	if (stacks == NULL)
 		return ;
-	if (STACK_A)
-		free_nodes(&STACK_A);
-	if (STACK_B)
-		free_nodes(&STACK_B);
+	if (stacks->stack_a)
+		free_nodes(&stacks->stack_a);
+	if (stacks->stack_b)
+		free_nodes(&stacks->stack_b);
 	if (stacks)
 		free(stacks);
 }

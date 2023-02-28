@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:09:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:01:51 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	}
 	init_stacks(stacks, 1);
 	check_inputs_and_insert(ac, av, stacks);
-	if (SIZE_A == 0)
+	if (stacks->size_a == 0)
 	{
 		free_stacks(stacks);
 		return (0);

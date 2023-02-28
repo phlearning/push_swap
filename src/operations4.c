@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:44:18 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 07:39:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:04:24 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	by the function change_index.*/
 void	op_pa(t_stacks *stacks, int flag)
 {
-	if (stacks == NULL || stacks->stack_b == NULL || SIZE_B == 0)
+	if (stacks == NULL || stacks->stack_b == NULL || stacks->size_b == 0)
 		return ;
 	push(&stacks->stack_b, &stacks->stack_a);
 	stacks->size_a++;
@@ -34,7 +34,7 @@ void	op_pa(t_stacks *stacks, int flag)
 	by the function change_index*/
 void	op_pb(t_stacks *stacks, int flag)
 {
-	if (stacks == NULL || stacks->stack_a == NULL || SIZE_A == 0)
+	if (stacks == NULL || stacks->stack_a == NULL || stacks->size_a == 0)
 		return ;
 	push(&stacks->stack_a, &stacks->stack_b);
 	stacks->size_a--;

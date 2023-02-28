@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:01 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:38:58 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:04:24 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	put_index_stack_a(t_stacks *stacks)
 	int		i;
 	t_node	*tmp;
 
-	if (STACK_A == NULL)
+	if (stacks->stack_a == NULL)
 		return ;
 	i = 0;
-	tmp = STACK_A;
+	tmp = stacks->stack_a;
 	while (i < stacks->size_a)
 	{
-		STACK_A->index = i;
-		STACK_A = STACK_A_NEXT;
+		stacks->stack_a->index = i;
+		stacks->stack_a = stacks->stack_a->next;
 		i++;
 	}
-	STACK_A = tmp;
+	stacks->stack_a = tmp;
 }
 
 /* Add index to the stack_b */
@@ -41,17 +41,17 @@ void	put_index_stack_b(t_stacks *stacks)
 	int		i;
 	t_node	*tmp;
 
-	if (STACK_B == NULL)
+	if (stacks->stack_b == NULL)
 		return ;
 	i = 0;
-	tmp = STACK_B;
-	while (i < SIZE_B)
+	tmp = stacks->stack_b;
+	while (i < stacks->size_b)
 	{
-		STACK_B->index = i;
-		STACK_B = STACK_B_NEXT;
+		stacks->stack_b->index = i;
+		stacks->stack_b = stacks->stack_b->next;
 		i++;
 	}
-	STACK_B = tmp;
+	stacks->stack_b = tmp;
 }
 
 /**
@@ -64,9 +64,9 @@ void	index_sa(t_stacks *stacks)
 {
 	t_node	*tmp;
 
-	tmp = STACK_A_NEXT;
-	STACK_A_NEXT->index = STACK_A->index;
-	STACK_A->index = tmp->index;
+	tmp = stacks->stack_a->next;
+	stacks->stack_a->next->index = stacks->stack_a->index;
+	stacks->stack_a->index = tmp->index;
 }
 
 /**
@@ -79,9 +79,9 @@ void	index_sb(t_stacks *stacks)
 {
 	t_node	*tmp;
 
-	tmp = STACK_B_NEXT;
-	STACK_B_NEXT->index = STACK_B->index;
-	STACK_B->index = tmp->index;
+	tmp = stacks->stack_b->next;
+	stacks->stack_b->next->index = stacks->stack_b->index;
+	stacks->stack_b->index = tmp->index;
 }
 
 /* Index_sa & Index_sb */

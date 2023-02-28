@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:49:14 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 07:47:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:30:56 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	index_smaller_strict_than_a(t_stacks *stacks, int value)
 	int	first_pos;
 	int	second_pos;
 
-	first_pos = index_smaller_strict(STACK_A, value);
-	second_pos = lastindex_smaller_strict(STACK_A, value);
+	first_pos = index_smaller_strict(stacks->stack_a, value);
+	second_pos = lastindex_smaller_strict(stacks->stack_a, value);
 	if (compare_pos(first_pos, second_pos, stacks, "A"))
 		index = first_pos;
 	else
@@ -66,18 +66,18 @@ void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count)
 	int	smaller;
 	int	half_size;
 
-	if (DATA_A >= value)
+	if (stacks->stack_a->data >= value)
 	{
-		half_size = SIZE_A / 2;
+		half_size = stacks->size_a / 2;
 		smaller = index_smaller_strict_than_a(stacks, value);
 		if (smaller <= half_size)
 		{
-			op_ra(stacks, FLAG);
+			op_ra(stacks, stacks->flagprint);
 			(*count)++;
 		}
 		else
 		{
-			op_rra(stacks, FLAG);
+			op_rra(stacks, stacks->flagprint);
 			(*count)--;
 		}
 	}
@@ -85,29 +85,23 @@ void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count)
 
 void	quick_sort_3(t_stacks *stacks)
 {
-	if (DATA_A1 < DATA_A2 && DATA_A1 < DATA_A3)
+	if (stacks->stack_a->data < stacks->stack_a->next->data && \
+		stacks->stack_a->data < stacks->stack_a->next->next->data)
 	{
-		if (DATA_A2 > DATA_A3)
+		if (stacks->stack_a->next->data > stacks->stack_a->next->next->data)
 		{
-			op_rra(stacks, FLAG);
-			op_sa(stacks, FLAG);
+			op_rra(stacks, stacks->flagprint);
+			op_sa(stacks, stacks->flagprint);
 		}
 	}
-	else if (DATA_A1 > DATA_A2 && DATA_A1 > DATA_A3)
-	{
-		if (DATA_A2 < DATA_A3)
-			op_ra(stacks, FLAG);
-		else
-		{
-			op_sa(stacks, FLAG);
-			op_rra(stacks, FLAG);
-		}
-	}
+	else if (stacks->stack_a->data > stacks->stack_a->next->data && \
+		stacks->stack_a->data > stacks->stack_a->next->next->data)
+		qs3_strict_superior(stacks);
 	else
 	{
-		if (DATA_A2 < DATA_A3)
-			op_sa(stacks, FLAG);
+		if (stacks->stack_a->next->data < stacks->stack_a->next->next->data)
+			op_sa(stacks, stacks->flagprint);
 		else
-			op_rra(stacks, FLAG);
+			op_rra(stacks, stacks->flagprint);
 	}
 }

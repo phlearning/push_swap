@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:53:27 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 10:54:02 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:04:24 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	printlist(t_node *node)
 	ft_printf("\n------------------Stack_a & Stack_b------------------\n");
 	ft_printf("stack_a_len: %d\t\t\t", stacks->size_a);
 	ft_printf("stack_b_len: %d\n", stacks->size_b);
-	while (count_a < SIZE_A || count_b < SIZE_B)
+	while (count_a < stacks->size_a || count_b < stacks->size_b)
 	{
-		if (SIZE_A > 0 && count_a < SIZE_A)
+		if (stacks->size_a > 0 && count_a < stacks->size_a)
 		{
 			ft_printf("stack_a[%d]: %d (%p)\t", tmp_a->index, tmp_a->data, tmp_a);
 			tmp_a = tmp_a->next;
@@ -54,7 +54,7 @@ void	printlist(t_node *node)
 		}
 		else
 			ft_printf("\t\t\t\t");
-		if (SIZE_B > 0 && count_b < SIZE_B)
+		if (stacks->size_b > 0 && count_b < stacks->size_b)
 		{
 			ft_printf("stack_b[%d]: %d (%p)\t", tmp_b->index, tmp_b->data, tmp_b);
 			tmp_b = tmp_b->next;

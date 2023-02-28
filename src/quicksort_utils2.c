@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:51:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:09:14 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:31:39 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	index_bigger_equal_b(t_stacks *stacks, int value)
 	int	first_pos;
 	int	second_pos;
 
-	first_pos = index_bigger_equal(STACK_B, value);
-	second_pos = lastindex_bigger_equal(STACK_B, value);
+	first_pos = index_bigger_equal(stacks->stack_b, value);
+	second_pos = lastindex_bigger_equal(stacks->stack_b, value);
 	if (compare_pos(first_pos, second_pos, stacks, "B"))
 		index = first_pos;
 	else
@@ -66,19 +66,30 @@ void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count)
 	int	smaller;
 	int	half_size;
 
-	if (DATA_B < value)
+	if (stacks->stack_b->data < value)
 	{
-		half_size = SIZE_B / 2 + SIZE_B % 2;
+		half_size = stacks->size_b / 2 + stacks->size_b % 2;
 		smaller = index_bigger_equal_b(stacks, value);
 		if (smaller <= half_size)
 		{
-			op_rb(stacks, FLAG);
+			op_rb(stacks, stacks->flagprint);
 			(*count)++;
 		}
 		else
 		{
-			op_rrb(stacks, FLAG);
+			op_rrb(stacks, stacks->flagprint);
 			(*count)--;
 		}
+	}
+}
+
+void	qs3_strict_superior(t_stacks *stacks)
+{
+	if (stacks->stack_a->next->data < stacks->stack_a->next->next->data)
+		op_ra(stacks, stacks->flagprint);
+	else
+	{
+		op_sa(stacks, stacks->flagprint);
+		op_rra(stacks, stacks->flagprint);
 	}
 }

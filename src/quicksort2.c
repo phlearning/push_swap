@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 00:49:49 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:04:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:04:58 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,34 @@ void	push_or_rotate_qcka2(t_stacks *stacks, \
 {
 	int	median;
 
-	get_median(STACK_A, *len, &median);
+	get_median(stacks->stack_a, *len, &median);
 	while (*len != (nb_elem / 2 + nb_elem % 2))
 	{
-		if (DATA_A1 < median && (*len)--)
-			op_pb(stacks, FLAG);
+		if (stacks->stack_a->data < median && (*len)--)
+			op_pb(stacks, stacks->flagprint);
 		else
 		{
-			if (compare_stack_to_value(STACK_A, median))
+			if (compare_stack_to_value(stacks->stack_a, median))
 				rotate_smaller_strict_a(stacks, median, &(*is_under));
 			else
-				op_ra(stacks, FLAG);
+				op_ra(stacks, stacks->flagprint);
 		}
 	}
 }
 
 void	reverse_rotate_qcka2(t_stacks *stacks, int nb_elem, int *is_under)
 {
-	while (((nb_elem / 2 + nb_elem % 2) != SIZE_A) && *is_under)
+	while (((nb_elem / 2 + nb_elem % 2) != stacks->size_a) && *is_under)
 	{
 		if (*is_under > 0)
 		{
 			(*is_under)--;
-			op_rra(stacks, FLAG);
+			op_rra(stacks, stacks->flagprint);
 		}
 		if (*is_under < 0)
 		{
 			(*is_under)++;
-			op_ra(stacks, FLAG);
+			op_ra(stacks, stacks->flagprint);
 		}
 	}
 }
@@ -55,7 +55,7 @@ int	quick_sort_alta(t_stacks *stacks, int len)
 	int	nb_elem;
 	int	is_under;
 
-	if (is_len_sorted(STACK_A, len))
+	if (is_len_sorted(stacks->stack_a, len))
 		return (1);
 	nb_elem = len;
 	if (nb_elem && len <= 3)
@@ -64,7 +64,7 @@ int	quick_sort_alta(t_stacks *stacks, int len)
 		return (1);
 	}
 	is_under = 0;
-	if ((is_under == 0) && !get_median(STACK_A, len, &median))
+	if ((is_under == 0) && !get_median(stacks->stack_a, len, &median))
 		return (0);
 	push_or_rotate_qcka2(stacks, nb_elem, &len, &is_under);
 	reverse_rotate_qcka2(stacks, nb_elem, &is_under);
@@ -78,25 +78,25 @@ void	push_or_rotate_qckb2(t_stacks *stacks, \
 {
 	int	median;
 
-	get_median(STACK_B, *len, &median);
+	get_median(stacks->stack_b, *len, &median);
 	while (*len != nb_elem / 2)
 	{
-		if (DATA_B1 >= median && (*len))
+		if (stacks->stack_b->data >= median && (*len))
 		{
-			op_pa(stacks, FLAG);
+			op_pa(stacks, stacks->flagprint);
 			(*len)--;
 		}
 		else
 		{
 			(*is_under)++;
-			op_rb(stacks, FLAG);
+			op_rb(stacks, stacks->flagprint);
 		}
 	}
-	while (nb_elem / 2 != SIZE_B && *is_under)
+	while (nb_elem / 2 != stacks->size_b && *is_under)
 	{
 		if ((*is_under) > 0)
 		{
-			op_rrb(stacks, FLAG);
+			op_rrb(stacks, stacks->flagprint);
 			(*is_under)--;
 		}
 	}
@@ -121,11 +121,11 @@ int	quick_sort_altb(t_stacks *stacks, int len)
 	int	is_under;
 
 	is_under = 0;
-	if (is_under == 0 && is_len_rev_sorted(STACK_B, len))
+	if (is_under == 0 && is_len_rev_sorted(stacks->stack_b, len))
 	{
 		while (len)
 		{
-			op_pa(stacks, FLAG);
+			op_pa(stacks, stacks->flagprint);
 			len--;
 		}
 	}
@@ -135,7 +135,7 @@ int	quick_sort_altb(t_stacks *stacks, int len)
 		return (1);
 	}
 	nb_elem = len;
-	if (nb_elem && !get_median(STACK_B, len, &median))
+	if (nb_elem && !get_median(stacks->stack_b, len, &median))
 		return (0);
 	push_or_rotate_qckb2(stacks, nb_elem, &len, &is_under);
 	quick_sort_alta(stacks, nb_elem / 2 + nb_elem % 2);

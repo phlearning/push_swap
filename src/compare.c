@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 00:39:43 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:29:14 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:04:24 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	compare_pos(int first_pos, int sec_pos, t_stacks *stacks, char *a_or_b)
 	int	size;
 
 	if (!ft_strncmp(a_or_b, "A", 2))
-		size = SIZE_A;
+		size = stacks->size_a;
 	else
-		size = SIZE_B;
+		size = stacks->size_b;
 	half_size = size / 2;
 	if (first_pos > half_size)
 		distance_first = size - first_pos;
@@ -87,12 +87,12 @@ int	compare_cmds(t_stacks *stacks, int flag_quicksort)
 		exit(1);
 	}
 	init_stacks(tmpstacks, 0);
-	tmpstacks->stack_a = node_copy(STACK_A, SIZE_A);
+	tmpstacks->stack_a = node_copy(stacks->stack_a, stacks->size_a);
 	input_param(tmpstacks);
 	if (flag_quicksort == 1)
-		quick_sort_alta(tmpstacks, SIZE_A);
+		quick_sort_alta(tmpstacks, stacks->size_a);
 	else
-		quick_sort_a(tmpstacks, SIZE_A);
+		quick_sort_a(tmpstacks, stacks->size_a);
 	nb_op = tmpstacks->cmds.nb_cmds;
 	free_stacks(tmpstacks);
 	return (nb_op);

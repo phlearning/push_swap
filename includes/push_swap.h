@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 10:43:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 11:47:43 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../libft/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 # include <stdio.h>
-# include "./define.h"
 
 typedef struct s_node {
 	int				index;
@@ -118,10 +117,10 @@ int		is_len_sorted(t_node *head, int len);
 int		is_len_rev_sorted(t_node *head, int len);
 
 void	sort(t_stacks *stacks);
-void	sort_size_3(t_stacks *stacks);
+void	s3_swap_rotate(t_stacks *stacks, int *len);
 void	sort_3(t_stacks *stacks, int len);
-void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
+void	ps3_swap_push(t_stacks *stacks, int *len);
 void	push_sort_3_b_to_a(t_stacks *stacks, int len);
 
 /* Quicksort Utils */
@@ -145,7 +144,7 @@ int		index_bigger_equal_b(t_stacks *stacks, int value);
 void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count);
 
 /* Quicksort */
-
+void	qs3_strict_superior(t_stacks *stacks);
 void	quick_sort_3(t_stacks *stacks);
 int		quick_sort_a(t_stacks *stacks, int len);
 int		quick_sort_b(t_stacks *stacks, int len);
