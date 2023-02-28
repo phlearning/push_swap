@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 00:39:43 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:19:42 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:29:14 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	compare_stack_to_value(t_node *node, int value)
 		return (1);
 	return (0);
 }
-
 
 int	compare_cmds(t_stacks *stacks, int flag_quicksort)
 {

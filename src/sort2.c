@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:21:16 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:29:23 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	sort_big_numbers(t_stacks *stacks)
 {
 	int	nb1;
 	int	nb2;
-	
+
 	if (!STACK_A)
 		return ;
 	if (is_sorted(STACK_A))
