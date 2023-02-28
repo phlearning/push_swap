@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:44:18 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:46:15 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 07:39:32 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Do nothing if b is empty.
 	The index doesn't matter here it will be changed
 	by the function change_index.*/
-void	op_pa(t_stacks *stacks)
+void	op_pa(t_stacks *stacks, int flag)
 {
 	if (stacks == NULL || stacks->stack_b == NULL || SIZE_B == 0)
 		return ;
@@ -24,14 +24,15 @@ void	op_pa(t_stacks *stacks)
 	stacks->size_a++;
 	stacks->size_b--;
 	addcommands(stacks, "pa");
-	ft_printf("pa\n");
+	if (flag == 1)
+		ft_printf("pa\n");
 }
 
 /* Push_b: Push the first element of stack_a to stack_b.
 	Do nothing if a is empty
 	The index doesn't matter here it will be changed
 	by the function change_index*/
-void	op_pb(t_stacks *stacks)
+void	op_pb(t_stacks *stacks, int flag)
 {
 	if (stacks == NULL || stacks->stack_a == NULL || SIZE_A == 0)
 		return ;
@@ -39,5 +40,6 @@ void	op_pb(t_stacks *stacks)
 	stacks->size_a--;
 	stacks->size_b++;
 	addcommands(stacks, "pb");
-	ft_printf("pb\n");
+	if (flag == 1)
+		ft_printf("pb\n");
 }

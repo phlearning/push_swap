@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:47:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:43:44 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 07:38:01 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,29 @@ void	addcommands(t_stacks *stacks, char *cmds)
 }
 
 /* Swap_a: Swap the first 2 elements in stack_a  */
-void	op_sa(t_stacks *stacks)
+void	op_sa(t_stacks *stacks, int flag)
 {
 	if (stacks == NULL || stacks->stack_a == NULL)
 		return ;
 	swap(&stacks->stack_a);
 	addcommands(stacks, "sa");
-	ft_printf("sa\n");
+	if (flag == 1)
+		ft_printf("sa\n");
 }
 
 /* Swap_b: Swap the first 2 elements in stack_b */
-void	op_sb(t_stacks *stacks)
+void	op_sb(t_stacks *stacks, int flag)
 {
 	if (stacks == NULL || stacks->stack_b == NULL)
 		return ;
 	swap(&stacks->stack_b);
 	addcommands(stacks, "sb");
-	ft_printf("sb\n");
+	if (flag == 1)
+		ft_printf("sb\n");
 }
 
 /* Swap_both: swap the first 2 elements in both stack_a and stack_b */
-void	op_ss(t_stacks *stacks)
+void	op_ss(t_stacks *stacks, int flag)
 {
 	if (stacks->stack_a == NULL && stacks->stack_b == NULL)
 		return ;
@@ -70,15 +72,17 @@ void	op_ss(t_stacks *stacks)
 	if (stacks != NULL && stacks->stack_b != NULL)
 		swap(&stacks->stack_b);
 	addcommands(stacks, "ss");
-	ft_printf("ss\n");
+	if (flag == 1)
+		ft_printf("ss\n");
 }
 
 /* Rotate_a: Rotate the stack_a towards the top */
-void	op_ra(t_stacks *stacks)
+void	op_ra(t_stacks *stacks, int flag)
 {
 	if (stacks == NULL || stacks->stack_a == NULL)
 		return ;
 	rotate(&stacks->stack_a);
 	addcommands(stacks, "ra");
-	ft_printf("ra\n");
+	if (flag == 1)
+		ft_printf("ra\n");
 }

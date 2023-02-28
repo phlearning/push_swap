@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:51:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 01:08:48 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:09:14 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count)
 		smaller = index_bigger_equal_b(stacks, value);
 		if (smaller <= half_size)
 		{
-			op_rb(stacks);
+			op_rb(stacks, FLAG);
 			(*count)++;
 		}
 		else
 		{
-			op_rrb(stacks);
+			op_rrb(stacks, FLAG);
 			(*count)--;
 		}
 	}

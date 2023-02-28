@@ -44,6 +44,7 @@ SOURCES			= 	main.c \
 					quicksort.c \
 					quicksort2.c \
 					quicksort_utils.c \
+					quicksort_utils2.c \
 					reg_quick_sort.c \
 					sort.c \
 					sort2.c \

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:18:20 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:02:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 07:44:07 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ void	init_cmds(t_stacks *stacks)
 	stacks->cmds.nb_pb = 0;
 }
 
-void	init_stacks(t_stacks *stacks)
+void	init_stacks(t_stacks *stacks, int flag)
 {
 	stacks->stack_a = NULL;
 	stacks->stack_b = NULL;
 	stacks->size_a = 0;
 	stacks->size_b = 0;
 	init_cmds(stacks);
+	if (flag == 1)
+		stacks->flagprint = 1;
+	else
+		stacks->flagprint = 0;
 }

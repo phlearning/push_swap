@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 00:39:43 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 00:40:48 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:19:42 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,29 @@ int	compare_stack_to_value(t_node *node, int value)
 	if (tmp->data <= value)
 		return (1);
 	return (0);
+}
+
+
+int	compare_cmds(t_stacks *stacks, int flag_quicksort)
+{
+	t_stacks	*tmpstacks;
+	int			nb_op;
+
+	tmpstacks = malloc(sizeof(t_stacks));
+	if (!stacks)
+	{
+		free(tmpstacks);
+		free_stacks(stacks);
+		exit(1);
+	}
+	init_stacks(tmpstacks, 0);
+	tmpstacks->stack_a = node_copy(STACK_A, SIZE_A);
+	input_param(tmpstacks);
+	if (flag_quicksort == 1)
+		quick_sort_alta(tmpstacks, SIZE_A);
+	else
+		quick_sort_a(tmpstacks, SIZE_A);
+	nb_op = tmpstacks->cmds.nb_cmds;
+	free_stacks(tmpstacks);
+	return (nb_op);
 }

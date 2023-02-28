@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 01:00:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:00:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define SIZE_B stacks->size_b
 /* --- */
 # define STACK_SIZE stacks->size_start
+# define FLAG stacks->flagprint
 /* --------------------------- */
 
 typedef struct s_node {
@@ -87,10 +88,11 @@ typedef struct	s_stacks
 	int		size_start;
 	int		size_a;
 	int		size_b;
+	int		flagprint;
 } t_stacks;
 
 /* Init */
-void	init_stacks(t_stacks *stacks);
+void	init_stacks(t_stacks *stacks, int flag);
 void	init_cmds(t_stacks *stacks);
 
 /* linked list functions */
@@ -113,7 +115,6 @@ void	free_stacks(t_stacks *stacks);
 void	free_split(char **str);
 int		*transf_args_to_tab(char **str);
 long	ft_atol(char *str);
-int		square_root(int	n);
 
 /* Check */
 
@@ -144,6 +145,7 @@ void	change_index(t_stacks *stacks, char *cmds);
 
 int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 int		compare_stack_to_value(t_node *node, int value);
+int		compare_cmds(t_stacks *stacks, int flag_quicksort);
 
 /* Sorting */
 int		is_sorted(t_node *head);
@@ -190,18 +192,17 @@ void	swap(t_node **head_ref);
 void	push(t_node **stack_src, t_node **stack_dst);
 void	rotate(t_node **head_ref);
 void	rrotate(t_node **head_ref);
-void	op_sa(t_stacks *stacks);
-void	op_sb(t_stacks *stacks);
-void	op_ss(t_stacks *stacks);
-void	op_ra(t_stacks *stacks);
-void	op_rb(t_stacks *stacks);
-void	op_rr(t_stacks *stacks);
-void	op_rra(t_stacks *stacks);
-void	op_rrb(t_stacks *stacks);
-void	op_rrr(t_stacks *stacks);
-void	op_pa(t_stacks *stacks);
-void	op_pb(t_stacks *stacks);
-void 	rrotate(t_node **head);
+void	op_sa(t_stacks *stacks, int flag);
+void	op_sb(t_stacks *stacks, int flag);
+void	op_ss(t_stacks *stacks, int flag);
+void	op_ra(t_stacks *stacks, int flag);
+void	op_rb(t_stacks *stacks, int flag);
+void	op_rr(t_stacks *stacks, int flag);
+void	op_rra(t_stacks *stacks, int flag);
+void	op_rrb(t_stacks *stacks, int flag);
+void	op_rrr(t_stacks *stacks, int flag);
+void	op_pa(t_stacks *stacks, int flag);
+void	op_pb(t_stacks *stacks, int flag);
 
 /* cmds */
 

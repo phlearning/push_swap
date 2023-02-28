@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 00:49:49 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 00:56:03 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:04:12 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	push_or_rotate_qcka2(t_stacks *stacks, \
 	while (*len != (nb_elem / 2 + nb_elem % 2))
 	{
 		if (DATA_A1 < median && (*len)--)
-			op_pb(stacks);
+			op_pb(stacks, FLAG);
 		else
 		{
 			if (compare_stack_to_value(STACK_A, median))
 				rotate_smaller_strict_a(stacks, median, &(*is_under));
 			else
-				op_ra(stacks);
+				op_ra(stacks, FLAG);
 		}
 	}
 }
@@ -39,12 +39,12 @@ void	reverse_rotate_qcka2(t_stacks *stacks, int nb_elem, int *is_under)
 		if (*is_under > 0)
 		{
 			(*is_under)--;
-			op_rra(stacks);
+			op_rra(stacks, FLAG);
 		}
 		if (*is_under < 0)
 		{
 			(*is_under)++;
-			op_ra(stacks);
+			op_ra(stacks, FLAG);
 		}
 	}
 }
@@ -83,20 +83,20 @@ void	push_or_rotate_qckb2(t_stacks *stacks, \
 	{
 		if (DATA_B1 >= median && (*len))
 		{
-			op_pa(stacks);
+			op_pa(stacks, FLAG);
 			(*len)--;
 		}
 		else
 		{
 			(*is_under)++;
-			op_rb(stacks);
+			op_rb(stacks, FLAG);
 		}
 	}
 	while (nb_elem / 2 != SIZE_B && *is_under)
 	{
 		if ((*is_under) > 0)
 		{
-			op_rrb(stacks);
+			op_rrb(stacks, FLAG);
 			(*is_under)--;
 		}
 	}
@@ -125,7 +125,7 @@ int	quick_sort_altb(t_stacks *stacks, int len)
 	{
 		while (len)
 		{
-			op_pa(stacks);
+			op_pa(stacks, FLAG);
 			len--;
 		}
 	}
