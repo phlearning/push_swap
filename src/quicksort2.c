@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort.c                                        :+:      :+:    :+:   */
+/*   quicksort2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 12:01:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 00:44:39 by pvong            ###   ########.fr       */
+/*   Created: 2023/02/28 00:49:49 by pvong             #+#    #+#             */
+/*   Updated: 2023/02/28 00:56:03 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	push_or_rotate_qcka(t_stacks *stacks, \
+void	push_or_rotate_qcka2(t_stacks *stacks, \
 		int nb_elem, int *len, int *is_under)
 {
 	int	median;
@@ -24,17 +24,15 @@ void	push_or_rotate_qcka(t_stacks *stacks, \
 			op_pb(stacks);
 		else
 		{
-			(*is_under)++;
-			op_ra(stacks);
-			// if (compare_stack_to_value(STACK_A, median))
-			// 	rotate_smaller_strict_a(stacks, median, &is_under);
-			// else
-			// 	op_ra(stacks);
+			if (compare_stack_to_value(STACK_A, median))
+				rotate_smaller_strict_a(stacks, median, &(*is_under));
+			else
+				op_ra(stacks);
 		}
 	}
 }
 
-void	reverse_rotate_qcka(t_stacks *stacks, int nb_elem, int *is_under)
+void	reverse_rotate_qcka2(t_stacks *stacks, int nb_elem, int *is_under)
 {
 	while (((nb_elem / 2 + nb_elem % 2) != SIZE_A) && *is_under)
 	{
@@ -51,7 +49,7 @@ void	reverse_rotate_qcka(t_stacks *stacks, int nb_elem, int *is_under)
 	}
 }
 
-int	quick_sort_a(t_stacks *stacks, int len)
+int	quick_sort_alta(t_stacks *stacks, int len)
 {
 	int	median;
 	int	nb_elem;
@@ -68,14 +66,14 @@ int	quick_sort_a(t_stacks *stacks, int len)
 	is_under = 0;
 	if ((is_under == 0) && !get_median(STACK_A, len, &median))
 		return (0);
-	push_or_rotate_qcka(stacks, nb_elem, &len, &is_under);
-	reverse_rotate_qcka(stacks, nb_elem, &is_under);
-	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
-	quick_sort_b(stacks, nb_elem / 2);
+	push_or_rotate_qcka2(stacks, nb_elem, &len, &is_under);
+	reverse_rotate_qcka2(stacks, nb_elem, &is_under);
+	quick_sort_alta(stacks, nb_elem / 2 + nb_elem % 2);
+	quick_sort_altb(stacks, nb_elem / 2);
 	return (1);
 }
 
-void	push_or_rotate_qckb(t_stacks *stacks, \
+void	push_or_rotate_qckb2(t_stacks *stacks, \
 		int nb_elem, int *len, int *is_under)
 {
 	int	median;
@@ -116,7 +114,7 @@ void	push_or_rotate_qckb(t_stacks *stacks, \
  * @param len 
  * @return int 
  */
-int	quick_sort_b(t_stacks *stacks, int len)
+int	quick_sort_altb(t_stacks *stacks, int len)
 {
 	int	median;
 	int	nb_elem;
@@ -139,8 +137,8 @@ int	quick_sort_b(t_stacks *stacks, int len)
 	nb_elem = len;
 	if (nb_elem && !get_median(STACK_B, len, &median))
 		return (0);
-	push_or_rotate_qckb(stacks, nb_elem, &len, &is_under);
-	quick_sort_a(stacks, nb_elem / 2 + nb_elem % 2);
-	quick_sort_b(stacks, nb_elem / 2);
+	push_or_rotate_qckb2(stacks, nb_elem, &len, &is_under);
+	quick_sort_alta(stacks, nb_elem / 2 + nb_elem % 2);
+	quick_sort_altb(stacks, nb_elem / 2);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:18:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 00:59:23 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,6 @@ void	sort_size_3(t_stacks *stacks)
 	}
 }
 
-void	quick_sort_3(t_stacks *stacks)
-{
-	if (DATA_A1 < DATA_A2 && DATA_A1 < DATA_A3)
-	{
-		if (DATA_A2 > DATA_A3)
-		{
-			op_rra(stacks);
-			op_sa(stacks);
-		}
-	}
-	else if (DATA_A1 > DATA_A2 && DATA_A1 > DATA_A3)
-	{
-		if (DATA_A2 < DATA_A3)
-			op_ra(stacks);
-		else
-		{
-			op_sa(stacks);
-			op_rra(stacks);
-		}
-	}
-	else
-	{
-		if (DATA_A2 < DATA_A3)
-			op_sa(stacks);
-		else
-			op_rra(stacks);
-	}
-}
-
 /**
  * 1. If the size of stack_a == 3 && given len == 3:
  * 		quick_sort_3 optimized sort for 3 numbers;
@@ -85,9 +56,9 @@ void	quick_sort_3(t_stacks *stacks)
  */
 void	sort_3(t_stacks *stacks, int len)
 {
-	// if (len == 3 && SIZE_A == 3)
-	// 	quick_sort_3(stacks);
-	if (len == 2)
+	if (len == 3 && SIZE_A == 3)
+		quick_sort_3(stacks);
+	else if (len == 2)
 	{
 		if (DATA_A1 > DATA_A2)
 			op_sa(stacks);
@@ -108,7 +79,7 @@ void	sort_3(t_stacks *stacks, int len)
 			else if (DATA_A1 > DATA_A2)
 				op_sa(stacks);
 			else if (len++)
-				op_pa(stacks);	
+				op_pa(stacks);
 		}
 	}
 }
@@ -175,69 +146,6 @@ void	sort_size_5(t_stacks *stacks)
 		op_sa(stacks);
 		op_ra(stacks);
 	}
-}
-
-/*
- * Compare_pos: compare the pos of 2 value.
- * Calculate the distance of the first and second value relative to top/bottom.
- * If first value's distance is smaller
- * return (1);
- * If second value's distance is smaller
- * returns (0);
- */
-int	compare_pos(int first_pos, int sec_pos, t_stacks *stacks, char *a_or_b)
-{
-	int	distance_first;
-	int	distance_sec;
-	int	half_size;
-	int	size;
-
-	if (!ft_strncmp(a_or_b, "A", 2))
-		size = SIZE_A;
-	else
-		size = SIZE_B;
-	half_size = size / 2;
-
-	if (first_pos > half_size)
-		distance_first = size - first_pos;
-	else
-		distance_first = first_pos;
-	if (sec_pos > half_size)
-		distance_sec = size - sec_pos;
-	else
-		distance_sec = sec_pos;
-	if (distance_first < distance_sec)
-		return (1);
-	else
-		return (0);
-	return (-1);
-}
-
-/**
- * Compare_stack_to_value: Check if there are still numbers
- * inferior to the value given in the stack.
- * @param node 
- * @param value 
- * @return int 
- */
-int	compare_stack_to_value(t_node *node, int value)
-{
-	t_node	*tmp;
-
-	if (node == NULL)
-		return (0);
-	tmp = node;
-	while (tmp->next != node)
-	{
-		if (tmp->data <= value)
-			return (1);
-		if (tmp->next->data <= value)
-			return (1);
-		tmp = tmp->next;
-	}
-	if (tmp->data <= value)
-		return (1);
-	return (0);
 }
 
 void	sort_big_numbers(t_stacks *stacks)

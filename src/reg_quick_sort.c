@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 09:38:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:36:13 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 00:37:23 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,27 @@ int	part(int *array, int len)
 {
 	int		beg;
 	int		last;
-	int		tmp[len];
+	int		*tmp;
 	int		i;
 
+	tmp = malloc(sizeof(int) * len);
+	if (!tmp)
+		return (0);
 	beg = 0;
 	last = len - 1;
 	i = -1;
 	while (++i < len - 1)
+	{
 		if (array[i] > array[len - 1])
 			tmp[last--] = array[i];
 		else
 			tmp[beg++] = array[i];
+	}
 	tmp[beg] = array[len - 1];
 	i = -1;
 	while (++i < len)
 		array[i] = tmp[i];
+	free(tmp);
 	return (beg);
 }
 

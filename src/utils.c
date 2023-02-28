@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:28:11 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/19 23:07:41 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 00:41:11 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ long	ft_atol(char *str)
 }
 
 /* Give the nearest square_root of the number */
-int	square_root(int	n)
+int	square_root(int n)
 {
 	int	root;
 

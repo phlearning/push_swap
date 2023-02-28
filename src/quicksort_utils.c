@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:49:14 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:50:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 01:00:03 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count)
 
 	if (DATA_A >= value)
 	{
-		half_size = SIZE_A /2;
+		half_size = SIZE_A / 2;
 		smaller = index_smaller_strict_than_a(stacks, value);
 		if (smaller <= half_size)
 		{
@@ -80,5 +80,34 @@ void	rotate_smaller_strict_a(t_stacks *stacks, int value, int *count)
 			op_rra(stacks);
 			(*count)--;
 		}
+	}
+}
+
+void	quick_sort_3(t_stacks *stacks)
+{
+	if (DATA_A1 < DATA_A2 && DATA_A1 < DATA_A3)
+	{
+		if (DATA_A2 > DATA_A3)
+		{
+			op_rra(stacks);
+			op_sa(stacks);
+		}
+	}
+	else if (DATA_A1 > DATA_A2 && DATA_A1 > DATA_A3)
+	{
+		if (DATA_A2 < DATA_A3)
+			op_ra(stacks);
+		else
+		{
+			op_sa(stacks);
+			op_rra(stacks);
+		}
+	}
+	else
+	{
+		if (DATA_A2 < DATA_A3)
+			op_sa(stacks);
+		else
+			op_rra(stacks);
 	}
 }

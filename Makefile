@@ -26,6 +26,7 @@ SRC_DIR			= src
 
 SOURCES			= 	main.c \
 					check.c \
+					compare.c \
 					errors.c \
 					errors2.c \
 					free.c \
@@ -41,6 +42,7 @@ SOURCES			= 	main.c \
 					operations4.c \
 					print.c \
 					quicksort.c \
+					quicksort2.c \
 					quicksort_utils.c \
 					reg_quick_sort.c \
 					sort.c \

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:53:38 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 01:00:32 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,9 @@ void	index_ss(t_stacks *stacks);
 void	index_reput(t_stacks *stacks);
 void	change_index(t_stacks *stacks, char *cmds);
 
-/* Rotate */
+/* Compare */
 
+int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 int		compare_stack_to_value(t_node *node, int value);
 
 /* Sorting */
@@ -149,17 +150,20 @@ int		is_sorted(t_node *head);
 int		is_rev_sorted(t_node *head);
 int		is_len_sorted(t_node *head, int len);
 int		is_len_rev_sorted(t_node *head, int len);
-int		compare_pos(int min_pos, int max_pos, t_stacks *stacks, char *a_or_b);
 
 void	sort(t_stacks *stacks);
 void	sort_size_3(t_stacks *stacks);
-void	quick_sort_3(t_stacks *stacks);
 void	sort_3(t_stacks *stacks, int len);
 void	sort_size_5(t_stacks *stacks);
 void	sort_big_numbers(t_stacks *stacks);
 void	push_sort_3_b_to_a(t_stacks *stacks, int len);
 
 /* Quicksort Utils */
+void	push_or_rotate_qcka(t_stacks *stacks, \
+		int nb_elem, int *len, int *is_under);
+void	reverse_rotate_qcka(t_stacks *stacks, int nb_elem, int *is_under);
+void	push_or_rotate_qckb(t_stacks *stacks, \
+		int nb_elem, int *len, int *is_under);
 int		index_smaller_strict(t_node *node, int value);
 int		lastindex_smaller_strict(t_node *node, int value);
 int		index_smaller_strict_than_a(t_stacks *stacks, int value);
@@ -171,8 +175,11 @@ void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count);
 
 /* Quicksort */
 
+void	quick_sort_3(t_stacks *stacks);
 int		quick_sort_a(t_stacks *stacks, int len);
 int		quick_sort_b(t_stacks *stacks, int len);
+int		quick_sort_alta(t_stacks *stacks, int len);
+int		quick_sort_altb(t_stacks *stacks, int len);
 
 int		part(int *array, int len);
 void	reg_quick_sort(int *array, int len);

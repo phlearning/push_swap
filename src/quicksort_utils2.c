@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:51:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:53:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 00:32:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	rotate_bigger_equal_b(t_stacks *stacks, int value, int *count)
 
 	if (DATA_B < value)
 	{
-		half_size = SIZE_B /2 + SIZE_B % 2;
+		half_size = SIZE_B / 2 + SIZE_B % 2;
 		smaller = index_bigger_equal_b(stacks, value);
 		if (smaller <= half_size)
 		{
