@@ -114,7 +114,6 @@ git:
 clean:
 	@rm -rf $(OBJS_DIR)
 	@rm -rf $(OBJS_DIRFS)
-	@rm -rf norminette.txt
 	@rm -rf checkfunction.txt
 	@make -sC $(LIBFT_DIR) clean
 	@make -sC $(FT_PRINTF_DIR) clean

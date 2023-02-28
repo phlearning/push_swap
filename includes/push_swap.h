@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:48:37 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 08:00:59 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 08:34:43 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,13 @@ void	push_sort_3_b_to_a(t_stacks *stacks, int len);
 /* Quicksort Utils */
 void	push_or_rotate_qcka(t_stacks *stacks, \
 		int nb_elem, int *len, int *is_under);
+void	push_or_rotate_qcka2(t_stacks *stacks, \
+		int nb_elem, int *len, int *is_under);
 void	reverse_rotate_qcka(t_stacks *stacks, int nb_elem, int *is_under);
+void	reverse_rotate_qcka2(t_stacks *stacks, int nb_elem, int *is_under);
 void	push_or_rotate_qckb(t_stacks *stacks, \
+		int nb_elem, int *len, int *is_under);
+void	push_or_rotate_qckb2(t_stacks *stacks, \
 		int nb_elem, int *len, int *is_under);
 int		index_smaller_strict(t_node *node, int value);
 int		lastindex_smaller_strict(t_node *node, int value);
