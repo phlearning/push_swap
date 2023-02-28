@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:12:55 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/27 23:31:47 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 01:08:08 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	pop(t_node **head_ref)
 	t_node	*node;
 
 	if (!(head_ref && *head_ref))
-        return ;
+		return ;
 	node = *head_ref;
-    node->next->prev = node->prev;
-    node->prev->next = node->next;
+	node->next->prev = node->prev;
+	node->prev->next = node->next;
 	if (node != node->next)
 		*head_ref = node->next;
 	else
 		*head_ref = NULL;
-    free(node);
-    return ;
+	free(node);
+	return ;
 }
 
 int	node_length(t_node *head)
@@ -73,31 +73,6 @@ t_node	*node_copy(t_node *stack, int len)
 	if (stack->next == stop)
 		insert_end(&tmp, stack->data);
 	return (tmp);
-}
-
-int	get_median(t_node *head, int len, int *median)
-{
-	t_node *tmp;
-	int	*tab;
-	int	i;
-
-	if (head == NULL || len == 0)
-		return (0);
-	tab = malloc(sizeof(int) * len);
-	if (!tab)
-		return (0);
-	i = -1;
-	tmp = node_copy(head, len);
-	while (++i < len)
-	{
-		tab[i] = tmp->data;
-		tmp = tmp->next;
-	}
-	reg_quick_sort(tab, len);
-	*median = tab[len/2];
-	free_nodes(&tmp);
-	free(tab);
-	return (1);
 }
 
 /* Look for the lowest number in the stack */

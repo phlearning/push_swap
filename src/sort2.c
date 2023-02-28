@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:32:31 by pvong             #+#    #+#             */
-/*   Updated: 2023/02/28 00:59:23 by pvong            ###   ########.fr       */
+/*   Updated: 2023/02/28 01:05:19 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void	sort_3(t_stacks *stacks, int len)
 	}
 	else if (len == 3)
 	{
-		while (len != 3 || !(DATA_A1 < DATA_A2 \
-			&& DATA_A2 < DATA_A3))
+		while (len != 3 || !(DATA_A1 < DATA_A2 && DATA_A2 < DATA_A3))
 		{
 			if (len == 3 && DATA_A1 > DATA_A2 && DATA_A3)
 				op_sa(stacks);
